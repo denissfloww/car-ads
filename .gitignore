@@ -1,0 +1,4 @@
+/.idea
+.env
+/server/node_modules/
+/server/build/
