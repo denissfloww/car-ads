@@ -1,11 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { AppThunk, RootState } from "../store";
-
-export interface UserState {
-    id: string;
-    username: string;
-    token: string;
-}
+import { UserState, CredentialsPayload } from "../types";
 
 interface InitialAuthState {
     user: UserState | null;
@@ -18,11 +13,6 @@ const initialState: InitialAuthState = {
     loading: false,
     error: null,
 };
-
-export interface CredentialsPayload {
-    username: string;
-    password: string;
-}
 
 const authSlice = createSlice({
     name: "auth",
@@ -41,7 +31,11 @@ const authSlice = createSlice({
     }
 })
 
-export const { setUser, testing, cancelll } = authSlice.actions
+export const {
+    setUser,
+    testing,
+    cancelll
+} = authSlice.actions
 
 export const login = (creditionals: CredentialsPayload) : AppThunk => {
     return async (dispatch) => {

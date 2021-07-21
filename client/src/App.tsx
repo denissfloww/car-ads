@@ -1,12 +1,13 @@
 import React from 'react';
-import LoginPage from './pages/Auth/LoginPage';
-import logo from './logo.svg';
 import './App.css';
+import NavBar from "./components/NavBar";
+import Routes from './Router';
 
 function App() {
   return (
     <div className="App">
-      <LoginPage />
+        <NavBar />
+        <Routes />
     </div>
   );
 }
