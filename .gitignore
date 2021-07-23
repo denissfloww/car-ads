@@ -2,4 +2,5 @@
 .env
 /server/node_modules/
 /server/build/
+/server/.idea
 /client/.idea/

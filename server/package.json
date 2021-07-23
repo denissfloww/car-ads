@@ -1,5 +1,5 @@
 {
-  "name": "bug-tracker-pern-ts",
+  "name": "car-ads",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -9,7 +9,7 @@
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "lint": "eslint --ext .ts ."
   },
-  "author": "Amandeep S",
+  "author": "denissfloww",
   "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

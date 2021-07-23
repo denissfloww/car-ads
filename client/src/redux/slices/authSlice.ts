@@ -43,7 +43,7 @@ export const login = (creditionals: CredentialsPayload) : AppThunk => {
             dispatch(testing())
         }
         catch (e) {
-
+            throw new Error(e)
         }
     }
 }
@@ -54,7 +54,7 @@ export const cancel = (): AppThunk => {
             dispatch(cancelll())
         }
         catch (e) {
-
+            throw new Error(e)
         }
     }
 }
