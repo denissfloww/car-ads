@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+
 export const useBodyStyles = (darkMode: boolean) =>
     makeStyles(
         (theme) => ({
@@ -9,7 +10,8 @@ export const useBodyStyles = (darkMode: boolean) =>
                 flexDirection: 'column',
                 flex: 1,
                 minHeight: '100vH',
-                backgroundColor: darkMode ? '#333' : '#00968810',
+                backgroundColor: darkMode ? '#333' : '#E1E1E4',
+                fontFamily: 'Nunito',
             },
         }),
         { index: 1 }
@@ -329,6 +331,23 @@ export const useActionCardStyles = makeStyles(
 
 export const useNavStyles = makeStyles(
     (theme) => ({
+        header: {
+            paddingRight: "79px",
+            paddingLeft: "118px",
+            backgroundColor: "#990021",
+        },
+        menuButton: {
+            fontFamily: "Nunito",
+            size: "18px",
+            marginLeft: "38px",
+            color: "white"
+        },
+        toolbar: {
+
+        },
+        logo: {
+            textAlign: "left",
+        },
         container: {
             position: 'sticky',
             top: 0,
@@ -442,8 +461,30 @@ export const useAuthPageStyles = makeStyles(
             marginTop: '1em',
             textAlign: 'center',
         },
+        headerText: {
+            marginBottom: '1em',
+            marginTop:'0.5em',
+            fontSize:'24pt',
+            textAlign: 'center',
+            fontFamily: 'Nunito'
+        },
         link: {
             cursor: 'pointer',
+        },
+        iconColor:{
+            color:'#990021'
+        }
+    }),
+    { index: 1 }
+);
+
+export const useFooterStyles = makeStyles(
+    (theme) => ({
+        footer: {
+            marginTop:'calc(5% + 60px)',
+            bottom: 0,
+            borderTop: '1px solid grey',
+            opacity: '50%'
         },
     }),
     { index: 1 }

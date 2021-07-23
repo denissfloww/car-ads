@@ -1,27 +1,42 @@
+import React from "react";
+import { Link as RouterLink } from 'react-router-dom';
+
 import {
     AppBar, Box,
     Button,
     Container, IconButton, Tab, Tabs,
     Toolbar, Typography
 } from "@material-ui/core";
-import React from "react";
+
+import { loginLink, signupLink } from '../Links'
 import { useNavStyles } from "../styles/muiStyles";
+import CarIcon from '../svg/logo.png';
+
 
 const NavBar = () => {
     const classes = useNavStyles();
     return (
-        <Container maxWidth="lg" className={classes.container}>
-            <Box display="flex" bgcolor="grey.200" p={2} width="auto" alignItems="center">
-                <Typography>React-bootstrap</Typography>
-                <Box>
-                    <Button>Вход и регистрация</Button>
-                    <Button color="primary">Link</Button>
-                </Box>
-                <Box flexGrow={1} textAlign="right">
-
-                </Box>
-            </Box>
-        </Container>
+            <AppBar className={classes.header}>
+                <Toolbar className={classes.toolbar}>
+                    <img src={CarIcon} alt=""/>
+                    <Button className={classes.menuButton}>Объявления</Button>
+                    <Button className={classes.menuButton}>Новости</Button>
+                    <Button
+                        className={classes.menuButton}
+                        component={RouterLink}
+                        to={loginLink}
+                    >
+                        Вход
+                    </Button>
+                    <Button
+                        className={classes.menuButton}
+                        component={RouterLink}
+                        to={signupLink}
+                    >
+                        Регистрация
+                    </Button>
+                </Toolbar>
+            </AppBar>
     );
 }
 

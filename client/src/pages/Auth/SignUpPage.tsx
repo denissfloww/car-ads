@@ -6,6 +6,7 @@ import {
     selectAuthState,
     cancel
 } from '../../redux/slices/authSlice';
+
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -28,25 +29,45 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import LockIcon from '@material-ui/icons/Lock';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+
 import DemoCreds from "../../components/DemoCreds";
-import {loginLink, signupLink} from "../../Links";
+import {loginLink} from "../../Links";
 import {Link as RouterLink} from "react-router-dom";
 
 interface InputValues{
     username: string;
     password: string;
+    confirmPassword: string;
 }
 
 const validationSchema = yup.object({
-    username: yup.string().required('Required'),
-    password: yup.string().required('Required'),
+    username: yup
+        .string()
+        .required('Required')
+        .max(20, 'Должно быть не более 20 символов')
+        .min(3, 'Должно быть не менее 3 символов')
+        .matches(
+            /^[a-zA-Z0-9-_]*$/,
+            'Допускаются только буквы, тире и символы подчеркивания'
+        ),
+    password: yup
+        .string()
+        .required('Required')
+        .min(6, 'Должно быть не менее 6 символов'),
+    confirmPassword: yup
+        .string()
+        .required('Required')
+        .min(6, 'Должно быть не менее 6 символов'),
 });
 
-const LoginPage = () => {
+const SignupPage = () => {
     const classes = useAuthPageStyles();
     const dispatch = useDispatch();
     const { loading } = useSelector(selectAuthState)
     const [showPass, setShowPass] = useState<boolean>(false)
+    const [showConfirmPass, setShowConfirmPass] = useState<boolean>(false)
+
     const { register, handleSubmit, errors } = useForm({
         mode: 'onChange',
         resolver: yupResolver(validationSchema),
@@ -65,33 +86,35 @@ const LoginPage = () => {
                 <form onSubmit={handleSubmit(handleLogin)} className={classes.form}>
                     <img src={CarIcon} alt="bug-logo" className={classes.titleLogo} />
                     <Typography variant="body1" className={classes.headerText}>
-                        Вход
+                        Регистрация
                     </Typography>
                     <div className={classes.inputField}>
-                       <TextField
-                           required
-                           fullWidth
-                           inputRef={register}
-                           type="text"
-                           label="Логин"
-                           variant="outlined"
-                           error={'username' in errors}
-                           helperText={'username' in errors ? errors.username.message : ''}
-                           InputProps={{
-                               startAdornment: (
-                                   <InputAdornment position="start">
-                                       <PersonIcon className={classes.iconColor} />
-                                   </InputAdornment>
-                               ),
-                           }}
-                       />
-                   </div>
+                        <TextField
+                            required
+                            fullWidth
+                            inputRef={register}
+                            type="text"
+                            name="username"
+                            label="Логин"
+                            variant="outlined"
+                            error={'username' in errors}
+                            helperText={'username' in errors ? errors.username.message : ''}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <PersonIcon className={classes.iconColor} />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </div>
                     <div className={classes.inputField}>
                         <TextField
                             required
                             fullWidth
                             inputRef={register}
                             type={showPass ? 'text': 'password'}
+                            name="password"
                             label="Пароль"
                             variant="outlined"
                             error={'password' in errors}
@@ -115,28 +138,61 @@ const LoginPage = () => {
                             }}
                         />
                     </div>
+                    <div className={classes.inputField}>
+                        <TextField
+                            required
+                            fullWidth
+                            inputRef={register}
+                            type={showConfirmPass ? 'text': 'password'}
+                            label="Подтверждение пароля"
+                            name="confirmPassword"
+                            variant="outlined"
+                            error={'confirmPassword' in errors}
+                            helperText={
+                                'confirmPassword' in errors
+                                    ? errors.confirmPassword.message
+                                    : ''
+                            }
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            size="small"
+                                            onClick={() => setShowConfirmPass(prevState => !prevState)}
+                                        >
+                                            {showConfirmPass ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <LockIcon className={classes.iconColor} />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </div>
                     <Button
                         color="inherit"
                         variant="contained"
                         size="large"
                         fullWidth
-                        startIcon={<ExitToAppIcon />}
+                        startIcon={<PersonAddIcon />}
                         type="submit"
                         className={classes.submitButton}
                         disabled={loading}
                     >
-                        Войти
+                        Зарегистрироваться
                     </Button>
-                    <DemoCreds />
                 </form>
                 <Typography variant="body1" className={classes.footerText}>
-                    Нет аккаунта?{' '}
+                    Уже есть аккаунт?{' '}
                     <Link
                         color="primary"
-                        to={signupLink}
+                        to={loginLink}
                         component={RouterLink}
                     >
-                        Зарегистрироваться
+                        Войти
                     </Link>
                 </Typography>
             </Paper>
@@ -145,4 +201,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default SignupPage;
