@@ -74,6 +74,7 @@ const LoginPage = () => {
                            inputRef={register}
                            type="text"
                            label="Логин"
+                           name="username"
                            variant="outlined"
                            error={'username' in errors}
                            helperText={'username' in errors ? errors.username.message : ''}
@@ -93,6 +94,7 @@ const LoginPage = () => {
                             inputRef={register}
                             type={showPass ? 'text': 'password'}
                             label="Пароль"
+                            name="password"
                             variant="outlined"
                             error={'password' in errors}
                             helperText={'password' in errors ? errors.password.message : ''}

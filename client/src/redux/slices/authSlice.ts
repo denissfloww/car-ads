@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { AppThunk, RootState } from "../store";
 import { UserState, CredentialsPayload } from "../types";
+import AuthService from "../../services/AuthService";
 
 interface InitialAuthState {
     user: UserState | null;
@@ -22,12 +23,15 @@ const authSlice = createSlice({
             state.user = action.payload;
             state.loading = false;
         },
+        setAuthLoading: (state) => {
+            state.loading = true
+        },
         testing: (state) => {
             state.loading = true
         },
         cancelll: (state) => {
             state.loading = false
-        }
+        },
     }
 })
 
@@ -41,6 +45,8 @@ export const login = (creditionals: CredentialsPayload) : AppThunk => {
     return async (dispatch) => {
         try {
             dispatch(testing())
+            const userData = await AuthService.login(creditionals);
+            console.log(userData);
         }
         catch (e) {
             throw new Error(e)
