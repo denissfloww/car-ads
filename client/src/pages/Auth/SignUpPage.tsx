@@ -33,7 +33,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 import DemoCreds from "../../components/DemoCreds";
 import {loginLink} from "../../Links";
-import {Link as RouterLink} from "react-router-dom";
+import {Link as RouterLink, useHistory} from "react-router-dom";
 
 interface InputValues{
     username: string;
@@ -72,8 +72,9 @@ const SignupPage = () => {
         mode: 'onChange',
         resolver: yupResolver(validationSchema),
     });
+    const history = useHistory();
     const handleLogin = ({ username, password }: InputValues) => {
-        dispatch(login({ username, password }));
+        dispatch(login({ username, password }, history));
     };
 
     const handleCancel = () => {

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
+import { useParams, useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {
     login,
@@ -31,6 +32,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DemoCreds from "../../components/DemoCreds";
 import {loginLink, signupLink} from "../../Links";
 import {Link as RouterLink} from "react-router-dom";
+import { History } from 'history';
 
 interface InputValues{
     username: string;
@@ -51,8 +53,10 @@ const LoginPage = () => {
         mode: 'onChange',
         resolver: yupResolver(validationSchema),
     });
-    const handleLogin = ({ username, password }: InputValues) => {
-        dispatch(login({ username, password }));
+    const history = useHistory();
+
+    const handleLogin = ({ username, password}: InputValues ) => {
+        dispatch(login({ username, password }, history));
     };
 
     const handleCancel = () => {

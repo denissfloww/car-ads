@@ -11,10 +11,16 @@ import {
 import { loginLink, signupLink } from '../Links'
 import { useNavStyles } from "../styles/muiStyles";
 import CarIcon from '../svg/logo.png';
+import LocalStorageService from "../services/LocalStorageService";
+import {useSelector} from "react-redux";
+import {selectAuthState} from "../redux/slices/authSlice";
 
 
 const NavBar = () => {
     const classes = useNavStyles();
+    const { user } = useSelector(selectAuthState)
+    const isAuth = user || LocalStorageService.getUser()
+
     return (
             <AppBar className={classes.header}>
                 <Toolbar className={classes.toolbar}>
@@ -35,6 +41,7 @@ const NavBar = () => {
                     >
                         Регистрация
                     </Button>
+                    {isAuth? <Button>testButton</Button>: null}
                 </Toolbar>
             </AppBar>
     );
