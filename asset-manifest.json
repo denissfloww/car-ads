@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/car-ads/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/car-ads/static/js/main.bc2360cb.chunk.js",
+    "main.js.map": "/car-ads/static/js/main.bc2360cb.chunk.js.map",
+    "runtime-main.js": "/car-ads/static/js/runtime-main.82742304.js",
+    "runtime-main.js.map": "/car-ads/static/js/runtime-main.82742304.js.map",
+    "static/js/2.5d2ae52b.chunk.js": "/car-ads/static/js/2.5d2ae52b.chunk.js",
+    "static/js/2.5d2ae52b.chunk.js.map": "/car-ads/static/js/2.5d2ae52b.chunk.js.map",
+    "static/js/3.c2e35bb0.chunk.js": "/car-ads/static/js/3.c2e35bb0.chunk.js",
+    "static/js/3.c2e35bb0.chunk.js.map": "/car-ads/static/js/3.c2e35bb0.chunk.js.map",
+    "index.html": "/car-ads/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/car-ads/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.5d2ae52b.chunk.js.LICENSE.txt": "/car-ads/static/js/2.5d2ae52b.chunk.js.LICENSE.txt",
+    "static/media/404 error page.d7d87954.png": "/car-ads/static/media/404 error page.d7d87954.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.82742304.js",
+    "static/js/2.5d2ae52b.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.bc2360cb.chunk.js"
+  ]
+}
