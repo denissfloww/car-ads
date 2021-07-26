@@ -5,7 +5,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     login,
     selectAuthState,
-    cancel
+    cancel,
+    clearAuthError
 } from '../../redux/slices/authSlice';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -33,6 +34,7 @@ import DemoCreds from "../../components/DemoCreds";
 import {loginLink, signupLink} from "../../Links";
 import {Link as RouterLink} from "react-router-dom";
 import { History } from 'history';
+import ErrorBox from "../../components/ErrorBox";
 
 interface InputValues{
     username: string;
@@ -47,7 +49,7 @@ const validationSchema = yup.object({
 const LoginPage = () => {
     const classes = useAuthPageStyles();
     const dispatch = useDispatch();
-    const { loading } = useSelector(selectAuthState)
+    const { loading, error } = useSelector(selectAuthState)
     const [showPass, setShowPass] = useState<boolean>(false)
     const { register, handleSubmit, errors } = useForm({
         mode: 'onChange',
@@ -145,6 +147,12 @@ const LoginPage = () => {
                         Зарегистрироваться
                     </Link>
                 </Typography>
+                {error && (
+                    <ErrorBox
+                        errorMsg={error}
+                        clearErrorMsg={() => dispatch(clearAuthError())}
+                    />
+                )}
             </Paper>
         </div>
 

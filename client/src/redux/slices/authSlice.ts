@@ -5,6 +5,7 @@ import AuthService from "../../services/AuthService";
 import LocalStorageService from "../../services/LocalStorageService";
 import { History } from 'history';
 import {homeLink} from "../../Links";
+import {getErrorMsg} from "../../utils/HelperFunc";
 
 interface InitialAuthState {
     user: UserState | null;
@@ -31,6 +32,13 @@ const authSlice = createSlice({
             state.loading = true;
             state.error = null;
         },
+        setAuthError: (state, action: PayloadAction<string>) => {
+          state.loading = false
+          state.error = action.payload
+        },
+        clearAuthError: (state) => {
+            state.error = null;
+        },
         testing: (state) => {
             state.loading = true
         },
@@ -43,7 +51,9 @@ const authSlice = createSlice({
 export const {
     setUser,
     testing,
-    cancelll
+    cancelll,
+    setAuthError,
+    clearAuthError
 } = authSlice.actions
 
 export const login = (creditionals: CredentialsPayload, history: History) : AppThunk => {
@@ -56,7 +66,7 @@ export const login = (creditionals: CredentialsPayload, history: History) : AppT
             history.push(homeLink)
         }
         catch (e) {
-            throw new Error(e)
+            dispatch((setAuthError(getErrorMsg(e))))
         }
     }
 }
