@@ -8,4 +8,5 @@ const { auth } = middleware;
 router.get('/', auth, getAllUsers);
 
 
+
 export default router;

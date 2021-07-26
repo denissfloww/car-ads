@@ -72,4 +72,5 @@ export const loginUser = async (req: Request, res: Response) => {
     username: user.username,
     token,
   });
+
 };
