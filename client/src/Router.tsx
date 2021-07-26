@@ -8,6 +8,7 @@ import {useSelector} from "react-redux";
 import {selectAuthState} from "./redux/slices/authSlice";
 import PersonalAccountPage from "./pages/Main/PersonalAccountPage";
 import LocalStorageService from "./services/LocalStorageService";
+import MainPage from "./pages/Main/MainPage";
 
 
 const Routes = () => {
@@ -27,6 +28,9 @@ const Routes = () => {
                 </Route>
                 <Route exact path={signupLink}>
                     <SignupPage />
+                </Route>
+                <Route exact path='/'>
+                    <MainPage />
                 </Route>
                 <Route>
                     <NotFoundPage />

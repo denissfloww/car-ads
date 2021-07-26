@@ -4,16 +4,17 @@ import { Link as RouterLink } from 'react-router-dom';
 import {
     AppBar, Box,
     Button,
-    Container, IconButton, Tab, Tabs,
+    Container, IconButton, Link, Tab, Tabs,
     Toolbar, Typography
 } from "@material-ui/core";
 
-import { loginLink, signupLink } from '../Links'
+import {homeLink, loginLink, mainLink, signupLink} from '../Links'
 import { useNavStyles } from "../styles/muiStyles";
 import CarIcon from '../svg/logo.png';
 import LocalStorageService from "../services/LocalStorageService";
 import {useSelector} from "react-redux";
 import {selectAuthState} from "../redux/slices/authSlice";
+import MainPage from "../pages/Main/MainPage";
 
 
 const NavBar = () => {
@@ -24,7 +25,11 @@ const NavBar = () => {
     return (
             <AppBar className={classes.header}>
                 <Toolbar className={classes.toolbar}>
-                    <img src={CarIcon} alt=""/>
+                    <Button
+                        to={mainLink}
+                        component={RouterLink}>
+                        <img src={CarIcon} alt=""/>
+                    </Button>
                     <Button className={classes.menuButton}>Объявления</Button>
                     <Button className={classes.menuButton}>Новости</Button>
                     <Button
