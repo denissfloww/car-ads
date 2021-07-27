@@ -1,11 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk, RootState } from '../store';
-import { UserState, CredentialsPayload } from '../types';
-import AuthService from '../../services/AuthService';
-import LocalStorageService from '../../services/LocalStorageService';
-import { History } from 'history';
-import { homeLink } from '../../Links';
-import { getErrorMsg } from '../../utils/HelperFunc';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AppThunk, RootState } from "../store";
+import { UserState, CredentialsPayload } from "../types";
+import AuthService from "../../services/AuthService";
+import LocalStorageService from "../../services/LocalStorageService";
+import { History } from "history";
+import { homeLink } from "../../Links";
+import { getErrorMsg } from "../../utils/HelperFunc";
 
 interface InitialAuthState {
   user: UserState | null;
@@ -13,15 +13,14 @@ interface InitialAuthState {
   error: string | null;
 }
 
-const a = 0;
 const initialState: InitialAuthState = {
   user: null,
   loading: false,
-  error: null
+  error: null,
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<UserState>) => {
@@ -45,8 +44,8 @@ const authSlice = createSlice({
     },
     cancelll: (state) => {
       state.loading = false;
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -55,7 +54,7 @@ export const {
   cancelll,
   setAuthError,
   clearAuthError,
-  removeUser
+  removeUser,
 } = authSlice.actions;
 
 export const login = (

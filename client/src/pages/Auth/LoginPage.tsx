@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   login,
@@ -13,9 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import CarIcon from '../../svg/logo.png';
 import {
-  AppBar,
   Button,
-  Container,
   IconButton,
   InputAdornment,
   Link,
@@ -31,9 +29,8 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import LockIcon from '@material-ui/icons/Lock';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DemoCreds from '../../components/DemoCreds';
-import { loginLink, signupLink } from '../../Links';
+import { signupLink } from '../../Links';
 import { Link as RouterLink } from 'react-router-dom';
-import { History } from 'history';
 import ErrorBox from '../../components/ErrorBox';
 
 interface InputValues {
