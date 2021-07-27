@@ -105,6 +105,39 @@ export const useFormStyles = makeStyles(
   { index: 1 }
 );
 
+export const usePersonalAccountStyles = makeStyles(
+    (theme) => ({
+        root:{
+            width:'100',
+            minHeight: 'calc(100vH - 130px)',
+            fontFamily: 'Nunito',
+            paddingTop:'1.5em'
+        },
+        headerPaper: {
+            padding: '1.5em',
+            marginBottom: '1.5em',
+            minHeight: 'calc(20vH - 130px)',
+            [theme.breakpoints.down('xs')]: {
+                padding: '0.5em 0.7em',
+                minHeight: 'calc(100vH - 80px)'
+            }
+        },
+        paper:{
+            padding: '1.5em',
+            minHeight: 'calc(100vH - 130px)',
+            [theme.breakpoints.down('xs')]: {
+                padding: '0.5em 0.7em',
+                minHeight: 'calc(100vH - 80px)'
+            }
+        },
+        tabs:{
+            flexGrow: 1,
+            color:'black',
+
+        }
+    })
+)
+
 export const useMainPageStyles = makeStyles(
   (theme) => ({
     root: {
@@ -330,16 +363,21 @@ export const useActionCardStyles = makeStyles(
 
 export const useNavStyles = makeStyles(
   (theme) => ({
-    header: {
-      paddingRight: '79px',
-      paddingLeft: '118px',
-      backgroundColor: '#990021'
-    },
+      appBar:{
+          backgroundColor: '#990021',
+          paddingTop:'0.2em',
+          paddingBottom:'0.2em',
+      },
     menuButton: {
       fontFamily: 'Nunito',
       size: '18px',
       marginLeft: '38px',
       color: 'white'
+    },
+    iconButton:{
+        fontFamily: 'Nunito',
+        size: '18px',
+        color: 'white'
     },
     toolbar: {},
     logo: {
@@ -348,12 +386,13 @@ export const useNavStyles = makeStyles(
     container: {
       position: 'sticky',
       top: 0,
-      zIndex: 100
+      zIndex: 100,
     },
     leftPortion: {
       flexGrow: 1,
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+        backgroundColor: '#990021'
     },
     logoWrapper: {
       marginRight: '1em',
