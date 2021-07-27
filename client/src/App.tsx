@@ -1,21 +1,21 @@
 import React from 'react';
 import './App.css';
-import NavBar from "./components/NavBar";
+import NavBar from './components/NavBar';
 import Routes from './Router';
-import Footer from "./components/Footer";
+import Footer from './components/Footer';
 
-import {useBodyStyles} from "./styles/muiStyles";
+import { useBodyStyles } from './styles/muiStyles';
 
 function App() {
-    const classes = useBodyStyles(false)();
+  const classes = useBodyStyles(false)();
   return (
-          <div className="App">
-              <div className={classes.root}>
-                  <NavBar />
-                  <Routes />
-                  <Footer />
-              </div>
-          </div>
+    <div className="App">
+      <div className={classes.root}>
+        <NavBar />
+        <Routes />
+        <Footer />
+      </div>
+    </div>
   );
 }
 

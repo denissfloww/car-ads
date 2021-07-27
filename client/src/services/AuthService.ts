@@ -1,16 +1,21 @@
-import axios from 'axios'
-import backEndUrl from "../BackEndUrl";
+import axios from 'axios';
+import backEndUrl from '../BackEndUrl';
 
 interface Creditionals {
-    username: string;
-    password: string;
+  username: string;
+  password: string;
 }
 
-const login = async (creditionals : Creditionals) => {
-    const response = await axios.post(`${backEndUrl}/login`, creditionals);
-    return response.data;
-}
+const login = async (creditionals: Creditionals) => {
+  const response = await axios.post(`${backEndUrl}/login`, creditionals);
+  return response.data;
+};
 
-const AuthService = { login }
+const signup = async (creditionals: Creditionals) => {
+  const response = await axios.post(`${backEndUrl}/signup`, creditionals);
+  return response.data;
+};
+
+const AuthService = { login, signup };
 
 export default AuthService;

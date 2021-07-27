@@ -1,23 +1,24 @@
-
 interface User {
-    id: string;
-    username: string;
-    token: string;
+  id: string;
+  username: string;
+  token: string;
 }
 
 const saveUser = (user: User) => {
-    localStorage.setItem('user', JSON.stringify(user))
-}
+  localStorage.setItem('user', JSON.stringify(user));
+};
 
 const getUser = () => {
-    const user = localStorage.getItem('user');
-    if (user) {
-        return JSON.parse(user);
-    }
+  const user = localStorage.getItem('user');
+  if (user) {
+    return JSON.parse(user);
+  }
 
-    return null;
-}
+  return null;
+};
 
-const LocalStorageService = { saveUser, getUser}
+const removeUser = () => localStorage.removeItem('user');
 
-export default LocalStorageService
+const LocalStorageService = { saveUser, getUser, removeUser };
+
+export default LocalStorageService;
