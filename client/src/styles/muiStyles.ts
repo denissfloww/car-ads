@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useBodyStyles = (darkMode: boolean) =>
   makeStyles(
-    (theme) => ({
+    theme => ({
       root: {
         width: '100vW',
         display: 'flex',
@@ -10,87 +10,87 @@ export const useBodyStyles = (darkMode: boolean) =>
         flex: 1,
         minHeight: '100vH',
         backgroundColor: darkMode ? '#333' : '#E1E1E4',
-        fontFamily: 'Nunito'
-      }
+        fontFamily: 'Nunito',
+      },
     }),
-    { index: 1 }
+    { index: 1 },
   );
 
 export const useTableStyles = makeStyles(
-  (theme) => ({
+  theme => ({
     table: {
       '& thead th': {
         fontWeight: '600',
         color: theme.palette.secondary.main,
-        backgroundColor: theme.palette.primary.light
-      }
+        backgroundColor: theme.palette.primary.light,
+      },
     },
     clickableCell: {
       '&:hover': {
         backgroundColor: theme.palette.primary.main + '15',
-        cursor: 'pointer'
-      }
+        cursor: 'pointer',
+      },
     },
     scrollableTable: {
       '& thead th': {
         fontWeight: '600',
         color: theme.palette.secondary.main,
-        backgroundColor: theme.palette.primary.light
+        backgroundColor: theme.palette.primary.light,
       },
       overflowY: 'auto',
-      maxHeight: '350px'
-    }
+      maxHeight: '350px',
+    },
   }),
-  { index: 1 }
+  { index: 1 },
 );
 
 export const useDialogStyles = makeStyles(
-  (theme) => ({
+  theme => ({
     dialogWrapper: {
       paddingBottom: 20,
       overflow: 'hidden',
       [theme.breakpoints.down('xs')]: {
-        padding: 0
-      }
+        padding: 0,
+      },
     },
     fab: {
       position: 'fixed',
       bottom: theme.spacing(2),
       right: theme.spacing(2),
-      zIndex: 1000
+      zIndex: 1000,
     },
     roundIconButton: {
       minWidth: 0,
       padding: '0.65em',
-      borderRadius: '2em'
-    }
+      borderRadius: '2em',
+    },
   }),
-  { index: 1 }
+  { index: 1 },
 );
 
 export const useFormStyles = makeStyles(
-  (theme) => ({
+  theme => ({
     submitBtn: {
       marginTop: '1.5em',
-      height: '3.2em'
+      height: '3.2em',
     },
     avatar: {
       color: theme.palette.primary.main,
-      backgroundColor: '#d3d3d3'
+      backgroundColor: '#d3d3d3',
     },
     fieldMargin: {
-      marginTop: '1.5em'
+      marginTop: '1.5em',
     },
     radioGroupForm: {
       marginTop: '0.8em',
-      width: '100%'
+      width: '100%',
     },
     radioGroup: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     radioGroupLabel: {
-      marginRight: '2em'
+      marginRight: '2em',
     },
     formControlLabels: {
       display: 'flex',
@@ -98,53 +98,86 @@ export const useFormStyles = makeStyles(
       width: '80%',
       [theme.breakpoints.down('xs')]: {
         flexDirection: 'column',
-        width: 'auto'
-      }
-    }
+        width: 'auto',
+      },
+    },
   }),
-  { index: 1 }
+  { index: 1 },
 );
 
-export const usePersonalAccountStyles = makeStyles(
-    (theme) => ({
-        root:{
-            width:'100',
-            minHeight: 'calc(100vH - 130px)',
-            fontFamily: 'Nunito',
-            paddingTop:'1.5em'
-        },
-        headerPaper: {
-            padding: '1.5em',
-            marginBottom: '1.5em',
-            minHeight: 'calc(20vH - 130px)',
-            [theme.breakpoints.down('xs')]: {
-                padding: '0.5em 0.7em',
-                minHeight: 'calc(100vH - 80px)'
-            }
-        },
-        paper:{
-            padding: '1.5em',
-            minHeight: 'calc(100vH - 130px)',
-            [theme.breakpoints.down('xs')]: {
-                padding: '0.5em 0.7em',
-                minHeight: 'calc(100vH - 80px)'
-            }
-        },
-        tabs:{
-            flexGrow: 1,
-            color:'black',
+export const useAppendPageStyles = makeStyles(theme => ({
+  root: {
+    width: '100',
+    minHeight: 'calc(100vH - 130px)',
+    fontFamily: 'Nunito',
+    paddingTop: '1.5em',
+  },
+  paper: {
+    textAlign: "left",
+    padding: '1.5em',
+    minHeight: 'calc(100vH - 130px)',
+    paddingLeft:'1.5em',
+    [theme.breakpoints.down('xs')]: {
+      padding: '0.5em 0.7em',
+      minHeight: 'calc(100vH - 80px)',
+    },
+  },
+  image: {
+    width: '70px',
+    height: '70px'
+  },
+  headerPaper: {
+    padding: '1.0em',
+    paddingLeft:'1.5em',
+    marginBottom: '1.5em',
+    minHeight: 'calc(15vH - 100px)',
+    textAlign:"left",
+    display: "flex",
+    alignItems: "center",
+    [theme.breakpoints.down('xs')]: {
+      padding: '0.5em 0.7em',
+      minHeight: 'calc(100vH - 80px)',
+    },
+  },
+}));
 
-        }
-    })
-)
+export const usePersonalAccountStyles = makeStyles(theme => ({
+  root: {
+    width: '100',
+    minHeight: 'calc(100vH - 130px)',
+    fontFamily: 'Nunito',
+    paddingTop: '1.5em',
+  },
+  headerPaper: {
+    padding: '1.5em',
+    marginBottom: '1.5em',
+    minHeight: 'calc(20vH - 130px)',
+    [theme.breakpoints.down('xs')]: {
+      padding: '0.5em 0.7em',
+      minHeight: 'calc(100vH - 80px)',
+    },
+  },
+  paper: {
+    padding: '1.5em',
+    minHeight: 'calc(100vH - 130px)',
+    [theme.breakpoints.down('xs')]: {
+      padding: '0.5em 0.7em',
+      minHeight: 'calc(100vH - 80px)',
+    },
+  },
+  tabs: {
+    flexGrow: 1,
+    color: 'black',
+  },
+}));
 
 export const useMainPageStyles = makeStyles(
-  (theme) => ({
+  theme => ({
     root: {
       padding: '1em 0',
       [theme.breakpoints.down('xs')]: {
-        padding: '0.5em 0.5em'
-      }
+        padding: '0.5em 0.5em',
+      },
     },
     headerPaper: {
       padding: '0.8em 1.5em',
@@ -153,104 +186,104 @@ export const useMainPageStyles = makeStyles(
       alignItems: 'center',
       [theme.breakpoints.down('xs')]: {
         padding: '0.3em 0.5em',
-        marginBottom: '0.5em'
-      }
+        marginBottom: '0.5em',
+      },
     },
     headerIcon: {
       fontSize: '4.5em',
       marginRight: '0.2em',
       [theme.breakpoints.down('xs')]: {
         fontSize: '3em',
-        marginRight: '0.3em'
-      }
+        marginRight: '0.3em',
+      },
     },
     projectsPaper: {
       padding: '1.5em',
       minHeight: 'calc(100vH - 244px)',
       [theme.breakpoints.down('xs')]: {
         padding: '0.7em 0.3em',
-        minHeight: 'calc(100vH - 160px)'
-      }
+        minHeight: 'calc(100vH - 160px)',
+      },
     },
     projectsListTable: {
       marginTop: '1.5em',
       [theme.breakpoints.down('xs')]: {
-        marginTop: 0
-      }
+        marginTop: 0,
+      },
     },
     detailsHeader: {
       padding: '1.2em 1.5em',
       marginBottom: '1em',
       [theme.breakpoints.down('xs')]: {
         padding: '0.5em 0.7em',
-        marginBottom: '0.5em'
-      }
+        marginBottom: '0.5em',
+      },
     },
     flexHeader: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     btnsWrapper: {
       margin: '1em 0',
       [theme.breakpoints.down('xs')]: {
-        margin: '0.5em 0'
-      }
+        margin: '0.5em 0',
+      },
     },
     membersWrapper: {
-      marginTop: '1em'
+      marginTop: '1em',
     },
     filterMembersInput: {
       [theme.breakpoints.down('xs')]: {
-        width: '55%'
-      }
+        width: '55%',
+      },
     },
     flexInput: {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       [theme.breakpoints.down('xs')]: {
-        marginTop: '0.3em'
-      }
+        marginTop: '0.3em',
+      },
     },
     bugsPaper: {
       padding: '1.5em',
       minHeight: 'calc(100vH - 356px)',
       [theme.breakpoints.down('xs')]: {
         padding: '0.5em 0.7em',
-        minHeight: 'calc(100vH - 256px)'
-      }
+        minHeight: 'calc(100vH - 256px)',
+      },
     },
     bugsActionCard: {
       margin: '1.5em 0',
       [theme.breakpoints.down('xs')]: {
-        margin: '0.5em 0'
-      }
+        margin: '0.5em 0',
+      },
     },
     notesPaper: {
       padding: '1.5em',
       minHeight: 'calc(100vH - 420px)',
       [theme.breakpoints.down('xs')]: {
         padding: '0.5em 0.7em',
-        minHeight: 'calc(100vH - 320px)'
-      }
+        minHeight: 'calc(100vH - 320px)',
+      },
     },
     notesWrapper: {
-      margin: '1.5em 0'
+      margin: '1.5em 0',
     },
     sortNotesInput: {
       width: '22%',
       [theme.breakpoints.down('xs')]: {
-        width: '55%'
-      }
+        width: '55%',
+      },
     },
     singleNote: {
       display: 'flex',
       alignItems: 'flex-start',
       marginBottom: '0.3em',
-      marginTop: '0.8em'
+      marginTop: '0.8em',
     },
     noteBody: {
-      marginTop: '0.2em'
+      marginTop: '0.2em',
     },
     avatar: {
       width: theme.spacing(4.8),
@@ -258,95 +291,95 @@ export const useMainPageStyles = makeStyles(
       marginRight: '0.4em',
       marginTop: '0.3em',
       color: theme.palette.primary.main,
-      backgroundColor: '#d3d3d3'
+      backgroundColor: '#d3d3d3',
     },
     notesBtnWrapper: {
-      margin: '0.5em 0'
+      margin: '0.5em 0',
     },
     iconText: {
       verticalAlign: 'middle',
-      display: 'inline-flex'
+      display: 'inline-flex',
     },
     textIconsWrapper: {
       display: 'flex',
       width: '100px',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
     },
     listItemWrapper: {
-      padding: '0.4em 0.3em'
+      padding: '0.4em 0.3em',
     },
     flexedWrapper: {
       width: '100%',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginTop: '0.3em'
+      marginTop: '0.3em',
     },
     roundIconButton: {
       minWidth: 0,
       padding: '0.65em',
-      borderRadius: '2em'
+      borderRadius: '2em',
     },
     gotoIcon: {
       fontSize: '0.7em',
-      marginLeft: '0.4em'
+      marginLeft: '0.4em',
     },
     marginText: {
-      marginBottom: '0.35em'
+      marginBottom: '0.35em',
     },
     notFoundPaper: {
       padding: '1.5em',
       minHeight: 'calc(100vH - 130px)',
       [theme.breakpoints.down('xs')]: {
         padding: '0.5em 0.7em',
-        minHeight: 'calc(100vH - 80px)'
-      }
+        minHeight: 'calc(100vH - 80px)',
+      },
     },
     error404Image: {
       width: '250px',
       display: 'block',
       margin: '0 auto',
       [theme.breakpoints.down('xs')]: {
-        width: '150px'
-      }
+        width: '150px',
+      },
     },
     error404Text: {
       fontSize: '2.2em',
       textAlign: 'center',
       marginTop: '1em',
       [theme.breakpoints.down('xs')]: {
-        fontSize: '1.5em'
-      }
+        fontSize: '1.5em',
+      },
     },
     notFoundWrapper: {
-      marginTop: '6em'
-    }
+      marginTop: '6em',
+    },
   }),
-  { index: 1 }
+  { index: 1 },
 );
 
 export const useActionCardStyles = makeStyles(
-  (theme) => ({
+  theme => ({
     inputs: {
       display: 'flex',
       minWidth: '100%',
       justifyContent: 'space-between',
       marginBottom: '1.5em',
       [theme.breakpoints.down('xs')]: {
-        marginBottom: '0.7em'
-      }
+        marginBottom: '0.7em',
+      },
     },
     searchBarWrapper: {
       width: '70%',
       [theme.breakpoints.down('xs')]: {
-        width: '55%'
-      }
+        width: '55%',
+      },
     },
     sortBarWrapper: {
       width: '25%',
       [theme.breakpoints.down('xs')]: {
-        width: '42%'
-      }
+        width: '42%',
+      },
     },
     flexWrapper: {
       display: 'flex',
@@ -354,34 +387,34 @@ export const useActionCardStyles = makeStyles(
       justifyContent: 'space-between',
       [theme.breakpoints.down('xs')]: {
         justifyContent: 'flex-start',
-        marginLeft: '0.2em'
-      }
-    }
+        marginLeft: '0.2em',
+      },
+    },
   }),
-  { index: 1 }
+  { index: 1 },
 );
 
 export const useNavStyles = makeStyles(
-  (theme) => ({
-      appBar:{
-          backgroundColor: '#990021',
-          paddingTop:'0.2em',
-          paddingBottom:'0.2em',
-      },
+  theme => ({
+    appBar: {
+      backgroundColor: '#990021',
+      paddingTop: '0.2em',
+      paddingBottom: '0.2em',
+    },
     menuButton: {
       fontFamily: 'Nunito',
       size: '18px',
       marginLeft: '38px',
-      color: 'white'
+      color: 'white',
     },
-    iconButton:{
-        fontFamily: 'Nunito',
-        size: '18px',
-        color: 'white'
+    iconButton: {
+      fontFamily: 'Nunito',
+      size: '18px',
+      color: 'white',
     },
     toolbar: {},
     logo: {
-      textAlign: 'left'
+      textAlign: 'left',
     },
     container: {
       position: 'sticky',
@@ -392,12 +425,12 @@ export const useNavStyles = makeStyles(
       flexGrow: 1,
       display: 'flex',
       alignItems: 'center',
-        backgroundColor: '#990021'
+      backgroundColor: '#990021',
     },
     logoWrapper: {
       marginRight: '1em',
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     logoBtn: {
       textTransform: 'none',
@@ -406,37 +439,37 @@ export const useNavStyles = makeStyles(
       marginRight: '0.3em',
       [theme.breakpoints.down('xs')]: {
         fontSize: '1em',
-        marginLeft: '0.6em'
-      }
+        marginLeft: '0.6em',
+      },
     },
     backBtn: {
       [theme.breakpoints.down('xs')]: {
-        marginLeft: '0.6em'
-      }
+        marginLeft: '0.6em',
+      },
     },
     svgImage: {
       width: '35px',
       marginRight: '5px',
       [theme.breakpoints.down('xs')]: {
-        width: '30px'
-      }
+        width: '30px',
+      },
     },
     rightBtnWrapper: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     lastBtn: {
-      marginLeft: '1em'
+      marginLeft: '1em',
     },
     threeDotsBtn: {
-      padding: '0.35em'
+      padding: '0.35em',
     },
     menuIcon: {
-      marginRight: '10px'
+      marginRight: '10px',
     },
     userInfo: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     avatar: {
       width: theme.spacing(4.1),
@@ -446,22 +479,22 @@ export const useNavStyles = makeStyles(
       backgroundColor: '#d3d3d3',
       [theme.breakpoints.down('xs')]: {
         width: theme.spacing(3.5),
-        height: theme.spacing(3.5)
-      }
+        height: theme.spacing(3.5),
+      },
     },
     btnsWrapper: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     userBtnMob: {
-      padding: '0.1em'
-    }
+      padding: '0.1em',
+    },
   }),
-  { index: 1 }
+  { index: 1 },
 );
 
 export const useAuthPageStyles = makeStyles(
-  (theme) => ({
+  theme => ({
     root: {
       padding: '1.5em 3em',
       width: '330px',
@@ -470,58 +503,58 @@ export const useAuthPageStyles = makeStyles(
       [theme.breakpoints.down('xs')]: {
         width: 'auto',
         margin: '0.5em 0.5em',
-        padding: '1em'
-      }
+        padding: '1em',
+      },
     },
     form: {
-      marginTop: '3em'
+      marginTop: '3em',
     },
     inputField: {
-      marginBottom: '1.5em'
+      marginBottom: '1.5em',
     },
     submitButton: {
       marginTop: '0.5em',
       height: '3.1em',
       fontSize: '1em',
-      fontWeight: 500
+      fontWeight: 500,
     },
     titleLogo: {
       display: 'block',
       width: '7em',
       margin: '0 auto',
       [theme.breakpoints.down('xs')]: {
-        width: '6em'
-      }
+        width: '6em',
+      },
     },
     footerText: {
       marginTop: '1em',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     headerText: {
       marginBottom: '1em',
       marginTop: '0.5em',
       fontSize: '24pt',
       textAlign: 'center',
-      fontFamily: 'Nunito'
+      fontFamily: 'Nunito',
     },
     link: {
-      cursor: 'pointer'
+      cursor: 'pointer',
     },
     iconColor: {
-      color: '#990021'
-    }
+      color: '#990021',
+    },
   }),
-  { index: 1 }
+  { index: 1 },
 );
 
 export const useFooterStyles = makeStyles(
-  (theme) => ({
+  theme => ({
     footer: {
       marginTop: 'calc(5% + 60px)',
       bottom: 0,
       borderTop: '1px solid grey',
-      opacity: '50%'
-    }
+      opacity: '50%',
+    },
   }),
-  { index: 1 }
+  { index: 1 },
 );

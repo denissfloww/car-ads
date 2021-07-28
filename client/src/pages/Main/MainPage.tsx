@@ -8,11 +8,7 @@ const MainPage = () => {
     <div className={classes.root}>
       <Paper className={classes.notFoundPaper}>
         <div className={classes.notFoundWrapper}>
-          <Typography
-            color="inherit"
-            variant="h6"
-            className={classes.error404Text}
-          >
+          <Typography color='inherit' variant='h6' className={classes.error404Text}>
             <p>Главная страница</p>
           </Typography>
         </div>

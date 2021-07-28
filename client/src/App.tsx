@@ -9,7 +9,7 @@ import { useBodyStyles } from './styles/muiStyles';
 function App() {
   const classes = useBodyStyles(false)();
   return (
-    <div className="App">
+    <div className='App'>
       <div className={classes.root}>
         <NavBar />
         <Routes />

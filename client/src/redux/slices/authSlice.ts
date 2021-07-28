@@ -1,11 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk, RootState } from "../store";
-import { UserState, CredentialsPayload } from "../types";
-import AuthService from "../../services/AuthService";
-import LocalStorageService from "../../services/LocalStorageService";
-import { History } from "history";
-import { homeLink } from "../../Links";
-import { getErrorMsg } from "../../utils/HelperFunc";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppThunk, RootState } from '../store';
+import { UserState, CredentialsPayload } from '../types';
+import AuthService from '../../services/AuthService';
+import LocalStorageService from '../../services/LocalStorageService';
+import { History } from 'history';
+import { homeLink } from '../../Links';
+import { getErrorMsg } from '../../utils/HelperFunc';
 
 interface InitialAuthState {
   user: UserState | null;
@@ -20,7 +20,7 @@ const initialState: InitialAuthState = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<UserState>) => {
@@ -28,7 +28,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
-    setAuthLoading: (state) => {
+    setAuthLoading: state => {
       state.loading = true;
       state.error = null;
     },
@@ -36,32 +36,22 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    clearAuthError: (state) => {
+    clearAuthError: state => {
       state.error = null;
     },
-    removeUser: (state) => {
+    removeUser: state => {
       state.user = null;
     },
-    cancelll: (state) => {
+    cancelll: state => {
       state.loading = false;
     },
   },
 });
 
-export const {
-  setUser,
-  setAuthLoading,
-  cancelll,
-  setAuthError,
-  clearAuthError,
-  removeUser,
-} = authSlice.actions;
+export const { setUser, setAuthLoading, cancelll, setAuthError, clearAuthError, removeUser } = authSlice.actions;
 
-export const login = (
-  creditionals: CredentialsPayload,
-  history: History
-): AppThunk => {
-  return async (dispatch) => {
+export const login = (creditionals: CredentialsPayload, history: History): AppThunk => {
+  return async dispatch => {
     try {
       dispatch(setAuthLoading());
       const userData = await AuthService.login(creditionals);
@@ -74,11 +64,8 @@ export const login = (
   };
 };
 
-export const signup = (
-  creditionals: CredentialsPayload,
-  history: History
-): AppThunk => {
-  return async (dispath) => {
+export const signup = (creditionals: CredentialsPayload, history: History): AppThunk => {
+  return async dispath => {
     try {
       dispath(setAuthLoading());
       const userData = await AuthService.signup(creditionals);
@@ -93,7 +80,7 @@ export const signup = (
 };
 
 export const cancel = (): AppThunk => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       dispatch(cancelll());
     } catch (e) {
@@ -103,7 +90,7 @@ export const cancel = (): AppThunk => {
 };
 
 export const logout = (): AppThunk => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(removeUser());
     LocalStorageService.removeUser();
   };

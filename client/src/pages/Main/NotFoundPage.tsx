@@ -9,12 +9,8 @@ const NotFoundPage = () => {
     <div className={classes.root}>
       <Paper className={classes.notFoundPaper}>
         <div className={classes.notFoundWrapper}>
-          <img src={notFoundImg} alt="" width="500px" height="500px" />
-          <Typography
-            color="inherit"
-            variant="h6"
-            className={classes.error404Text}
-          >
+          <img src={notFoundImg} alt='' width='500px' height='500px' />
+          <Typography color='inherit' variant='h6' className={classes.error404Text}>
             <p>Страница не найдена!</p>
           </Typography>
         </div>

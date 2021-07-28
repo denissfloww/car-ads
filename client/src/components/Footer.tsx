@@ -3,11 +3,7 @@ import { useFooterStyles } from '../styles/muiStyles';
 
 const Footer = () => {
   const classes = useFooterStyles();
-  return (
-    <footer className={classes.footer}>
-      ©denissfloww 2021–2021 (Тюменская область)
-    </footer>
-  );
+  return <footer className={classes.footer}>©denissfloww 2021–2021 (Тюменская область)</footer>;
 };
 
 export default Footer;

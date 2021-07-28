@@ -5,3 +5,5 @@ export const homeLink = '/home';
 export const signupLink = '/signup';
 
 export const mainLink = '/';
+
+export const appendAdLink = '/append'
