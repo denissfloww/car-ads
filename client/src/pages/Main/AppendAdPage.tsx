@@ -1,4 +1,4 @@
-import { Paper, TextField, Typography } from '@material-ui/core';
+import {Button, Paper, TextField, Typography} from '@material-ui/core';
 import { Image } from '@material-ui/icons';
 import React from 'react';
 import { useAppendPageStyles } from '../../styles/muiStyles';
@@ -34,22 +34,44 @@ const AppendAdPage = () => {
             }}
           /></p>
           <p>
-            <h3>Выберите модель</h3>
-          <Autocomplete
-            id="combo-box-demo"
-            options={top100Films}
-            getOptionLabel={(option) => option.title}
-            renderInput={(params) => <TextField {...params} label="Выберите марку" variant="outlined" />}
-            renderOption={options => {
-              return (
-                <>
-                  <img style={{width: "40px", height:"40px"}} src={options.imageUrl} alt='' />
-                  {options.title}
-                </>
-              )
-            }}
-          /></p>
-
+                <h3>Выберите модель</h3>
+              <Autocomplete
+                id="combo-box-demo"
+                options={top100Films}
+                getOptionLabel={(option) => option.title}
+                renderInput={(params) => <TextField {...params} label="Выберите марку" variant="outlined" />}
+                renderOption={options => {
+                  return (
+                    <>
+                      <img style={{width: "40px", height:"40px"}} src={options.imageUrl} alt='' />
+                      {options.title}
+                    </>
+                  )
+                }}
+              />
+          </p>
+            <p>
+                <h3>Выберите год выпуска авто</h3>
+                <Autocomplete
+                    id="combo-box-demo"
+                    options={top100Films}
+                    getOptionLabel={(option) => option.title}
+                    renderInput={(params) => <TextField {...params} label="Выберите год выпуска авто" variant="outlined" />}
+                    renderOption={options => {
+                        return (
+                            <>
+                                <img style={{width: "40px", height:"40px"}} src={options.imageUrl} alt='' />
+                                {options.title}
+                            </>
+                        )
+                    }}
+                />
+            </p>
+            <p>
+                <h3>Выберите тип кузова</h3>
+                <Button>dfgdfg</Button>
+                <Button />
+            </p>
        </div>
       </Paper>
     </div>
