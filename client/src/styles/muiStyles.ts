@@ -114,6 +114,8 @@ export const useAppendPageStyles = makeStyles(theme => ({
   },
   paper: {
     textAlign: "left",
+    display: 'flex',
+    justifyContent: 'center',
     padding: '1.5em',
     minHeight: 'calc(100vH - 130px)',
     paddingLeft:'1.5em',
