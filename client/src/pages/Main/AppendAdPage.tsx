@@ -16,7 +16,7 @@ import ImageUploader from '../../components/ImageUploader';
 const AppendAdPage = () => {
   const dispatch = useDispatch();
   const classes = useAppendPageStyles();
-  const { showModels, showYear, showBody, brandValue } = useSelector(selectAppendState);
+  const { showModels, showYear, showBody, brandValue, modelValue, yearValue, bodyValue } = useSelector(selectAppendState);
   const [images, setImages] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);
@@ -26,29 +26,30 @@ const AppendAdPage = () => {
 
   const handleBrandChange = (_: any, value: any) => {
     dispatch(changeBrand(value));
-    setSelectedBrand(value);
-    if ((selectedModel as any)?.name !== value?.name) {
-      setSelectedModel(null);
-      setSelectedYear(null);
-      setSelectedBody(null);
-    }
+    // setSelectedBrand(value);
+    // if ((selectedModel as any)?.name !== value?.name) {
+    //   setSelectedModel(null);
+    //   setSelectedYear(null);
+    //   setSelectedBody(null);
+    // }
   };
 
   const handleModelChange = (_: any, value: any) => {
-    dispatch(changeModel());
-    setSelectedModel(value);
-    if ((selectedYear as any)?.name !== value?.name) {
-      setSelectedYear(null);
-      setSelectedBody(null);
-    }
+    dispatch(changeModel(value));
+    // setSelectedModel(value);
+    // if ((selectedYear as any)?.name !== value?.name) {
+    //   setSelectedYear(null);
+    //   setSelectedBody(null);
+    // }
   };
 
   const handleYearChange = (_: any, value: any) => {
-    setSelectedYear(value);
-    dispatch(changeYear());
-    if ((selectedBody as any)?.name !== value?.name) {
-      setSelectedBody(null);
-    }
+      dispatch(changeYear(value));
+    //   setSelectedYear(value);
+    //
+    // if ((selectedBody as any)?.name !== value?.name) {
+    //   setSelectedBody(null);
+    // }
   };
 
   const handleBodyChange = (_: any, value: any) => {
@@ -98,7 +99,7 @@ const AppendAdPage = () => {
                   options={testModel}
                   getOptionLabel={option => option.name}
                   getOptionSelected={(option, value) => option.name === value.name}
-                  value={selectedModel}
+                  value={modelValue}
                   onChange={handleModelChange}
                   renderInput={params => <TextField {...params} label='Модель' variant='outlined' />}
                 />
@@ -112,7 +113,7 @@ const AppendAdPage = () => {
                   options={testYear}
                   getOptionLabel={option => option.name}
                   getOptionSelected={(option, value) => option.name === value.name}
-                  value={selectedYear}
+                  value={yearValue}
                   onChange={handleYearChange}
                   renderInput={params => <TextField {...params} label='Год выпуска' variant='outlined' />}
                 />
@@ -126,7 +127,7 @@ const AppendAdPage = () => {
                   options={testBody}
                   getOptionLabel={option => option.name}
                   getOptionSelected={(option, value) => option.name === value.name}
-                  value={selectedBody}
+                  value={bodyValue}
                   onChange={handleBodyChange}
                   renderInput={params => <TextField {...params} label='Тип кузова' variant='outlined' />}
                 />

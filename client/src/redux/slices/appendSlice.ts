@@ -13,15 +13,20 @@ interface InitialAppendState {
     showYear: boolean
     modelValue: any | null;
     brandValue: any | null;
+    yearValue: any | null;
+    bodyValue: any | null;
     showBody: boolean
 }
 
 const initialState: InitialAppendState = {
     showModels: false,
     showYear: false,
-    modelValue: null,
     showBody: false,
+    modelValue: null,
     brandValue: null,
+    yearValue: null,
+    bodyValue: null,
+
 };
 
 const appendSlice = createSlice({
@@ -34,13 +39,20 @@ const appendSlice = createSlice({
             state.showBody = false;
             state.brandValue = action.payload;
             state.modelValue = null;
+            state.yearValue = null;
+            state.bodyValue = null;
         },
-        setChangeModel: state => {
+        setChangeModel: (state, action: PayloadAction<string>) => {
             state.showYear = true;
-            state.showBody = false
+            state.showBody = false;
+            state.modelValue = action.payload;
+            state.yearValue = null;
+            state.bodyValue = null;
         },
-        setChangeYear: state => {
+        setChangeYear: (state, action: PayloadAction<string>) => {
             state.showBody = true
+            state.yearValue = action.payload;
+            state.bodyValue = null;
         }
     }
 });
@@ -57,20 +69,20 @@ export const changeBrand = (brandValue: string): AppThunk => {
     };
 };
 
-export const changeModel = (): AppThunk => {
+export const changeModel = (modelValue: string): AppThunk => {
     return async dispatch => {
         try{
-            dispatch(setChangeModel())
+            dispatch(setChangeModel(modelValue))
         }catch (e) {
             dispatch(setAuthError(getErrorMsg(e)));
         }
     }
 }
 
-export const changeYear = (): AppThunk => {
+export const changeYear = (yearValue: string): AppThunk => {
     return async dispatch => {
         try{
-            dispatch(setChangeYear())
+            dispatch(setChangeYear(yearValue))
         }catch (e) {
             dispatch(setAuthError(getErrorMsg(e)));
         }
