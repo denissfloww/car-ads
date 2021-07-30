@@ -117,8 +117,9 @@ export const useAppendPageStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     padding: '1.5em',
-    minHeight: 'calc(100vH - 130px)',
+    minHeight: 'calc(30vH - 80px)',
     paddingLeft:'1.5em',
+    marginTop:'1.5em',
     [theme.breakpoints.down('xs')]: {
       padding: '0.5em 0.7em',
       minHeight: 'calc(100vH - 80px)',
@@ -128,6 +129,14 @@ export const useAppendPageStyles = makeStyles(theme => ({
     width: '70px',
     height: '70px'
   },
+
+  borderTest: {
+      border: '2px solid black'
+    },
+
+    uploadForm: {
+      padding:'auto',
+    },
   headerPaper: {
     padding: '1.0em',
     paddingLeft:'1.5em',
@@ -141,6 +150,9 @@ export const useAppendPageStyles = makeStyles(theme => ({
       minHeight: 'calc(100vH - 80px)',
     },
   },
+    imageItemButton: {
+
+    }
 }));
 
 export const usePersonalAccountStyles = makeStyles(theme => ({

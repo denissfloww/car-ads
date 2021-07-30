@@ -1,6 +1,6 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppThunk, RootState} from "../store";
-import {CredentialsPayload} from "../types";
+import {CredentialsPayload, UserState} from "../types";
 import {History} from "history";
 import AuthService from "../../services/AuthService";
 import LocalStorageService from "../../services/LocalStorageService";
@@ -11,7 +11,8 @@ import {setAuthError, setAuthLoading, setUser} from "./authSlice";
 interface InitialAppendState {
     showModels: boolean
     showYear: boolean
-    modelValue: string | null;
+    modelValue: any | null;
+    brandValue: any | null;
     showBody: boolean
 }
 
@@ -20,17 +21,19 @@ const initialState: InitialAppendState = {
     showYear: false,
     modelValue: null,
     showBody: false,
+    brandValue: null,
 };
 
 const appendSlice = createSlice({
     name: 'append',
     initialState,
     reducers: {
-        setChangeBrand: state => {
+        setChangeBrand: (state, action: PayloadAction<string>) => {
             state.showModels = true;
             state.showYear = false;
             state.showBody = false;
-            state.modelValue = null
+            state.brandValue = action.payload;
+            state.modelValue = null;
         },
         setChangeModel: state => {
             state.showYear = true;
@@ -44,10 +47,10 @@ const appendSlice = createSlice({
 
 export const { setChangeBrand, setChangeModel, setChangeYear } = appendSlice.actions;
 
-export const changeBrand = (): AppThunk => {
+export const changeBrand = (brandValue: string): AppThunk => {
     return async dispatch => {
         try {
-            dispatch(setChangeBrand())
+            dispatch(setChangeBrand(brandValue))
         } catch (e) {
             dispatch(setAuthError(getErrorMsg(e)));
         }
