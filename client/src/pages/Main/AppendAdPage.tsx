@@ -44,7 +44,7 @@ const AppendAdPage = () => {
   };
 
   const handleYearChange = (_: any, value: any) => {
-      dispatch(changeYear(value));
+    dispatch(changeYear(value));
     //   setSelectedYear(value);
     //
     // if ((selectedBody as any)?.name !== value?.name) {
