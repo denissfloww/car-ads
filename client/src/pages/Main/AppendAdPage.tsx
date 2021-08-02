@@ -1,16 +1,11 @@
-import { Button, Paper, TextField, Typography } from '@material-ui/core';
-import { Image } from '@material-ui/icons';
-import { on } from 'cluster';
+import { Paper, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeBrand, changeModel, changeYear, selectAppendState } from '../../redux/slices/appendSlice';
 import { useAppendPageStyles } from '../../styles/muiStyles';
 import DirectionsCarIcon from '@material-ui/icons/DirectionsCar';
 import { Autocomplete } from '@material-ui/lab';
-import ImageUploading, { ImageListType } from 'react-images-uploading';
-import CancelIcon from '@material-ui/icons/Cancel';
-import PublishIcon from '@material-ui/icons/Publish';
-import AutoComplete from '../../components/AutoCompletes/AutoComplete';
+import { ImageListType } from 'react-images-uploading';
 import ImageUploader from '../../components/ImageUploader';
 
 const AppendAdPage = () => {
@@ -26,30 +21,14 @@ const AppendAdPage = () => {
 
   const handleBrandChange = (_: any, value: any) => {
     dispatch(changeBrand(value));
-    // setSelectedBrand(value);
-    // if ((selectedModel as any)?.name !== value?.name) {
-    //   setSelectedModel(null);
-    //   setSelectedYear(null);
-    //   setSelectedBody(null);
-    // }
   };
 
   const handleModelChange = (_: any, value: any) => {
     dispatch(changeModel(value));
-    // setSelectedModel(value);
-    // if ((selectedYear as any)?.name !== value?.name) {
-    //   setSelectedYear(null);
-    //   setSelectedBody(null);
-    // }
   };
 
   const handleYearChange = (_: any, value: any) => {
     dispatch(changeYear(value));
-    //   setSelectedYear(value);
-    //
-    // if ((selectedBody as any)?.name !== value?.name) {
-    //   setSelectedBody(null);
-    // }
   };
 
   const handleBodyChange = (_: any, value: any) => {

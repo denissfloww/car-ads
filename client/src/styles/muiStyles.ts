@@ -113,13 +113,13 @@ export const useAppendPageStyles = makeStyles(theme => ({
     paddingTop: '1.5em',
   },
   paper: {
-    textAlign: "left",
+    textAlign: 'left',
     display: 'flex',
     justifyContent: 'center',
     padding: '1.5em',
     minHeight: 'calc(30vH - 80px)',
-    paddingLeft:'1.5em',
-    marginTop:'1.5em',
+    paddingLeft: '1.5em',
+    marginTop: '1.5em',
     [theme.breakpoints.down('xs')]: {
       padding: '0.5em 0.7em',
       minHeight: 'calc(100vH - 80px)',
@@ -127,32 +127,30 @@ export const useAppendPageStyles = makeStyles(theme => ({
   },
   image: {
     width: '70px',
-    height: '70px'
+    height: '70px',
   },
 
   borderTest: {
-      border: '2px solid black'
-    },
+    border: '2px solid black',
+  },
 
-    uploadForm: {
-      padding:'auto',
-    },
+  uploadForm: {
+    padding: 'auto',
+  },
   headerPaper: {
     padding: '1.0em',
-    paddingLeft:'1.5em',
+    paddingLeft: '1.5em',
     marginBottom: '1.5em',
     minHeight: 'calc(15vH - 100px)',
-    textAlign:"left",
-    display: "flex",
-    alignItems: "center",
+    textAlign: 'left',
+    display: 'flex',
+    alignItems: 'center',
     [theme.breakpoints.down('xs')]: {
       padding: '0.5em 0.7em',
       minHeight: 'calc(100vH - 80px)',
     },
   },
-    imageItemButton: {
-
-    }
+  imageItemButton: {},
 }));
 
 export const usePersonalAccountStyles = makeStyles(theme => ({

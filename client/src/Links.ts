@@ -6,4 +6,4 @@ export const signupLink = '/signup';
 
 export const mainLink = '/';
 
-export const appendAdLink = '/append'
+export const appendAdLink = '/append';

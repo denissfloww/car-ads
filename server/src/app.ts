@@ -5,6 +5,7 @@ import 'express-async-errors';
 import middleware from './middleware';
 import authRoutes from './routes/auth';
 import userRoutes from './routes/user';
+import addRoutes from './routes/add'
 
 const app = express();
 
@@ -12,6 +13,8 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
+
+app.use('/add', addRoutes)
 app.use('/', authRoutes);
 app.use('/users', userRoutes);
 
