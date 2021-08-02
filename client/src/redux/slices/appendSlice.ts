@@ -11,12 +11,14 @@ interface InitialAppendState {
   yearValue: any | null;
   bodyValue: any | null;
   showBody: boolean;
+  showEngine: boolean;
 }
 
 const initialState: InitialAppendState = {
   showModels: false,
   showYear: false,
   showBody: false,
+  showEngine: true,
   modelValue: null,
   brandValue: null,
   yearValue: null,

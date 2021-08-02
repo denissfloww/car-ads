@@ -1,4 +1,4 @@
-import { Paper, TextField } from '@material-ui/core';
+import {createStyles, Paper, TextField, Theme} from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeBrand, changeModel, changeYear, selectAppendState } from '../../redux/slices/appendSlice';
@@ -7,11 +7,50 @@ import DirectionsCarIcon from '@material-ui/icons/DirectionsCar';
 import { Autocomplete } from '@material-ui/lab';
 import { ImageListType } from 'react-images-uploading';
 import ImageUploader from '../../components/ImageUploader';
+import { DropzoneArea } from 'material-ui-dropzone';
+import MaskedInput from 'react-text-mask';
+import {makeStyles} from "@material-ui/core/styles";
+import NumberFormat from 'react-number-format';
+import { ColorPalette } from 'material-ui-color';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+
+
+interface NumberFormatCustomProps {
+  inputRef: (instance: NumberFormat | null) => void;
+  onChange: (event: { target: { name: string; value: string } }) => void;
+  name: string;
+}
+
+function NumberFormatCustom(props: NumberFormatCustomProps) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+      <NumberFormat
+          {...other}
+          getInputRef={inputRef}
+          onValueChange={(values: any) => {
+            onChange({
+              target: {
+                name: props.name,
+                value: values.value,
+              },
+            });
+          }}
+          thousandSeparator
+          isNumericString
+      />
+  );
+}
+
+interface State {
+  textmask: string;
+  numberformat: string;
+}
 
 const AppendAdPage = () => {
   const dispatch = useDispatch();
   const classes = useAppendPageStyles();
-  const { showModels, showYear, showBody, brandValue, modelValue, yearValue, bodyValue } = useSelector(selectAppendState);
+  const { showModels, showYear, showBody, brandValue, modelValue, yearValue, bodyValue, showEngine } = useSelector(selectAppendState);
   const [images, setImages] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);
@@ -35,9 +74,16 @@ const AppendAdPage = () => {
     const a = 1;
   };
 
-  const onImageUploaderChange = (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
-    console.log(imageList, addUpdateIndex);
-    setImages(imageList as never[]);
+  const [values, setValues] = React.useState<State>({
+    textmask: '(1  )    -    ',
+    numberformat: '1320',
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value,
+    });
   };
 
   return (
@@ -48,7 +94,7 @@ const AppendAdPage = () => {
           <h1>Продайте свой автомобиль</h1>
         </Paper>
         <Paper className={classes.paper}>
-          <div style={{ width: '500px' }}>
+          <div style={{ width: '50%' }}>
             <h2>Основная информация</h2>
             <p style={{ display: 'inline' }}>
               <h3>Выберите марку авто</h3>
@@ -112,12 +158,61 @@ const AppendAdPage = () => {
                 />
               </p>
             ) : null}
+            {showEngine ? (
+                <p>
+                  <h3>Выберите тип двигателя</h3>
+                  <Autocomplete
+                      id='body'
+                      options={testEngine}
+                      value={testEngine.length == 1? testEngine[0] : null}
+                      getOptionLabel={option => option.name}
+                      getOptionSelected={(option, value) => option.name === value.name}
+                      onChange={handleBodyChange}
+                      renderInput={params => <TextField {...params} label='Тип двигателя' variant='outlined' />}
+                  />
+                </p>
+            ) : null}
           </div>
         </Paper>
         <Paper className={classes.paper}>
-          <div style={{ width: '500px' }}>
+          <div style={{ width: '100%' }}>
             <h2>Добавьте фото</h2>
-            <ImageUploader maxNumber={maxNumber} onChange={onImageUploaderChange} images={images} />
+            <DropzoneArea
+                filesLimit={maxNumber}
+                dropzoneText='Нажмите или перетащите фото'
+                acceptedFiles={['image/*']}
+                onChange={(files: any) => console.log('Files:', files)}
+            />
+          </div>
+        </Paper>
+        <Paper className={classes.paper}>
+          <div style={{ width: '50%' }}>
+            <h2>Дополнительная информация</h2>
+            <p>
+              <h3>Пробег</h3>
+              <TextField
+                  label="Км"
+                  value={values.numberformat}
+                  onChange={handleChange}
+                  name="numberformat"
+                  id="formatted-numberformat-input"
+                  InputProps={{
+                    inputComponent: NumberFormatCustom as any,
+                  }}
+              />
+            </p>
+            <p>
+              <h3>
+                Цвет
+              </h3>
+              <ColorPalette palette={palette} onSelect={(color) => { console.log(palette[color])}} />
+            </p>
+            <p>
+              <h3>
+                Комментарий
+              </h3>
+              <TextareaAutosize aria-label="minimum height" placeholder="Добавьте описание" />
+            </p>
           </div>
         </Paper>
       </div>
@@ -136,5 +231,23 @@ const testModel = [{ name: 'Vectra' }, { name: 'Selena' }, { name: 'm3' }];
 const testYear = [{ name: '2021' }, { name: '2000' }, { name: '3000' }];
 
 const testBody = [{ name: 'Седан' }, { name: 'Кроссовер' }, { name: 'Лифтбек' }];
+
+const testEngine = [{ name: 'Бензиновый' }, { name: 'Дизельный' }];
+
+const palette = {
+  red: '#ff0000',
+  blue: '#0000ff',
+  green: '#00ff00',
+  yellow: 'yellow',
+  cyan: 'cyan',
+  lime: 'lime',
+  gray: 'gray',
+  orange: 'orange',
+  purple: 'purple',
+  black: 'black',
+  white: 'white',
+  pink: 'pink',
+  darkblue: 'darkblue',
+};
 
 export default AppendAdPage;
