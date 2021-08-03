@@ -1,4 +1,4 @@
-import {createStyles, Paper, TextField, Theme} from '@material-ui/core';
+import {Button, createStyles, FormControlLabel, Paper, RadioGroup, TextField, Theme} from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeBrand, changeModel, changeYear, selectAppendState } from '../../redux/slices/appendSlice';
@@ -13,39 +13,27 @@ import {makeStyles} from "@material-ui/core/styles";
 import NumberFormat from 'react-number-format';
 import { ColorPalette } from 'material-ui-color';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import MilageFormatCustom from '../../components/MilageTextMask';
+import ContactNumberMask from "../../components/ContactNumberMask";
+import { Radio } from '@material-ui/core';
+import PriceFormatCustom from '../../components/PriceFormatMask';
+import PublishIcon from '@material-ui/icons/Publish';
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import {setAuthError, signup} from "../../redux/slices/authSlice";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
-
-interface NumberFormatCustomProps {
-  inputRef: (instance: NumberFormat | null) => void;
-  onChange: (event: { target: { name: string; value: string } }) => void;
-  name: string;
-}
-
-function NumberFormatCustom(props: NumberFormatCustomProps) {
-  const { inputRef, onChange, ...other } = props;
-
-  return (
-      <NumberFormat
-          {...other}
-          getInputRef={inputRef}
-          onValueChange={(values: any) => {
-            onChange({
-              target: {
-                name: props.name,
-                value: values.value,
-              },
-            });
-          }}
-          thousandSeparator
-          isNumericString
-      />
-  );
-}
-
-interface State {
-  textmask: string;
-  numberformat: string;
-}
+const validationSchema = yup.object({
+  username: yup
+      .string()
+      .required('Required')
+      .max(20, 'Должно быть не более 20 символов')
+      .min(3, 'Должно быть не менее 3 символов')
+      .matches(/^[a-zA-Z0-9-_]*$/, 'Допускаются только буквы, тире и символы подчеркивания'),
+  password: yup.string().required('Required').min(6, 'Должно быть не менее 6 символов'),
+  confirmPassword: yup.string().required('Required').min(6, 'Должно быть не менее 6 символов'),
+});
 
 const AppendAdPage = () => {
   const dispatch = useDispatch();
@@ -74,21 +62,23 @@ const AppendAdPage = () => {
     const a = 1;
   };
 
-  const [values, setValues] = React.useState<State>({
-    textmask: '(1  )    -    ',
-    numberformat: '1320',
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const a = 1
+  };
+
+  const { register, handleSubmit, errors } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(validationSchema),
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
+  const handleSignUp = () => {
+    console.log('Бан')
   };
 
   return (
     <>
       <div className={classes.root}>
+        <form onSubmit={handleSubmit(handleSignUp)}>
         <Paper className={classes.headerPaper}>
           <DirectionsCarIcon fontSize='large' style={{ fontSize: '4.5em', marginRight: '0.2em' }} />
           <h1>Продайте свой автомобиль</h1>
@@ -158,6 +148,17 @@ const AppendAdPage = () => {
                 />
               </p>
             ) : null}
+            {showBody ? (
+                <p>
+                  <h3>Выберите поколение</h3>
+                  <RadioGroup aria-label="gender" name="gender1">
+                    <FormControlLabel value="female" control={<Radio color="primary"/> } label="1" />
+                    <FormControlLabel value="male" control={<Radio color="primary" />} label="2" />
+                    <FormControlLabel value="other" control={<Radio color="primary" />} label="3" />
+                    <FormControlLabel value="disabled" control={<Radio color="primary" />} label="4+" />
+                  </RadioGroup>
+                </p>
+            ) : null}
             {showEngine ? (
                 <p>
                   <h3>Выберите тип двигателя</h3>
@@ -172,6 +173,45 @@ const AppendAdPage = () => {
                   />
                 </p>
             ) : null}
+            {showEngine ? (
+                <p>
+                  <h3>Выберите привод</h3>
+                  <Autocomplete
+                      id='body'
+                      options={testDrive}
+                      value={testDrive.length == 1? testDrive[0] : null}
+                      getOptionLabel={option => option.name}
+                      getOptionSelected={(option, value) => option.name === value.name}
+                      onChange={handleBodyChange}
+                      renderInput={params => <TextField {...params} label='Тип' variant='outlined' />}
+                  />
+                </p>
+            ) : null}
+            {showEngine ? (
+                <p>
+                  <h3>Выберите коробку передач</h3>
+                  <Autocomplete
+                      id='body'
+                      options={testTransmission}
+                      value={testTransmission.length == 1? testTransmission[0] : null}
+                      getOptionLabel={option => option.name}
+                      getOptionSelected={(option, value) => option.name === value.name}
+                      onChange={handleBodyChange}
+                      renderInput={params => <TextField {...params} label='Тип' variant='outlined' />}
+                  />
+                </p>
+            ) : null}
+            <p>
+              <h3>VIN</h3>
+              <TextField
+                  style={{width:'100%'}}
+                  label=""
+                  onChange={handleChange}
+                  variant="outlined"
+                  name="numberformat"
+                  id="formatted-numberformat-input"
+              />
+            </p>
           </div>
         </Paper>
         <Paper className={classes.paper}>
@@ -192,12 +232,12 @@ const AppendAdPage = () => {
               <h3>Пробег</h3>
               <TextField
                   label="Км"
-                  value={values.numberformat}
                   onChange={handleChange}
+                  variant="outlined"
                   name="numberformat"
                   id="formatted-numberformat-input"
                   InputProps={{
-                    inputComponent: NumberFormatCustom as any,
+                    inputComponent: MilageFormatCustom as any,
                   }}
               />
             </p>
@@ -211,10 +251,64 @@ const AppendAdPage = () => {
               <h3>
                 Комментарий
               </h3>
-              <TextareaAutosize aria-label="minimum height" placeholder="Добавьте описание" />
+              <TextField
+                  variant="outlined"
+                  style={{width:"100%"}}
+                  placeholder="Добавьте описание"
+                  multiline
+                  rows={2}
+                  rowsMax={Infinity}
+              />
+            </p>
+            <p>
+              <h3>
+                Контактный телефон
+              </h3>
+              <TextField
+                  label="Телефон"
+                  onChange={handleChange}
+                  variant="outlined"
+                  name="numberformat"
+                  id="formatted-numberformat-input"
+                  InputProps={{
+                    inputComponent: ContactNumberMask as any,
+                  }}
+              />
+            </p>
+            <p>
+              <h3>
+                Колличество владельцев
+              </h3>
+              <RadioGroup aria-label="gender" name="gender1">
+                <FormControlLabel value="female" control={<Radio color="primary" />} label="1" />
+                <FormControlLabel value="male" control={<Radio color="primary" />} label="2" />
+                <FormControlLabel value="other" control={<Radio color="primary" />} label="3" />
+                <FormControlLabel value="disabled" control={<Radio color="primary" />} label="4+" />
+              </RadioGroup>
+            </p>
+            <p>
+              <h3>
+                Цена
+              </h3>
+              <TextField
+                  label="В рублях"
+                  onChange={handleChange}
+                  variant="outlined"
+                  name="numberformat"
+                  id="formatted-numberformat-input"
+                  InputProps={{
+                    inputComponent: PriceFormatCustom as any,
+                  }}
+              />
+            </p>
+            <p>
+              <Button variant="contained" color="primary" type='submit' startIcon={<PublishIcon />}>
+                Подать объявление
+              </Button>
             </p>
           </div>
         </Paper>
+        </form>
       </div>
     </>
   );
@@ -233,6 +327,11 @@ const testYear = [{ name: '2021' }, { name: '2000' }, { name: '3000' }];
 const testBody = [{ name: 'Седан' }, { name: 'Кроссовер' }, { name: 'Лифтбек' }];
 
 const testEngine = [{ name: 'Бензиновый' }, { name: 'Дизельный' }];
+
+const testTransmission = [{name: 'Автомат'},{ name: 'Механическая'}]
+
+const testDrive = [{name: 'Передний'},{ name: 'Задний'}]
+
 
 const palette = {
   red: '#ff0000',
