@@ -1,4 +1,22 @@
-import {Button, createStyles, FormControlLabel, Paper, RadioGroup, TextField, Theme} from '@material-ui/core';
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  createStyles,
+  FormControlLabel,
+  Grid,
+  GridList,
+  GridListTile,
+  GridListTileBar,
+  Paper,
+  RadioGroup,
+  TextField,
+  Theme,
+  Typography
+} from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeBrand, changeModel, changeYear, selectAppendState } from '../../redux/slices/appendSlice';
@@ -23,6 +41,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {setAuthError, signup} from "../../redux/slices/authSlice";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import '../../styles/AppendPageCss.css'
 
 const validationSchema = yup.object({
   username: yup
@@ -151,7 +170,7 @@ const AppendAdPage = () => {
             {showBody ? (
                 <p>
                   <h3>Выберите поколение</h3>
-                  <RadioGroup aria-label="gender" name="gender1">
+                  <RadioGroup aria-label="gender" name="gender1" onChange={() => {alert('fsdf')}}>
                     <FormControlLabel value="female" control={<Radio color="primary"/> } label="1" />
                     <FormControlLabel value="male" control={<Radio color="primary" />} label="2" />
                     <FormControlLabel value="other" control={<Radio color="primary" />} label="3" />
@@ -200,6 +219,94 @@ const AppendAdPage = () => {
                       renderInput={params => <TextField {...params} label='Тип' variant='outlined' />}
                   />
                 </p>
+            ) : null}
+            {showEngine ? (
+                <p>
+                  <h3>Поколение</h3>
+                  <GridList>
+
+                      <input
+                          type="radio" name="emotion"
+                          id="sad" className="input-hidden" />
+                      <label htmlFor="sad">
+                        <GridListTile className='generation-image-div'>
+                          <img
+                              src="https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard"
+                              alt="I'm sad"/>
+                          <GridListTileBar
+                              title="sddf"
+                              subtitle="dfsdf"
+                          />
+                        </GridListTile>
+                      </label>
+
+
+
+                      <input
+                          type="radio" name="emotion"
+                          id="sadr" className="input-hidden" />
+                      <label htmlFor="sadr">
+                        <GridListTile className='generation-image-div'>
+                          <img
+                              src="https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard"
+                              alt="I'm sad"/>
+                          <GridListTileBar
+                              title="sddf"
+                              subtitle="dfsdf"
+                          />
+                        </GridListTile>
+                      </label>
+
+                    <input
+                        type="radio" name="emotion"
+                        id="sadrr" className="input-hidden" />
+                    <label htmlFor="sadrr">
+                      <GridListTile className='generation-image-div'>
+
+                        <img
+                            src="https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard"
+                            alt="I'm sad"/>
+                        <GridListTileBar
+                            title="sddf"
+                            subtitle="dfsdf"
+                        />
+                      </GridListTile>
+                    </label>
+                  </GridList>
+                  {/*<RadioGroup aria-label="gender" name="gender1" onChange={() => {alert('fsdf')}}>*/}
+                  {/*<div className="img-div">*/}
+                  {/*  <input*/}
+                  {/*      type="radio" name="emotion"*/}
+                  {/*      id="sad" className="input-hidden" />*/}
+                  {/*  <label htmlFor="sad">*/}
+                  {/*    <img*/}
+                  {/*        src="http://loremflickr.com/620/440/london"*/}
+                  {/*        alt="I'm sad"/>*/}
+                  {/*  </label>*/}
+                  {/*</div>*/}
+                  {/*<div className="img-div">*/}
+                  {/*  <input*/}
+                  {/*      type="radio" name="emotion"*/}
+                  {/*      id="happy" className="input-hidden"/>*/}
+                  {/*  <label htmlFor="happy">*/}
+                  {/*    <img*/}
+                  {/*        src="http://loremflickr.com/620/440/london"*/}
+                  {/*        alt="I'm happy"/>*/}
+                  {/*  </label>*/}
+                  {/*</div>*/}
+                  {/*<div className="img-div">*/}
+                  {/*  <input*/}
+                  {/*      type="radio" name="emotion"*/}
+                  {/*      id="happ" className="input-hidden"/>*/}
+                  {/*  <label htmlFor="happ">*/}
+                  {/*    <img*/}
+                  {/*        src="http://loremflickr.com/620/440/london"*/}
+                  {/*        alt="4"/>*/}
+                  {/*  </label>*/}
+                  {/*</div>*/}
+                  {/*</RadioGroup>*/}
+                </p>
+
             ) : null}
             <p>
               <h3>VIN</h3>

@@ -129,7 +129,6 @@ export const useAppendPageStyles = makeStyles(theme => ({
     width: '70px',
     height: '70px',
   },
-
   borderTest: {
     border: '2px solid black',
   },
