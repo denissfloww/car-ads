@@ -30,12 +30,12 @@ interface InputValues {
 const validationSchema = yup.object({
   username: yup
     .string()
-    .required('Required')
+    .required('Заполните это поле!')
     .max(20, 'Должно быть не более 20 символов')
     .min(3, 'Должно быть не менее 3 символов')
     .matches(/^[a-zA-Z0-9-_]*$/, 'Допускаются только буквы, тире и символы подчеркивания'),
-  password: yup.string().required('Required').min(6, 'Должно быть не менее 6 символов'),
-  confirmPassword: yup.string().required('Required').min(6, 'Должно быть не менее 6 символов'),
+  password: yup.string().required('Заполните это поле!').min(6, 'Должно быть не менее 6 символов'),
+  confirmPassword: yup.string().required('Заполните это поле!').min(6, 'Должно быть не менее 6 символов'),
 });
 
 const SignupPage = () => {

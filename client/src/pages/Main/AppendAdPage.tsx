@@ -41,17 +41,14 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {setAuthError, signup} from "../../redux/slices/authSlice";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import '../../styles/AppendPageCss.css'
+import '../../styles/AppendPageStyle.css'
 
 const validationSchema = yup.object({
-  username: yup
-      .string()
-      .required('Required')
-      .max(20, 'Должно быть не более 20 символов')
-      .min(3, 'Должно быть не менее 3 символов')
-      .matches(/^[a-zA-Z0-9-_]*$/, 'Допускаются только буквы, тире и символы подчеркивания'),
-  password: yup.string().required('Required').min(6, 'Должно быть не менее 6 символов'),
-  confirmPassword: yup.string().required('Required').min(6, 'Должно быть не менее 6 символов'),
+  mileage: yup.string().required('Заполните это поле!'),
+  vin: yup.string().required('Заполните это поле!'),
+  price: yup.string().required('Заполните это поле!'),
+  phone: yup.string().required('Заполните это поле!').matches(/^7\([1-9]+\)\s\d+-\d{4}$/, 'Введите корректный формат телефона'),
+  brand: yup.string().required()
 });
 
 const AppendAdPage = () => {
@@ -82,22 +79,22 @@ const AppendAdPage = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const a = 1
+    console.log(event.target.value)
   };
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register: append, handleSubmit, errors } = useForm({
     mode: 'onChange',
     resolver: yupResolver(validationSchema),
   });
 
-  const handleSignUp = () => {
+  const handleAppend = () => {
     console.log('Бан')
   };
 
   return (
     <>
       <div className={classes.root}>
-        <form onSubmit={handleSubmit(handleSignUp)}>
+        <form onSubmit={handleSubmit(handleAppend)}>
         <Paper className={classes.headerPaper}>
           <DirectionsCarIcon fontSize='large' style={{ fontSize: '4.5em', marginRight: '0.2em' }} />
           <h1>Продайте свой автомобиль</h1>
@@ -113,8 +110,20 @@ const AppendAdPage = () => {
                 options={testBrand}
                 getOptionLabel={option => option.name}
                 getOptionSelected={(option, value) => option.name === value.name}
+                includeInputInList
                 onChange={handleBrandChange}
-                renderInput={params => <TextField {...params} label='Марка' variant='outlined' />}
+                renderInput={params =>
+                    <TextField
+                        {...params}
+                        label='Марка'
+                        fullWidth
+                        inputRef={append}
+                        variant='outlined'
+                        name='brand'
+                        error={'brand' in errors}
+                        helperText={'brand' in errors ? errors.brand.message : ''}
+                    />
+                }
                 renderOption={options => {
                   return (
                     <>
@@ -224,99 +233,43 @@ const AppendAdPage = () => {
                 <p>
                   <h3>Поколение</h3>
                   <GridList>
-
-                      <input
-                          type="radio" name="emotion"
-                          id="sad" className="input-hidden" />
-                      <label htmlFor="sad">
-                        <GridListTile className='generation-image-div'>
-                          <img
-                              src="https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard"
-                              alt="I'm sad"/>
-                          <GridListTileBar
-                              title="sddf"
-                              subtitle="dfsdf"
-                          />
-                        </GridListTile>
-                      </label>
-
-
-
-                      <input
-                          type="radio" name="emotion"
-                          id="sadr" className="input-hidden" />
-                      <label htmlFor="sadr">
-                        <GridListTile className='generation-image-div'>
-                          <img
-                              src="https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard"
-                              alt="I'm sad"/>
-                          <GridListTileBar
-                              title="sddf"
-                              subtitle="dfsdf"
-                          />
-                        </GridListTile>
-                      </label>
-
-                    <input
-                        type="radio" name="emotion"
-                        id="sadrr" className="input-hidden" />
-                    <label htmlFor="sadrr">
-                      <GridListTile className='generation-image-div'>
-
-                        <img
-                            src="https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard"
-                            alt="I'm sad"/>
-                        <GridListTileBar
-                            title="sddf"
-                            subtitle="dfsdf"
-                        />
-                      </GridListTile>
-                    </label>
+                    {testGeneration.map((item) => (
+                        <div>
+                          <input
+                              type="radio" name="generation"
+                              // onChange={(e) => {alert(e.target.value)}}
+                              value={item.name}
+                              id={item.name} className="input-hidden" />
+                          <label htmlFor={item.name}>
+                            <GridListTile className='generation-image-div'>
+                              <img src={item.img}/>
+                              <GridListTileBar
+                                  title={item.name}
+                                  subtitle={item.yearRelease}
+                              />
+                            </GridListTile>
+                          </label>
+                        </div>
+                    ))}
                   </GridList>
-                  {/*<RadioGroup aria-label="gender" name="gender1" onChange={() => {alert('fsdf')}}>*/}
-                  {/*<div className="img-div">*/}
-                  {/*  <input*/}
-                  {/*      type="radio" name="emotion"*/}
-                  {/*      id="sad" className="input-hidden" />*/}
-                  {/*  <label htmlFor="sad">*/}
-                  {/*    <img*/}
-                  {/*        src="http://loremflickr.com/620/440/london"*/}
-                  {/*        alt="I'm sad"/>*/}
-                  {/*  </label>*/}
-                  {/*</div>*/}
-                  {/*<div className="img-div">*/}
-                  {/*  <input*/}
-                  {/*      type="radio" name="emotion"*/}
-                  {/*      id="happy" className="input-hidden"/>*/}
-                  {/*  <label htmlFor="happy">*/}
-                  {/*    <img*/}
-                  {/*        src="http://loremflickr.com/620/440/london"*/}
-                  {/*        alt="I'm happy"/>*/}
-                  {/*  </label>*/}
-                  {/*</div>*/}
-                  {/*<div className="img-div">*/}
-                  {/*  <input*/}
-                  {/*      type="radio" name="emotion"*/}
-                  {/*      id="happ" className="input-hidden"/>*/}
-                  {/*  <label htmlFor="happ">*/}
-                  {/*    <img*/}
-                  {/*        src="http://loremflickr.com/620/440/london"*/}
-                  {/*        alt="4"/>*/}
-                  {/*  </label>*/}
-                  {/*</div>*/}
-                  {/*</RadioGroup>*/}
                 </p>
 
             ) : null}
             <p>
-              <h3>VIN</h3>
+              <h3>VIN-номер</h3>
               <TextField
+                  required
+                  fullWidth
+                  inputRef={append}
                   style={{width:'100%'}}
-                  label=""
+                  label="vin"
+                  name="vin"
                   onChange={handleChange}
                   variant="outlined"
-                  name="numberformat"
+                  value='test'
                   id="formatted-numberformat-input"
+                  error={'vin' in errors}
+                  helperText={'vin' in errors ? errors.vin.message : ''}
               />
             </p>
           </div>
@@ -338,11 +291,18 @@ const AppendAdPage = () => {
             <p>
               <h3>Пробег</h3>
               <TextField
+                  required
+                  fullWidth
+                  inputRef={append}
                   label="Км"
+                  value='4234'
                   onChange={handleChange}
+                  type='text'
                   variant="outlined"
-                  name="numberformat"
+                  name="mileage"
                   id="formatted-numberformat-input"
+                  error={'mileage' in errors}
+                  helperText={'mileage' in errors ? errors.mileage.message : ''}
                   InputProps={{
                     inputComponent: MilageFormatCustom as any,
                   }}
@@ -372,11 +332,17 @@ const AppendAdPage = () => {
                 Контактный телефон
               </h3>
               <TextField
+                  required
+                  fullWidth
+                  inputRef={append}
+                  value='9999999999'
                   label="Телефон"
                   onChange={handleChange}
                   variant="outlined"
-                  name="numberformat"
+                  name="phone"
                   id="formatted-numberformat-input"
+                  error={'phone' in errors}
+                  helperText={'phone' in errors ? errors.phone.message : ''}
                   InputProps={{
                     inputComponent: ContactNumberMask as any,
                   }}
@@ -387,10 +353,10 @@ const AppendAdPage = () => {
                 Колличество владельцев
               </h3>
               <RadioGroup aria-label="gender" name="gender1">
-                <FormControlLabel value="female" control={<Radio color="primary" />} label="1" />
-                <FormControlLabel value="male" control={<Radio color="primary" />} label="2" />
-                <FormControlLabel value="other" control={<Radio color="primary" />} label="3" />
-                <FormControlLabel value="disabled" control={<Radio color="primary" />} label="4+" />
+                <FormControlLabel value="female" control={<Radio required color="primary" />} label="1" />
+                <FormControlLabel value="male" control={<Radio required color="primary" />} label="2" />
+                <FormControlLabel value="other" control={<Radio required color="primary" />} label="3" />
+                <FormControlLabel value="disabled" control={<Radio required color="primary" />} label="4+" />
               </RadioGroup>
             </p>
             <p>
@@ -398,11 +364,17 @@ const AppendAdPage = () => {
                 Цена
               </h3>
               <TextField
+                  required
+                  fullWidth
+                  inputRef={append}
+                  value='200000'
                   label="В рублях"
                   onChange={handleChange}
                   variant="outlined"
-                  name="numberformat"
+                  name="price"
                   id="formatted-numberformat-input"
+                  error={'price' in errors}
+                  helperText={'price' in errors ? errors.price.message : ''}
                   InputProps={{
                     inputComponent: PriceFormatCustom as any,
                   }}
@@ -435,10 +407,14 @@ const testBody = [{ name: 'Седан' }, { name: 'Кроссовер' }, { name
 
 const testEngine = [{ name: 'Бензиновый' }, { name: 'Дизельный' }];
 
-const testTransmission = [{name: 'Автомат'},{ name: 'Механическая'}]
+const testTransmission = [{name: 'Автомат'}, { name: 'Механическая'}]
 
 const testDrive = [{name: 'Передний'},{ name: 'Задний'}]
-
+const testGeneration = [
+    {name: 'I', yearRelease:'2021-2018', img:'https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard'},
+    {name: 'II', yearRelease:'2023-2030', img:'https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard'},
+  {name: 'III', yearRelease:'2040-2030', img:'https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard'}
+]
 
 const palette = {
   red: '#ff0000',
