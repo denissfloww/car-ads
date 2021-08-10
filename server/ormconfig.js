@@ -1,9 +1,9 @@
-const type = process.env.TYPEORM_TYPE || 'postgres';
-const username = process.env.TYPEORM_USERNAME || 'waknzqjojaptve';
-const password = process.env.TYPEORM_PASSWORD || '090968863573cd88e5b39d0600e998b3a3724dd204dc0bf0b69159bd26736ce5';
-const host = process.env.TYPEORM_HOST || 'ec2-52-213-167-210.eu-west-1.compute.amazonaws.com';
-const port = parseInt(process.env.TYPEORM_PORT, 10) || 5432;
-const database = process.env.TYPEORM_DATABASE || 'd7ovr9jt5t8iht';
+const type = process.env.TYPEORM_TYPE;
+const username = process.env.TYPEORM_USERNAME;
+const password = process.env.TYPEORM_PASSWORD;
+const host = process.env.TYPEORM_HOST;
+const port = 5432;
+const database = process.env.TYPEORM_DATABASE;
 
 module.exports = {
   type,
@@ -28,8 +28,8 @@ module.exports = {
   },
   synchronize: false,
   logging: false,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  // ssl: {
+  //   rejectUnauthorized: false
+  // }
   // ssl:true,
 };

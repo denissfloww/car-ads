@@ -17,9 +17,16 @@ import {
   Theme,
   Typography
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeBrand, changeModel, changeYear, selectAppendState } from '../../redux/slices/appendSlice';
+import {
+  changeBody,
+  changeBrand,
+  changeModel,
+  changeYear,
+  fetchBrands,
+  selectAppendState
+} from '../../redux/slices/appendSlice';
 import { useAppendPageStyles } from '../../styles/muiStyles';
 import DirectionsCarIcon from '@material-ui/icons/DirectionsCar';
 import { Autocomplete } from '@material-ui/lab';
@@ -54,15 +61,29 @@ const validationSchema = yup.object({
 const AppendAdPage = () => {
   const dispatch = useDispatch();
   const classes = useAppendPageStyles();
-  const { showModels, showYear, showBody, brandValue, modelValue, yearValue, bodyValue, showEngine } = useSelector(selectAppendState);
+
+  const {
+    showModels,
+    showYear,
+    showBody,
+    brandValue,
+    modelValue,
+    yearValue,
+    bodyValue,
+    showEngine,
+    showGeneration,
+    brands,
+    models }: any = useSelector(selectAppendState);
+
   const [images, setImages] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedBody, setSelectedBody] = useState(null);
   const maxNumber = 40;
+  useEffect(() => {dispatch(fetchBrands())}, [1]);
 
-  const handleBrandChange = (_: any, value: any) => {
+  const handleBrandChange = (e: any, value: any) => {
     dispatch(changeBrand(value));
   };
 
@@ -75,11 +96,11 @@ const AppendAdPage = () => {
   };
 
   const handleBodyChange = (_: any, value: any) => {
-    const a = 1;
+    dispatch(changeBody(value))
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value)
+    console.log()
   };
 
   const { register: append, handleSubmit, errors } = useForm({
@@ -107,10 +128,12 @@ const AppendAdPage = () => {
               <Autocomplete
                 id='category'
                 style={{ marginBottom: 8 }}
-                options={testBrand}
+                options={brands}
                 getOptionLabel={option => option.name}
+                value={brandValue}
                 getOptionSelected={(option, value) => option.name === value.name}
                 includeInputInList
+                disableClearable
                 onChange={handleBrandChange}
                 renderInput={params =>
                     <TextField
@@ -139,12 +162,15 @@ const AppendAdPage = () => {
                 <h3>Выберите модель</h3>
                 <Autocomplete
                   id='subcategory'
-                  options={testModel}
+                  options={models ? models : null}
                   getOptionLabel={option => option.name}
                   getOptionSelected={(option, value) => option.name === value.name}
                   value={modelValue}
+                  disableClearable
                   onChange={handleModelChange}
-                  renderInput={params => <TextField {...params} label='Модель' variant='outlined' />}
+                  renderInput={params =>
+                      <TextField {...params} label='Модель' variant='outlined' />
+                  }
                 />
               </p>
             ) : null}
@@ -157,6 +183,7 @@ const AppendAdPage = () => {
                   getOptionLabel={option => option.name}
                   getOptionSelected={(option, value) => option.name === value.name}
                   value={yearValue}
+                  disableClearable
                   onChange={handleYearChange}
                   renderInput={params => <TextField {...params} label='Год выпуска' variant='outlined' />}
                 />
@@ -171,12 +198,13 @@ const AppendAdPage = () => {
                   getOptionLabel={option => option.name}
                   getOptionSelected={(option, value) => option.name === value.name}
                   value={bodyValue}
+                  disableClearable
                   onChange={handleBodyChange}
                   renderInput={params => <TextField {...params} label='Тип кузова' variant='outlined' />}
                 />
               </p>
             ) : null}
-            {showBody ? (
+            {showGeneration ? (
                 <p>
                   <h3>Выберите поколение</h3>
                   <RadioGroup aria-label="gender" name="gender1" onChange={() => {alert('fsdf')}}>
@@ -187,17 +215,20 @@ const AppendAdPage = () => {
                   </RadioGroup>
                 </p>
             ) : null}
-            {showEngine ? (
+
+            {showEngine  ? (
                 <p>
                   <h3>Выберите тип двигателя</h3>
                   <Autocomplete
                       id='body'
                       options={testEngine}
-                      value={testEngine.length == 1? testEngine[0] : null}
                       getOptionLabel={option => option.name}
                       getOptionSelected={(option, value) => option.name === value.name}
+                      disableClearable
                       onChange={handleBodyChange}
-                      renderInput={params => <TextField {...params} label='Тип двигателя' variant='outlined' />}
+                      renderInput={
+                        params => <TextField {...params} label='Тип двигателя' variant='outlined' />
+                      }
                   />
                 </p>
             ) : null}
@@ -221,7 +252,7 @@ const AppendAdPage = () => {
                   <Autocomplete
                       id='body'
                       options={testTransmission}
-                      value={testTransmission.length == 1? testTransmission[0] : null}
+                      disableClearable
                       getOptionLabel={option => option.name}
                       getOptionSelected={(option, value) => option.name === value.name}
                       onChange={handleBodyChange}
