@@ -21,8 +21,8 @@ import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   changeBody,
-  changeBrand,
-  changeModel,
+  changeBrand, changeDrive, changeEngine, changeGearBox, changeGeneration, changeImages,
+  changeModel, changeModification,
   changeYear,
   fetchBrands,
   selectAppendState
@@ -73,9 +73,18 @@ const AppendAdPage = () => {
     showEngine,
     showGeneration,
     brands,
-    models }: any = useSelector(selectAppendState);
+    showDrive,
+    showGearBox,
+    models,
+    showModification,
+    modificationValue,
+    engineValue,
+    driveValue,
+    gearboxValue,
+    images
+  }: any = useSelector(selectAppendState);
 
-  const [images, setImages] = useState([]);
+  const [imagesTest, setImagesTest] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
@@ -99,18 +108,43 @@ const AppendAdPage = () => {
     dispatch(changeBody(value))
   };
 
+  const handleEngineChange = (_: any, value: any) => {
+    dispatch(changeEngine(value))
+  }
+
+  const handleGenerationChange = (_: any, value: any) => {
+    dispatch(changeGeneration(value))
+  }
+
+  const handleDriveChange = (_: any, value: any) => {
+    dispatch(changeDrive(value))
+  }
+
+  const handleGearboxChange = (_: any, value: any) => {
+    dispatch(changeGearBox(value))
+  }
+
+  const handleModificationChange = (_: any, value: any) => {
+    dispatch(changeModification(value))
+  }
+
+  const handleImagesChange = (images: any) => {
+    dispatch(changeImages(images))
+  }
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log()
   };
 
-  const { register: append, handleSubmit, errors } = useForm({
+  const { register: append, handleSubmit, errors, getValues } = useForm({
     mode: 'onChange',
     resolver: yupResolver(validationSchema),
   });
 
-  const handleAppend = () => {
-    console.log('Бан')
+  const handleAppend = ({ brand, generation } : any) => {
+    console.log(brand, generation, images)
   };
+
 
   return (
     <>
@@ -126,7 +160,6 @@ const AppendAdPage = () => {
             <p style={{ display: 'inline' }}>
               <h3>Выберите марку авто</h3>
               <Autocomplete
-                id='category'
                 style={{ marginBottom: 8 }}
                 options={brands}
                 getOptionLabel={option => option.name}
@@ -206,69 +239,13 @@ const AppendAdPage = () => {
             ) : null}
             {showGeneration ? (
                 <p>
-                  <h3>Выберите поколение</h3>
-                  <RadioGroup aria-label="gender" name="gender1" onChange={() => {alert('fsdf')}}>
-                    <FormControlLabel value="female" control={<Radio color="primary"/> } label="1" />
-                    <FormControlLabel value="male" control={<Radio color="primary" />} label="2" />
-                    <FormControlLabel value="other" control={<Radio color="primary" />} label="3" />
-                    <FormControlLabel value="disabled" control={<Radio color="primary" />} label="4+" />
-                  </RadioGroup>
-                </p>
-            ) : null}
-
-            {showEngine  ? (
-                <p>
-                  <h3>Выберите тип двигателя</h3>
-                  <Autocomplete
-                      id='body'
-                      options={testEngine}
-                      getOptionLabel={option => option.name}
-                      getOptionSelected={(option, value) => option.name === value.name}
-                      disableClearable
-                      onChange={handleBodyChange}
-                      renderInput={
-                        params => <TextField {...params} label='Тип двигателя' variant='outlined' />
-                      }
-                  />
-                </p>
-            ) : null}
-            {showEngine ? (
-                <p>
-                  <h3>Выберите привод</h3>
-                  <Autocomplete
-                      id='body'
-                      options={testDrive}
-                      value={testDrive.length == 1? testDrive[0] : null}
-                      getOptionLabel={option => option.name}
-                      getOptionSelected={(option, value) => option.name === value.name}
-                      onChange={handleBodyChange}
-                      renderInput={params => <TextField {...params} label='Тип' variant='outlined' />}
-                  />
-                </p>
-            ) : null}
-            {showEngine ? (
-                <p>
-                  <h3>Выберите коробку передач</h3>
-                  <Autocomplete
-                      id='body'
-                      options={testTransmission}
-                      disableClearable
-                      getOptionLabel={option => option.name}
-                      getOptionSelected={(option, value) => option.name === value.name}
-                      onChange={handleBodyChange}
-                      renderInput={params => <TextField {...params} label='Тип' variant='outlined' />}
-                  />
-                </p>
-            ) : null}
-            {showEngine ? (
-                <p>
                   <h3>Поколение</h3>
                   <GridList>
                     {testGeneration.map((item) => (
                         <div>
                           <input
                               type="radio" name="generation"
-                              // onChange={(e) => {alert(e.target.value)}}
+                              onChange={(e) => {handleGenerationChange(e, e.target.value)}}
                               value={item.name}
                               id={item.name} className="input-hidden" />
                           <label htmlFor={item.name}>
@@ -284,6 +261,65 @@ const AppendAdPage = () => {
                     ))}
                   </GridList>
                 </p>
+            ) : null}
+            {showEngine  ? (
+                <p>
+                  <h3>Выберите тип двигателя</h3>
+                  <Autocomplete
+                      id='body'
+                      options={testEngine}
+                      getOptionLabel={option => option.name}
+                      getOptionSelected={(option, value) => option.name === value.name}
+                      disableClearable
+                      value={engineValue}
+                      onChange={handleEngineChange}
+                      renderInput={
+                        params => <TextField {...params} label='Тип двигателя' variant='outlined' />
+                      }
+                  />
+                </p>
+            ) : null}
+            {showDrive ? (
+                <p>
+                  <h3>Выберите привод</h3>
+                  <Autocomplete
+                      id='body'
+                      options={testDrive}
+                      value={driveValue}
+                      getOptionLabel={option => option.name}
+                      getOptionSelected={(option, value) => option.name === value.name}
+                      onChange={handleDriveChange}
+                      renderInput={
+                        params => <TextField {...params} label='Тип' variant='outlined' />
+                      }
+                  />
+                </p>
+            ) : null}
+            {showGearBox ? (
+                <p>
+                  <h3>Выберите коробку передач</h3>
+                  <Autocomplete
+                      id='body'
+                      options={testTransmission}
+                      disableClearable
+                      value={gearboxValue}
+                      getOptionLabel={option => option.name}
+                      getOptionSelected={(option, value) => option.name === value.name}
+                      onChange={handleGearboxChange}
+                      renderInput={params => <TextField {...params} label='Тип' variant='outlined' />}
+                  />
+                </p>
+            ) : null}
+            {showModification ? (
+                <p>
+                  <h3>Модификация</h3>
+                  <RadioGroup aria-label="gender" name="gender1" value={modificationValue} onChange={handleModificationChange}>
+                    {testModification.map((modification) => (
+                        <FormControlLabel value={modification.hp} control={<Radio required color="primary" />} label={`${modification.hp} л.с | ${modification.engineCapacity} л.`} />
+                    ))}
+                  </RadioGroup>
+                </p>
+
 
             ) : null}
             <p>
@@ -445,6 +481,11 @@ const testGeneration = [
     {name: 'I', yearRelease:'2021-2018', img:'https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard'},
     {name: 'II', yearRelease:'2023-2030', img:'https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard'},
   {name: 'III', yearRelease:'2040-2030', img:'https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard'}
+]
+
+const testModification = [
+  {hp:'43', engineCapacity: '2.0'},
+  {hp:'30', engineCapacity: '1.0'}
 ]
 
 const palette = {
