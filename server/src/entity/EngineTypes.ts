@@ -5,7 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Models } from "./Models";
+import { Modifications } from "./Modifications";
 
 @Index("engine_pk", ["id"], { unique: true })
 @Entity("engine_types", { schema: "public" })
@@ -28,6 +28,6 @@ export class EngineTypes {
   })
   updatedAt: Date;
 
-  @OneToMany(() => Models, (models) => models.engineType)
-  models: Models[];
+  @OneToMany(() => Modifications, (modifications) => modifications.engineType)
+  modifications: Modifications[];
 }
