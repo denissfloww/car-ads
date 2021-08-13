@@ -81,7 +81,8 @@ const AppendAdPage = () => {
     engineValue,
     driveValue,
     gearboxValue,
-    images
+    images,
+    years,
   }: any = useSelector(selectAppendState);
 
   const [imagesTest, setImagesTest] = useState([]);
@@ -96,11 +97,12 @@ const AppendAdPage = () => {
     dispatch(changeBrand(value));
   };
 
-  const handleModelChange = (_: any, value: any) => {
+  const handleModelChange = (e: any, value: any) => {
+    console.log(JSON.stringify(value, null, ' '))
     dispatch(changeModel(value));
   };
 
-  const handleYearChange = (_: any, value: any) => {
+  const handleYearChange = (e: any, value: any) => {
     dispatch(changeYear(value));
   };
 
@@ -212,13 +214,15 @@ const AppendAdPage = () => {
                 <h3>Выберите год выпуска авто</h3>
                 <Autocomplete
                   id='year'
-                  options={testYear}
-                  getOptionLabel={option => option.name}
-                  getOptionSelected={(option, value) => option.name === value.name}
+                  options={years ? years : null}
+                  getOptionLabel={option => option.year_release}
+                  getOptionSelected={(option, value) => option.year_release === value.year_release}
                   value={yearValue}
                   disableClearable
                   onChange={handleYearChange}
-                  renderInput={params => <TextField {...params} label='Год выпуска' variant='outlined' />}
+                  renderInput={params =>
+                      <TextField {...params} label='Год выпуска' variant='outlined' />
+                  }
                 />
               </p>
             ) : null}

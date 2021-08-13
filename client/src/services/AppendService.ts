@@ -6,11 +6,28 @@ const getBrands = async () => {
     return response.data;
 };
 
-const getModelsByBrand = async (brandId: string) => {
-    const response = await axios.get(`${backEndUrl}/append/models/1`);
+const getModels = async (brandId: string) => {
+    const response = await axios.get(`${backEndUrl}/append/models`,
+        {
+            params:
+                {
+                    brandId: 1
+                }
+        }
+    );
     return response.data;
 }
 
-const AppendService = { getBrands, getModelsByBrand };
+const getYears = async (modelId: string) => {
+    const response = await axios.get(`${backEndUrl}/append/years`,{
+        params: {
+            modelId: 1
+        }
+    })
+
+    return response.data
+}
+
+const AppendService = { getBrands, getModels, getYears };
 
 export default AppendService;

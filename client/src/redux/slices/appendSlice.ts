@@ -5,6 +5,8 @@ import { setAuthError } from './authSlice';
 import {Brand} from "../../interfaces/Brand";
 import AppendService from "../../services/AppendService";
 import {Model} from "../../interfaces/Model";
+import App from "../../App";
+import {Year} from "../../interfaces/Year";
 
 interface InitialAppendState {
   //show some inputs state
@@ -30,6 +32,7 @@ interface InitialAppendState {
   //inputs array value
   brands: Brand[];
   models: Model[];
+  years: Year[];
 }
 
 const initialState: InitialAppendState = {
@@ -55,7 +58,8 @@ const initialState: InitialAppendState = {
   images: null,
   //inputs array value
   brands: [],
-  models: []
+  models: [],
+  years: []
 };
 
 const appendSlice = createSlice({
@@ -67,6 +71,9 @@ const appendSlice = createSlice({
     },
     setModels: (state, action: PayloadAction<{ models: Model[]}>) => {
       state.models = action.payload.models
+    },
+    setYears: (state, action: PayloadAction<{ years: Year[]}>) => {
+      state.years = action.payload.years
     },
     setImages: (state, action: PayloadAction<{ images: any}>) => {
       state.images = action.payload.images
@@ -178,7 +185,8 @@ export const {
   setChangeDrive,
   setChangeGearBox,
   setChangeModification,
-  setImages
+  setImages,
+  setYears
 } = appendSlice.actions;
 
 export const fetchBrands = (): AppThunk => {
@@ -196,10 +204,12 @@ export const changeBrand = (brandValue: string): AppThunk => {
   return async dispatch => {
     try {
 
-      const models: Model[] = await AppendService.getModelsByBrand(brandValue);
+      dispatch(setChangeBrand(brandValue));
+
+      const models: Model[] = await AppendService.getModels(brandValue);
       dispatch(setModels( { models } ))
 
-      dispatch(setChangeBrand(brandValue));
+
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
@@ -210,6 +220,11 @@ export const changeModel = (modelValue: string): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setChangeModel(modelValue));
+      //JSON.stringify(modelValue, null, ' ')
+
+      const years: Year[] = await AppendService.getYears(modelValue);
+      dispatch(setYears({ years }));
+
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
