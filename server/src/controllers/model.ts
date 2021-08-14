@@ -35,7 +35,10 @@ export const getYears = async (req: Request, res: Response) => {
     if(!years){
         return res.status(404).send('Не найдено');
     }
-    return res.status(200).json(years);
+
+    let result = years.map(({ year_release } : any) => year_release)
+
+    return res.status(200).json(result);
 }
 
 export const getBodies = async (req: Request, res: Response) => {

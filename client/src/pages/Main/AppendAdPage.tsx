@@ -49,6 +49,8 @@ import * as yup from "yup";
 import {setAuthError, signup} from "../../redux/slices/authSlice";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import '../../styles/AppendPageStyle.css'
+import {Generation} from "../../interfaces/Generation";
+import {Modification} from "../../interfaces/Modification";
 
 const validationSchema = yup.object({
   mileage: yup.string().required('Заполните это поле!'),
@@ -71,6 +73,7 @@ const AppendAdPage = () => {
     yearValue,
     bodyValue,
     showEngine,
+    generationValue,
     showGeneration,
     brands,
     showDrive,
@@ -83,6 +86,12 @@ const AppendAdPage = () => {
     gearboxValue,
     images,
     years,
+    bodies,
+    generations,
+    engines,
+    drives,
+    gearboxes,
+    modifications
   }: any = useSelector(selectAppendState);
 
   const [imagesTest, setImagesTest] = useState([]);
@@ -98,32 +107,31 @@ const AppendAdPage = () => {
   };
 
   const handleModelChange = (e: any, value: any) => {
-    console.log(JSON.stringify(value, null, ' '))
     dispatch(changeModel(value));
   };
 
   const handleYearChange = (e: any, value: any) => {
-    dispatch(changeYear(value));
+    dispatch(changeYear(value, modelValue));
   };
 
   const handleBodyChange = (_: any, value: any) => {
-    dispatch(changeBody(value))
+    dispatch(changeBody(value, yearValue, modelValue))
   };
 
   const handleEngineChange = (_: any, value: any) => {
-    dispatch(changeEngine(value))
+    dispatch(changeEngine(value, modelValue, bodyValue, generationValue))
   }
 
   const handleGenerationChange = (_: any, value: any) => {
-    dispatch(changeGeneration(value))
+    dispatch(changeGeneration(value, modelValue, bodyValue))
   }
 
   const handleDriveChange = (_: any, value: any) => {
-    dispatch(changeDrive(value))
+    dispatch(changeDrive(value, modelValue, bodyValue, generationValue, engineValue))
   }
 
   const handleGearboxChange = (_: any, value: any) => {
-    dispatch(changeGearBox(value))
+    dispatch(changeGearBox(value, modelValue, bodyValue, generationValue, engineValue, driveValue))
   }
 
   const handleModificationChange = (_: any, value: any) => {
@@ -214,9 +222,9 @@ const AppendAdPage = () => {
                 <h3>Выберите год выпуска авто</h3>
                 <Autocomplete
                   id='year'
-                  options={years ? years : null}
-                  getOptionLabel={option => option.year_release}
-                  getOptionSelected={(option, value) => option.year_release === value.year_release}
+                  options={years}
+                  getOptionLabel={option => option.toString()}
+                  getOptionSelected={(option, value) => option === value}
                   value={yearValue}
                   disableClearable
                   onChange={handleYearChange}
@@ -231,7 +239,7 @@ const AppendAdPage = () => {
                 <h3>Выберите тип кузова</h3>
                 <Autocomplete
                   id='body'
-                  options={testBody}
+                  options={bodies}
                   getOptionLabel={option => option.name}
                   getOptionSelected={(option, value) => option.name === value.name}
                   value={bodyValue}
@@ -245,7 +253,7 @@ const AppendAdPage = () => {
                 <p>
                   <h3>Поколение</h3>
                   <GridList>
-                    {testGeneration.map((item) => (
+                    {generations.map((item: Generation) => (
                         <div>
                           <input
                               type="radio" name="generation"
@@ -254,10 +262,10 @@ const AppendAdPage = () => {
                               id={item.name} className="input-hidden" />
                           <label htmlFor={item.name}>
                             <GridListTile className='generation-image-div'>
-                              <img src={item.img}/>
+                              <img src={item.image} height={150} width={200} />
                               <GridListTileBar
                                   title={item.name}
-                                  subtitle={item.yearRelease}
+                                  subtitle={item.name}
                               />
                             </GridListTile>
                           </label>
@@ -271,7 +279,7 @@ const AppendAdPage = () => {
                   <h3>Выберите тип двигателя</h3>
                   <Autocomplete
                       id='body'
-                      options={testEngine}
+                      options={engines}
                       getOptionLabel={option => option.name}
                       getOptionSelected={(option, value) => option.name === value.name}
                       disableClearable
@@ -288,7 +296,7 @@ const AppendAdPage = () => {
                   <h3>Выберите привод</h3>
                   <Autocomplete
                       id='body'
-                      options={testDrive}
+                      options={drives}
                       value={driveValue}
                       getOptionLabel={option => option.name}
                       getOptionSelected={(option, value) => option.name === value.name}
@@ -304,7 +312,7 @@ const AppendAdPage = () => {
                   <h3>Выберите коробку передач</h3>
                   <Autocomplete
                       id='body'
-                      options={testTransmission}
+                      options={gearboxes}
                       disableClearable
                       value={gearboxValue}
                       getOptionLabel={option => option.name}
@@ -317,9 +325,9 @@ const AppendAdPage = () => {
             {showModification ? (
                 <p>
                   <h3>Модификация</h3>
-                  <RadioGroup aria-label="gender" name="gender1" value={modificationValue} onChange={handleModificationChange}>
-                    {testModification.map((modification) => (
-                        <FormControlLabel value={modification.hp} control={<Radio required color="primary" />} label={`${modification.hp} л.с | ${modification.engineCapacity} л.`} />
+                  <RadioGroup aria-label="gender" name="gender1" value={modelValue} onChange={handleModificationChange}>
+                    {modifications.map((modification: Modification) => (
+                        <FormControlLabel value={modification} control={<Radio required color="primary" />} label={`${modification.hp} л.с | ${modification.engineCapacity} л.`} />
                     ))}
                   </RadioGroup>
                 </p>
@@ -472,7 +480,7 @@ const testBrand = [
 
 const testModel = [{ name: 'Vectra' }, { name: 'Selena' }, { name: 'm3' }];
 
-const testYear = [{ name: '2021' }, { name: '2000' }, { name: '3000' }];
+const testYear = ['2021', '2000','3000'];
 
 const testBody = [{ name: 'Седан' }, { name: 'Кроссовер' }, { name: 'Лифтбек' }];
 
@@ -488,8 +496,8 @@ const testGeneration = [
 ]
 
 const testModification = [
-  {hp:'43', engineCapacity: '2.0'},
-  {hp:'30', engineCapacity: '1.0'}
+  {id:'1',hp:'43', engineCapacity: '2.0'},
+  {id:'2',hp:'30', engineCapacity: '1.0'}
 ]
 
 const palette = {

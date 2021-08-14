@@ -6,7 +6,11 @@ import {Brand} from "../../interfaces/Brand";
 import AppendService from "../../services/AppendService";
 import {Model} from "../../interfaces/Model";
 import App from "../../App";
-import {Year} from "../../interfaces/Year";
+import {Generation} from "../../interfaces/Generation";
+import {Engine} from "../../interfaces/Engine";
+import {Drive} from "../../interfaces/Drive";
+import {Gearbox} from "../../interfaces/Gearbox";
+import {Modification} from "../../interfaces/Modification";
 
 interface InitialAppendState {
   //show some inputs state
@@ -32,7 +36,13 @@ interface InitialAppendState {
   //inputs array value
   brands: Brand[];
   models: Model[];
-  years: Year[];
+  years: number[];
+  bodies: Body[];
+  generations: Generation[];
+  engines: Engine[],
+  drives: Drive[]
+  gearboxes: Gearbox[],
+  modifications: Modification[],
 }
 
 const initialState: InitialAppendState = {
@@ -59,7 +69,13 @@ const initialState: InitialAppendState = {
   //inputs array value
   brands: [],
   models: [],
-  years: []
+  years: [],
+  bodies:[],
+  generations:[],
+  engines:[],
+  drives:[],
+  gearboxes:[],
+  modifications:[]
 };
 
 const appendSlice = createSlice({
@@ -72,8 +88,26 @@ const appendSlice = createSlice({
     setModels: (state, action: PayloadAction<{ models: Model[]}>) => {
       state.models = action.payload.models
     },
-    setYears: (state, action: PayloadAction<{ years: Year[]}>) => {
+    setYears: (state, action: PayloadAction<{ years: number[]}>) => {
       state.years = action.payload.years
+    },
+    setBodies: (state, action: PayloadAction<{ bodies: Body[]}>) => {
+      state.bodies = action.payload.bodies
+    },
+    setGenerations: (state, action: PayloadAction<{ generations: Generation[]}>) => {
+      state.generations = action.payload.generations
+    },
+    setEngines: (state, action: PayloadAction<{ engines: Engine[]}>) => {
+      state.engines = action.payload.engines
+    },
+    setDrives: (state, action: PayloadAction<{ drives: Drive[]}>) => {
+      state.drives = action.payload.drives
+    },
+    setGearboxes: (state, action: PayloadAction<{ gearboxes: Gearbox[]}>) => {
+      state.gearboxes = action.payload.gearboxes
+    },
+    setModifications: (state, action: PayloadAction<{ modifications: Modification[]}>) => {
+      state.modifications = action.payload.modifications
     },
     setImages: (state, action: PayloadAction<{ images: any}>) => {
       state.images = action.payload.images
@@ -186,7 +220,13 @@ export const {
   setChangeGearBox,
   setChangeModification,
   setImages,
-  setYears
+  setYears,
+  setBodies,
+  setGenerations,
+  setEngines,
+  setDrives,
+  setGearboxes,
+  setModifications
 } = appendSlice.actions;
 
 export const fetchBrands = (): AppThunk => {
@@ -220,9 +260,7 @@ export const changeModel = (modelValue: string): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setChangeModel(modelValue));
-      //JSON.stringify(modelValue, null, ' ')
-
-      const years: Year[] = await AppendService.getYears(modelValue);
+      const years: number[] = await AppendService.getYears(modelValue);
       dispatch(setYears({ years }));
 
     } catch (e) {
@@ -231,60 +269,77 @@ export const changeModel = (modelValue: string): AppThunk => {
   };
 };
 
-export const changeYear = (yearValue: string): AppThunk => {
+export const changeYear = (yearValue: string, modelValue: string): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setChangeYear(yearValue));
+      const bodies: Body[] = await AppendService.getBodies(yearValue ,modelValue)
+      dispatch(setBodies({ bodies }))
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
   };
 };
 
-export const changeBody = (bodyValue: string):AppThunk => {
+export const changeBody = (bodyValue: string, year: string, modelValue: string):AppThunk => {
   return async dispatch => {
     try {
       dispatch(setChangeBody(bodyValue))
+      const generations: Generation[] = await AppendService.getGenerations(modelValue, year, bodyValue)
+      dispatch(setGenerations({generations}))
+
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
   }
 }
 
-export const changeGeneration = (generationValue: string): AppThunk => {
+export const changeGeneration = (generationValue: string, modelValue: string, bodyValue: string): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setChangeGeneration(generationValue))
+
+      const engines: Engine[] = await AppendService.getEngines(modelValue, bodyValue, generationValue)
+
+      dispatch(setEngines({engines}))
     } catch (e) {
+
       dispatch(setAuthError(getErrorMsg(e)));
     }
   }
 }
 
-export const changeEngine = (engineValue: string): AppThunk => {
+export const changeEngine = (engineValue: string, modelValue: string, bodyValue: string, generationValue: string): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setChangeEngine(engineValue))
+      const drives: Drive[] = await AppendService.getDrives(modelValue, bodyValue, generationValue, engineValue)
+      dispatch(setDrives({drives}))
+
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
   }
 }
 
-export const changeDrive = (driveValue: string): AppThunk => {
+export const changeDrive = (driveValue: string, modelValue: string, bodyValue: string, generationValue: string, engineValue: string): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setChangeDrive(driveValue))
+      const gearboxes: Gearbox[] = await AppendService.getGearboxes(modelValue, bodyValue, generationValue, engineValue, driveValue)
+      dispatch(setGearboxes({gearboxes}))
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
   }
 }
 
-export const changeGearBox = (gearboxValue: string): AppThunk => {
+export const changeGearBox = (gearboxValue: string, modelValue: string, bodyValue: string, generationValue: string, engineValue: string, driveValue: string): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setChangeGearBox(gearboxValue))
+      const modifications: Modification[] = await AppendService.getModifications(modelValue, bodyValue, generationValue, engineValue, driveValue, gearboxValue)
+      dispatch(setModifications({modifications}))
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }

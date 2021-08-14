@@ -46,7 +46,7 @@ export class GenerationsTable1628507037196 implements MigrationInterface {
         );
 
         await queryRunner.query(
-            `INSERT INTO "generations" VALUES ('8', 'XII (E210)','img','2018','2021', now(), now() ) `
+            `INSERT INTO "generations" VALUES ('8', 'XII (E210)','https://avatars.mds.yandex.net/get-verba/1030388/2a00000160935780b135a55662f0aba4e157/minicard','2018','2021', now(), now() ) `
         );
     }
 
