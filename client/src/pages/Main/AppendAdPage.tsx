@@ -20,9 +20,20 @@ import {
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  appendAdd,
   changeBody,
-  changeBrand, changeDrive, changeEngine, changeGearBox, changeGeneration, changeImages,
-  changeModel, changeModification,
+  changeBrand,
+  changeColor,
+  changeComment, changeCountOwners,
+  changeDrive,
+  changeEngine,
+  changeGearBox,
+  changeGeneration,
+  changeImages,
+  changeMileage,
+  changeModel,
+  changeModification, changePhone, changePrice,
+  changeVinNumber,
   changeYear,
   fetchBrands,
   selectAppendState
@@ -51,19 +62,20 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import '../../styles/AppendPageStyle.css'
 import {Generation} from "../../interfaces/Generation";
 import {Modification} from "../../interfaces/Modification";
+import { useHistory } from 'react-router-dom';
 
 const validationSchema = yup.object({
   mileage: yup.string().required('Заполните это поле!'),
   vin: yup.string().required('Заполните это поле!'),
   price: yup.string().required('Заполните это поле!'),
   phone: yup.string().required('Заполните это поле!').matches(/^7\([1-9]+\)\s\d+-\d{4}$/, 'Введите корректный формат телефона'),
-  brand: yup.string().required()
+  brand: yup.string().required(),
 });
 
 const AppendAdPage = () => {
   const dispatch = useDispatch();
   const classes = useAppendPageStyles();
-
+  const history = useHistory();
   const {
     showModels,
     showYear,
@@ -84,17 +96,23 @@ const AppendAdPage = () => {
     engineValue,
     driveValue,
     gearboxValue,
-    images,
     years,
     bodies,
     generations,
     engines,
     drives,
     gearboxes,
-    modifications
+    modifications,
+    vinNumber,
+    mileage,
+    color,
+    comment,
+    phone,
+    countOwners,
+    price,
   }: any = useSelector(selectAppendState);
 
-  const [imagesTest, setImagesTest] = useState([]);
+  const [images, setImages] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
@@ -139,11 +157,35 @@ const AppendAdPage = () => {
   }
 
   const handleImagesChange = (images: any) => {
-    dispatch(changeImages(images))
+    setImages(images)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log()
+  };
+
+  const handleVinNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeVinNumber(event.target.value))
+  };
+
+  const handleMileageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeMileage(event.target.value))
+  };
+
+  const handleCommentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeComment(event.target.value))
+  };
+
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changePhone(event.target.value))
+  };
+
+  const handleCountOwnersChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeCountOwners(event.target.value))
+  };
+
+  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changePrice(event.target.value))
   };
 
   const { register: append, handleSubmit, errors, getValues } = useForm({
@@ -151,8 +193,8 @@ const AppendAdPage = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const handleAppend = ({ brand, generation } : any) => {
-    console.log(brand, generation, images)
+  const handleAppend = () => {
+    dispatch(appendAdd(history,modificationValue, vinNumber, images, mileage, color, comment, phone, countOwners, price))
   };
 
 
@@ -168,7 +210,7 @@ const AppendAdPage = () => {
           <div style={{ width: '50%' }}>
             <h2>Основная информация</h2>
             <p style={{ display: 'inline' }}>
-              <h3>Выберите марку авто</h3>
+              <h5>Выберите марку авто</h5>
               <Autocomplete
                 style={{ marginBottom: 8 }}
                 options={brands}
@@ -325,9 +367,11 @@ const AppendAdPage = () => {
             {showModification ? (
                 <p>
                   <h3>Модификация</h3>
-                  <RadioGroup aria-label="gender" name="gender1" value={modelValue} onChange={handleModificationChange}>
+                  <RadioGroup aria-label="modification" name="modification" value={modificationValue} onChange={handleModificationChange}>
                     {modifications.map((modification: Modification) => (
-                        <FormControlLabel value={modification} control={<Radio required color="primary" />} label={`${modification.hp} л.с | ${modification.engineCapacity} л.`} />
+                        <>
+                          <FormControlLabel value={modification.id.toString()} control={<Radio required color="primary" />} label={`${modification.hp} л.с | ${modification.engineCapacity} л.`} />
+                        </>
                     ))}
                   </RadioGroup>
                 </p>
@@ -343,9 +387,9 @@ const AppendAdPage = () => {
                   style={{width:'100%'}}
                   label="vin"
                   name="vin"
-                  onChange={handleChange}
+                  onChange={handleVinNumberChange}
                   variant="outlined"
-                  value='test'
+                  value={vinNumber}
                   id="formatted-numberformat-input"
                   error={'vin' in errors}
                   helperText={'vin' in errors ? errors.vin.message : ''}
@@ -360,7 +404,7 @@ const AppendAdPage = () => {
                 filesLimit={maxNumber}
                 dropzoneText='Нажмите или перетащите фото'
                 acceptedFiles={['image/*']}
-                onChange={(files: any) => console.log('Files:', files)}
+                onChange={handleImagesChange}
             />
           </div>
         </Paper>
@@ -374,8 +418,8 @@ const AppendAdPage = () => {
                   fullWidth
                   inputRef={append}
                   label="Км"
-                  value='4234'
-                  onChange={handleChange}
+                  value={mileage}
+                  onChange={handleMileageChange}
                   type='text'
                   variant="outlined"
                   name="mileage"
@@ -391,16 +435,19 @@ const AppendAdPage = () => {
               <h3>
                 Цвет
               </h3>
-              <ColorPalette palette={palette} onSelect={(color) => { console.log(palette[color])}} />
+              <ColorPalette palette={palette} onSelect={(color) => {dispatch(changeColor(palette[color]))}} />
             </p>
             <p>
               <h3>
                 Комментарий
               </h3>
               <TextField
+                  name="comment"
                   variant="outlined"
                   style={{width:"100%"}}
                   placeholder="Добавьте описание"
+                  value={comment}
+                  onChange={handleCommentChange}
                   multiline
                   rows={2}
                   rowsMax={Infinity}
@@ -414,9 +461,9 @@ const AppendAdPage = () => {
                   required
                   fullWidth
                   inputRef={append}
-                  value='9999999999'
+                  value={phone}
+                  onChange={handlePhoneChange}
                   label="Телефон"
-                  onChange={handleChange}
                   variant="outlined"
                   name="phone"
                   id="formatted-numberformat-input"
@@ -431,11 +478,11 @@ const AppendAdPage = () => {
               <h3>
                 Колличество владельцев
               </h3>
-              <RadioGroup aria-label="gender" name="gender1">
-                <FormControlLabel value="female" control={<Radio required color="primary" />} label="1" />
-                <FormControlLabel value="male" control={<Radio required color="primary" />} label="2" />
-                <FormControlLabel value="other" control={<Radio required color="primary" />} label="3" />
-                <FormControlLabel value="disabled" control={<Radio required color="primary" />} label="4+" />
+              <RadioGroup aria-label="countOwners" name="countOwners" onChange={handleCountOwnersChange}>
+                <FormControlLabel value="1" control={<Radio required color="primary" />} label="1" />
+                <FormControlLabel value="2" control={<Radio required color="primary" />} label="2" />
+                <FormControlLabel value="3" control={<Radio required color="primary" />} label="3" />
+                <FormControlLabel value="4+" control={<Radio required color="primary" />} label="4+" />
               </RadioGroup>
             </p>
             <p>
@@ -446,9 +493,9 @@ const AppendAdPage = () => {
                   required
                   fullWidth
                   inputRef={append}
-                  value='200000'
+                  value={price}
                   label="В рублях"
-                  onChange={handleChange}
+                  onChange={handlePriceChange}
                   variant="outlined"
                   name="price"
                   id="formatted-numberformat-input"
@@ -501,19 +548,17 @@ const testModification = [
 ]
 
 const palette = {
-  red: '#ff0000',
-  blue: '#0000ff',
-  green: '#00ff00',
-  yellow: 'yellow',
-  cyan: 'cyan',
-  lime: 'lime',
-  gray: 'gray',
-  orange: 'orange',
-  purple: 'purple',
-  black: 'black',
-  white: 'white',
-  pink: 'pink',
-  darkblue: 'darkblue',
+  'Красный': '#ff0000',
+  'Синий': '#0000ff',
+  'Зеленый': '#00ff00',
+  'Желтый': 'yellow',
+  'Голубой': 'cyan',
+  'Серый': 'gray',
+  'Оранжевый': 'orange',
+  'Фиолетовый': 'purple',
+  'Черный': 'black',
+  'Белый': 'white',
+  'Коричневый': '#634940',
 };
 
 export default AppendAdPage;

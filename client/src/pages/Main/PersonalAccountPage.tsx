@@ -1,8 +1,23 @@
 import React from 'react';
 import { usePersonalAccountStyles } from '../../styles/muiStyles';
-import { Paper, Tab } from '@material-ui/core';
+import {
+  Button,
+  Card, CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia, createStyles,
+  IconButton,
+  makeStyles,
+  Paper,
+  Tab, Theme,
+  Typography
+} from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import TabPanel from '../../components/TabPanel';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+import UserAdCard from "../../components/AutoCompletes/UserAdCard";
 
 const PersonalAccountPage = () => {
   const classes = usePersonalAccountStyles();
@@ -15,14 +30,15 @@ const PersonalAccountPage = () => {
       <Paper className={classes.paper}>
         <div className={classes.tabs}>
           <Tabs value={value} onChange={handleChange}>
-            <Tab label='Объявления' />
-            <Tab label='Настройки' />
+            <Tab style={{fontFamily:'Nunito'}} label='Мои Объявления' />
+            <Tab style={{fontFamily:'Nunito'}} label='Настройки профиля' />
           </Tabs>
           <TabPanel index={0} value={value}>
-            Тут мои объявления
+           <UserAdCard />
           </TabPanel>
           <TabPanel index={1} value={value}>
             Тут мои найстройки
+
           </TabPanel>
         </div>
       </Paper>

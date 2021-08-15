@@ -339,6 +339,7 @@ export const useMainPageStyles = makeStyles(
       marginBottom: '0.35em',
     },
     notFoundPaper: {
+      fontFamily: 'Nunito',
       padding: '1.5em',
       minHeight: 'calc(100vH - 130px)',
       [theme.breakpoints.down('xs')]: {
@@ -346,6 +347,15 @@ export const useMainPageStyles = makeStyles(
         minHeight: 'calc(100vH - 80px)',
       },
     },
+      successAppendPaper: {
+          fontFamily: 'Nunito',
+          padding: '1.5em',
+          minHeight: 'calc(100vH - 130px)',
+          [theme.breakpoints.down('xs')]: {
+              padding: '0.5em 0.7em',
+              minHeight: 'calc(100vH - 80px)',
+          },
+      },
     error404Image: {
       width: '250px',
       display: 'block',
@@ -355,6 +365,7 @@ export const useMainPageStyles = makeStyles(
       },
     },
     error404Text: {
+        fontFamily: 'Nunito',
       fontSize: '2.2em',
       textAlign: 'center',
       marginTop: '1em',
@@ -362,9 +373,21 @@ export const useMainPageStyles = makeStyles(
         fontSize: '1.5em',
       },
     },
+      successAppendText: {
+          fontFamily: 'Nunito',
+          fontSize: '2.2em',
+          textAlign: 'center',
+          marginTop: '1em',
+          [theme.breakpoints.down('xs')]: {
+              fontSize: '1.5em',
+          },
+      },
     notFoundWrapper: {
       marginTop: '6em',
     },
+      successAppendWrapper: {
+          marginTop: '6em',
+      },
   }),
   { index: 1 },
 );
@@ -422,6 +445,9 @@ export const useNavStyles = makeStyles(
       fontFamily: 'Nunito',
       size: '18px',
       color: 'white',
+        '&:hover': {
+            color: 'white',
+        }
     },
     toolbar: {},
     logo: {

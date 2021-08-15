@@ -109,6 +109,10 @@ const getModifications = async (modelValue: any, bodyValue: any, generationValue
     return response.data
 }
 
-const AppendService = { getBrands, getModels, getYears, getBodies, getGenerations, getEngines, getDrives, getGearboxes, getModifications };
+const appendAdd = async (modificationId: any, vinNumber: any, images: any, mileage: any, color: any, comment: any,  phone: any, countOwners: any,price: any) => {
+    console.log(modificationId, vinNumber, images, mileage, color, comment, phone, countOwners, price)
+}
+
+const AppendService = { getBrands, getModels, getYears, getBodies, getGenerations, getEngines, getDrives, getGearboxes, getModifications, appendAdd };
 
 export default AppendService;

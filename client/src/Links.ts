@@ -7,3 +7,5 @@ export const signupLink = '/signup';
 export const mainLink = '/';
 
 export const appendAdLink = '/append';
+
+export const successAppendLink = '/success'

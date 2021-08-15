@@ -2,7 +2,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import LoginPage from './pages/Auth/LoginPage';
 import SignupPage from './pages/Auth/SignUpPage';
-import { appendAdLink, homeLink, loginLink, signupLink } from './Links';
+import {appendAdLink, homeLink, loginLink, signupLink, successAppendLink} from './Links';
 import AppendAdPage from './pages/Main/AppendAdPage';
 import NotFoundPage from './pages/Main/NotFoundPage';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { selectAuthState } from './redux/slices/authSlice';
 import PersonalAccountPage from './pages/Main/PersonalAccountPage';
 import LocalStorageService from './services/LocalStorageService';
 import MainPage from './pages/Main/MainPage';
+import SuccessAppendPage from "./pages/Main/SuccessAppendPage";
 
 const Routes = () => {
   const { user } = useSelector(selectAuthState);
@@ -31,7 +32,13 @@ const Routes = () => {
         <Route exact path={appendAdLink}>
           {isAuth ? <AppendAdPage /> : <Redirect to={loginLink} />}
         </Route>
+        <Route exact path={successAppendLink}>
+          {isAuth ? <SuccessAppendPage /> : <Redirect to={loginLink} />}
+        </Route>
         <Route exact path='/'>
+          <MainPage />
+        </Route>
+        <Route exact path='/car-ads'>
           <MainPage />
         </Route>
         <Route>
