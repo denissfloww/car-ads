@@ -70,7 +70,7 @@ const validationSchema = yup.object({
   vin: yup.string().required('Заполните это поле!'),
   price: yup.string().required('Заполните это поле!'),
   phone: yup.string().required('Заполните это поле!').matches(/^7\([1-9]+\)\s\d+-\d{4}$/, 'Введите корректный формат телефона'),
-  brand: yup.string().required(),
+  brand: yup.string().required('Вы не выбрали марку!'),
 });
 
 const AppendAdPage = () => {
@@ -219,6 +219,7 @@ const AppendAdPage = () => {
                         {...params}
                         label='Марка'
                         fullWidth
+                        required={true}
                         inputRef={append}
                         variant='outlined'
                         name='brand'
@@ -247,7 +248,7 @@ const AppendAdPage = () => {
                   disableClearable
                   onChange={handleModelChange}
                   renderInput={params =>
-                      <TextField {...params} label='Модель' variant='outlined' />
+                      <TextField {...params} required={true} label='Модель' variant='outlined' />
                   }
                 />
               </p>
@@ -263,7 +264,7 @@ const AppendAdPage = () => {
                   disableClearable
                   onChange={handleYearChange}
                   renderInput={params =>
-                      <TextField {...params} label='Год выпуска' variant='outlined' />
+                      <TextField {...params} required={true} label='Год выпуска' variant='outlined' />
                   }
                 />
               </p>
@@ -278,7 +279,7 @@ const AppendAdPage = () => {
                   value={bodyValue}
                   disableClearable
                   onChange={handleBodyChange}
-                  renderInput={params => <TextField {...params} label='Тип кузова' variant='outlined' />}
+                  renderInput={params => <TextField {...params} required={true} label='Тип кузова' variant='outlined' />}
                 />
               </p>
             ) : null}
@@ -289,6 +290,7 @@ const AppendAdPage = () => {
                     {generations.map((item: Generation) => (
                         <div>
                           <input
+                              required={true}
                               type="radio" name="generation"
                               onChange={(e) => {handleGenerationChange(e, e.target.value)}}
                               value={item.name}
@@ -319,7 +321,7 @@ const AppendAdPage = () => {
                       onChange={handleEngineChange}
                       renderInput={
                         params =>
-                            <TextField {...params} label='Тип двигателя' variant='outlined' />
+                            <TextField {...params} required={true} label='Тип двигателя' variant='outlined' />
                       }
                   />
                 </p>
@@ -335,7 +337,7 @@ const AppendAdPage = () => {
                       getOptionSelected={(option, value) => option.name === value.name}
                       onChange={handleDriveChange}
                       renderInput={
-                        params => <TextField {...params} label='Тип' variant='outlined' />
+                        params => <TextField {...params} required={true} label='Тип' variant='outlined' />
                       }
                   />
                 </p>
@@ -351,7 +353,7 @@ const AppendAdPage = () => {
                       getOptionLabel={option => option.name}
                       getOptionSelected={(option, value) => option.name === value.name}
                       onChange={handleGearboxChange}
-                      renderInput={params => <TextField {...params} label='Тип' variant='outlined' />}
+                      renderInput={params => <TextField {...params} required={true} label='Тип' variant='outlined' />}
                   />
                 </p>
             ) : null}
