@@ -112,6 +112,10 @@ export const useAppendPageStyles = makeStyles(theme => ({
     fontFamily: 'Nunito',
     paddingTop: '1.5em',
   },
+    directionCarIcon: {
+        fontSize: '4.5em',
+        marginRight: '0.2em'
+    },
   paper: {
     textAlign: 'left',
     display: 'flex',
@@ -125,6 +129,19 @@ export const useAppendPageStyles = makeStyles(theme => ({
       minHeight: 'calc(100vH - 80px)',
     },
   },
+    inputBlock:{
+        width: '50%'
+    },
+    textFieldBlock:{
+        width:'100%'
+    },
+    imageArea:{
+        width:'100%'
+    },
+    brandImage:{
+        width: '40px',
+        height: '40px'
+    },
   image: {
     width: '70px',
     height: '70px',

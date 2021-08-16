@@ -4,7 +4,7 @@ import { UserState, CredentialsPayload } from '../types';
 import AuthService from '../../services/AuthService';
 import LocalStorageService from '../../services/LocalStorageService';
 import { History } from 'history';
-import { homeLink } from '../../Links';
+import {homeLink, loginLink} from '../../Links';
 import { getErrorMsg } from '../../utils/HelperFunc';
 
 interface InitialAuthState {
@@ -42,13 +42,10 @@ const authSlice = createSlice({
     removeUser: state => {
       state.user = null;
     },
-    cancelll: state => {
-      state.loading = false;
-    },
   },
 });
 
-export const { setUser, setAuthLoading, cancelll, setAuthError, clearAuthError, removeUser } = authSlice.actions;
+export const { setUser, setAuthLoading, setAuthError, clearAuthError, removeUser } = authSlice.actions;
 
 export const login = (creditionals: CredentialsPayload, history: History): AppThunk => {
   return async dispatch => {
@@ -79,20 +76,11 @@ export const signup = (creditionals: CredentialsPayload, history: History): AppT
   };
 };
 
-export const cancel = (): AppThunk => {
-  return async dispatch => {
-    try {
-      dispatch(cancelll());
-    } catch (e) {
-      throw new Error(e);
-    }
-  };
-};
-
-export const logout = (): AppThunk => {
+export const logout = (history: any): AppThunk => {
   return dispatch => {
     dispatch(removeUser());
     LocalStorageService.removeUser();
+    history.push(loginLink)
   };
 };
 

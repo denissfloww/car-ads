@@ -21,7 +21,7 @@ const NavBar = () => {
   const isAuth = user || LocalStorageService.getUser();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logout(history));
     history.push(loginLink);
   };
 

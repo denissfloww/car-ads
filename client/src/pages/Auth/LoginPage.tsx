@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, selectAuthState, cancel, clearAuthError } from '../../redux/slices/authSlice';
+import { login, selectAuthState, clearAuthError } from '../../redux/slices/authSlice';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -44,10 +44,6 @@ const LoginPage = () => {
 
   const handleLogin = ({ username, password }: InputValues) => {
     dispatch(login({ username, password }, history));
-  };
-
-  const handleCancel = () => {
-    dispatch(cancel());
   };
 
   return (

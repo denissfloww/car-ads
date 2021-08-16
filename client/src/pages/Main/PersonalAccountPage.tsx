@@ -5,7 +5,7 @@ import {
   Card, CardActionArea,
   CardActions,
   CardContent,
-  CardMedia, createStyles,
+  CardMedia, createStyles, Grid,
   IconButton,
   makeStyles,
   Paper,
@@ -17,7 +17,7 @@ import TabPanel from '../../components/TabPanel';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
-import UserAdCard from "../../components/AutoCompletes/UserAdCard";
+import UserAdCard from "../../components/UserAdCard";
 
 const PersonalAccountPage = () => {
   const classes = usePersonalAccountStyles();
@@ -28,13 +28,18 @@ const PersonalAccountPage = () => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <div className={classes.tabs}>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab style={{fontFamily:'Nunito'}} label='Мои Объявления' />
-            <Tab style={{fontFamily:'Nunito'}} label='Настройки профиля' />
-          </Tabs>
+        <div className={classes.tabs} >
+          <Grid item md={11} style={{margin: "0 auto"}}>
+            <Tabs value={value} onChange={handleChange}>
+              <Tab style={{fontFamily:'Nunito'}} label='Мои Объявления' />
+              <Tab style={{fontFamily:'Nunito'}} label='Настройки профиля' />
+            </Tabs>
+          </Grid>
+
           <TabPanel index={0} value={value}>
-           <UserAdCard />
+              <UserAdCard />
+              <UserAdCard />
+
           </TabPanel>
           <TabPanel index={1} value={value}>
             Тут мои найстройки

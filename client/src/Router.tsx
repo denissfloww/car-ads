@@ -14,20 +14,20 @@ import SuccessAppendPage from "./pages/Main/SuccessAppendPage";
 
 const Routes = () => {
   const { user } = useSelector(selectAuthState);
-  const isAuth = LocalStorageService.getUser() || user;
+  const isAuth = user || LocalStorageService.getUser();
 
   console.log(isAuth);
   return (
     <Container>
       <Switch>
+        <Route exact path='/'>
+          <MainPage />
+        </Route>
+        <Route exact path='/car-ads'>
+          <MainPage />
+        </Route>
         <Route exact path={homeLink}>
           {isAuth ? <PersonalAccountPage /> : <Redirect to='/login' />}
-        </Route>
-        <Route exact path={loginLink}>
-          {!isAuth ? <LoginPage /> : <Redirect to={homeLink} />}
-        </Route>
-        <Route exact path={signupLink}>
-          {!isAuth ? <SignupPage /> : <Redirect to={homeLink} />}
         </Route>
         <Route exact path={appendAdLink}>
           {isAuth ? <AppendAdPage /> : <Redirect to={loginLink} />}
@@ -35,11 +35,11 @@ const Routes = () => {
         <Route exact path={successAppendLink}>
           {isAuth ? <SuccessAppendPage /> : <Redirect to={loginLink} />}
         </Route>
-        <Route exact path='/'>
-          <MainPage />
+        <Route exact path={loginLink}>
+          {!isAuth ? <LoginPage /> : <Redirect to={homeLink} />}
         </Route>
-        <Route exact path='/car-ads'>
-          <MainPage />
+        <Route exact path={signupLink}>
+          {!isAuth ? <SignupPage /> : <Redirect to={homeLink} />}
         </Route>
         <Route>
           <NotFoundPage />

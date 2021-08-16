@@ -63,6 +63,7 @@ import '../../styles/AppendPageStyle.css'
 import {Generation} from "../../interfaces/Generation";
 import {Modification} from "../../interfaces/Modification";
 import { useHistory } from 'react-router-dom';
+import {palette} from "../../const/palette";
 
 const validationSchema = yup.object({
   mileage: yup.string().required('Заполните это поле!'),
@@ -113,12 +114,10 @@ const AppendAdPage = () => {
   }: any = useSelector(selectAppendState);
 
   const [images, setImages] = useState([]);
-  const [selectedBrand, setSelectedBrand] = useState(null);
-  const [selectedModel, setSelectedModel] = useState(null);
-  const [selectedYear, setSelectedYear] = useState(null);
-  const [selectedBody, setSelectedBody] = useState(null);
-  const maxNumber = 40;
-  useEffect(() => {dispatch(fetchBrands())}, [1]);
+  const maxNumber = 10;
+  useEffect(() => {
+    dispatch(fetchBrands())
+  }, [1]);
 
   const handleBrandChange = (e: any, value: any) => {
     dispatch(changeBrand(value));
@@ -160,10 +159,6 @@ const AppendAdPage = () => {
     setImages(images)
   }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log()
-  };
-
   const handleVinNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changeVinNumber(event.target.value))
   };
@@ -203,16 +198,15 @@ const AppendAdPage = () => {
       <div className={classes.root}>
         <form onSubmit={handleSubmit(handleAppend)}>
         <Paper className={classes.headerPaper}>
-          <DirectionsCarIcon fontSize='large' style={{ fontSize: '4.5em', marginRight: '0.2em' }} />
+          <DirectionsCarIcon fontSize='large' className={classes.directionCarIcon} />
           <h1>Продайте свой автомобиль</h1>
         </Paper>
         <Paper className={classes.paper}>
-          <div style={{ width: '50%' }}>
+          <div className={classes.inputBlock}>
             <h2>Основная информация</h2>
-            <p style={{ display: 'inline' }}>
-              <h5>Выберите марку авто</h5>
+            <p>
+              <h3>Выберите марку авто</h3>
               <Autocomplete
-                style={{ marginBottom: 8 }}
                 options={brands}
                 getOptionLabel={option => option.name}
                 value={brandValue}
@@ -235,7 +229,7 @@ const AppendAdPage = () => {
                 renderOption={options => {
                   return (
                     <>
-                      <img style={{ width: '40px', height: '40px' }} src={options.imageUrl} alt='' />
+                      <img className={classes.brandImage} src={options.imageUrl} alt='' />
                       {options.name}
                     </>
                   );
@@ -246,7 +240,6 @@ const AppendAdPage = () => {
               <p>
                 <h3>Выберите модель</h3>
                 <Autocomplete
-                  id='subcategory'
                   options={models ? models : null}
                   getOptionLabel={option => option.name}
                   getOptionSelected={(option, value) => option.name === value.name}
@@ -263,7 +256,6 @@ const AppendAdPage = () => {
               <p>
                 <h3>Выберите год выпуска авто</h3>
                 <Autocomplete
-                  id='year'
                   options={years}
                   getOptionLabel={option => option.toString()}
                   getOptionSelected={(option, value) => option === value}
@@ -280,7 +272,6 @@ const AppendAdPage = () => {
               <p>
                 <h3>Выберите тип кузова</h3>
                 <Autocomplete
-                  id='body'
                   options={bodies}
                   getOptionLabel={option => option.name}
                   getOptionSelected={(option, value) => option.name === value.name}
@@ -320,7 +311,6 @@ const AppendAdPage = () => {
                 <p>
                   <h3>Выберите тип двигателя</h3>
                   <Autocomplete
-                      id='body'
                       options={engines}
                       getOptionLabel={option => option.name}
                       getOptionSelected={(option, value) => option.name === value.name}
@@ -328,7 +318,8 @@ const AppendAdPage = () => {
                       value={engineValue}
                       onChange={handleEngineChange}
                       renderInput={
-                        params => <TextField {...params} label='Тип двигателя' variant='outlined' />
+                        params =>
+                            <TextField {...params} label='Тип двигателя' variant='outlined' />
                       }
                   />
                 </p>
@@ -337,9 +328,9 @@ const AppendAdPage = () => {
                 <p>
                   <h3>Выберите привод</h3>
                   <Autocomplete
-                      id='body'
                       options={drives}
                       value={driveValue}
+                      disableClearable
                       getOptionLabel={option => option.name}
                       getOptionSelected={(option, value) => option.name === value.name}
                       onChange={handleDriveChange}
@@ -367,10 +358,12 @@ const AppendAdPage = () => {
             {showModification ? (
                 <p>
                   <h3>Модификация</h3>
-                  <RadioGroup aria-label="modification" name="modification" value={modificationValue} onChange={handleModificationChange}>
+                  <RadioGroup name="modification" value={modificationValue} onChange={handleModificationChange}>
                     {modifications.map((modification: Modification) => (
                         <>
-                          <FormControlLabel value={modification.id.toString()} control={<Radio required color="primary" />} label={`${modification.hp} л.с | ${modification.engineCapacity} л.`} />
+                          <FormControlLabel value={modification.id.toString()} control={
+                            <Radio required color="primary" />
+                          } label={`${modification.hp} л.с | ${modification.engineCapacity} л.`} />
                         </>
                     ))}
                   </RadioGroup>
@@ -384,7 +377,7 @@ const AppendAdPage = () => {
                   required
                   fullWidth
                   inputRef={append}
-                  style={{width:'100%'}}
+                  className={classes.textFieldBlock}
                   label="vin"
                   name="vin"
                   onChange={handleVinNumberChange}
@@ -398,7 +391,7 @@ const AppendAdPage = () => {
           </div>
         </Paper>
         <Paper className={classes.paper}>
-          <div style={{ width: '100%' }}>
+          <div className={classes.imageArea}>
             <h2>Добавьте фото</h2>
             <DropzoneArea
                 filesLimit={maxNumber}
@@ -409,7 +402,7 @@ const AppendAdPage = () => {
           </div>
         </Paper>
         <Paper className={classes.paper}>
-          <div style={{ width: '50%' }}>
+          <div className={classes.inputBlock}>
             <h2>Дополнительная информация</h2>
             <p>
               <h3>Пробег</h3>
@@ -444,7 +437,7 @@ const AppendAdPage = () => {
               <TextField
                   name="comment"
                   variant="outlined"
-                  style={{width:"100%"}}
+                  className={classes.textFieldBlock}
                   placeholder="Добавьте описание"
                   value={comment}
                   onChange={handleCommentChange}
@@ -517,48 +510,6 @@ const AppendAdPage = () => {
       </div>
     </>
   );
-};
-
-const testBrand = [
-  { name: 'Opel', imageUrl: 'https://avatars.mds.yandex.net/get-verba/937147/2a00000179b3e4e1c4c28087a58eb0595a12/logo' },
-  { name: 'BMW', imageUrl: 'https://avatars.mds.yandex.net/get-verba/1030388/2a00000179af8e23344d871bcfa394f0c60d/logo' },
-  { name: 'Toyota', imageUrl: 'https://avatars.mds.yandex.net/get-verba/1030388/2a00000179af8e23344d871bcfa394f0c60d/logo' },
-];
-
-const testModel = [{ name: 'Vectra' }, { name: 'Selena' }, { name: 'm3' }];
-
-const testYear = ['2021', '2000','3000'];
-
-const testBody = [{ name: 'Седан' }, { name: 'Кроссовер' }, { name: 'Лифтбек' }];
-
-const testEngine = [{ name: 'Бензиновый' }, { name: 'Дизельный' }];
-
-const testTransmission = [{name: 'Автомат'}, { name: 'Механическая'}]
-
-const testDrive = [{name: 'Передний'},{ name: 'Задний'}]
-const testGeneration = [
-    {name: 'I', yearRelease:'2021-2018', img:'https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard'},
-    {name: 'II', yearRelease:'2023-2030', img:'https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard'},
-  {name: 'III', yearRelease:'2040-2030', img:'https://avatars.mds.yandex.net/get-verba/937147/2a0000016ffbbb0f0140d930c0448202630f/minicard'}
-]
-
-const testModification = [
-  {id:'1',hp:'43', engineCapacity: '2.0'},
-  {id:'2',hp:'30', engineCapacity: '1.0'}
-]
-
-const palette = {
-  'Красный': '#ff0000',
-  'Синий': '#0000ff',
-  'Зеленый': '#00ff00',
-  'Желтый': 'yellow',
-  'Голубой': 'cyan',
-  'Серый': 'gray',
-  'Оранжевый': 'orange',
-  'Фиолетовый': 'purple',
-  'Черный': 'black',
-  'Белый': 'white',
-  'Коричневый': '#634940',
 };
 
 export default AppendAdPage;

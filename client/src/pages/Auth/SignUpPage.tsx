@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAuthState, cancel, signup, setAuthError, clearAuthError } from '../../redux/slices/authSlice';
+import { selectAuthState, signup, setAuthError, clearAuthError } from '../../redux/slices/authSlice';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -55,10 +55,6 @@ const SignupPage = () => {
       return dispatch(setAuthError('Пароли не совпадают'));
     }
     dispatch(signup({ username, password }, history));
-  };
-
-  const handleCancel = () => {
-    dispatch(cancel());
   };
 
   return (
