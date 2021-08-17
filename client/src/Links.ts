@@ -8,4 +8,4 @@ export const mainLink = '/';
 
 export const appendAdLink = '/append';
 
-export const successAppendLink = '/success'
+export const successAppendLink = '/success';

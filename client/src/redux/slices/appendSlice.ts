@@ -1,18 +1,17 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../store';
 import { getErrorMsg } from '../../utils/HelperFunc';
 import { setAuthError } from './authSlice';
-import {Brand} from "../../interfaces/Brand";
-import AppendService from "../../services/AppendService";
-import {Model} from "../../interfaces/Model";
-import App from "../../App";
-import {Generation} from "../../interfaces/Generation";
-import {Engine} from "../../interfaces/Engine";
-import {Drive} from "../../interfaces/Drive";
-import {Gearbox} from "../../interfaces/Gearbox";
-import {Modification} from "../../interfaces/Modification";
-import {homeLink, successAppendLink} from "../../Links";
-import {History} from "history";
+import { Brand } from '../../interfaces/Brand';
+import AppendService from '../../services/AppendService';
+import { Model } from '../../interfaces/Model';
+import { Generation } from '../../interfaces/Generation';
+import { Engine } from '../../interfaces/Engine';
+import { Drive } from '../../interfaces/Drive';
+import { Gearbox } from '../../interfaces/Gearbox';
+import { Modification } from '../../interfaces/Modification';
+import { successAppendLink } from '../../Links';
+import { History } from 'history';
 
 interface InitialAppendState {
   //show some inputs state
@@ -31,8 +30,8 @@ interface InitialAppendState {
   yearValue: any | null;
   bodyValue: any | null;
   generationValue: any | null;
-  engineValue:any | null;
-  driveValue:any | null;
+  engineValue: any | null;
+  driveValue: any | null;
   gearboxValue: any | null;
   modificationValue: any | null;
   images: any;
@@ -49,10 +48,10 @@ interface InitialAppendState {
   years: number[];
   bodies: Body[];
   generations: Generation[];
-  engines: Engine[],
-  drives: Drive[]
-  gearboxes: Gearbox[],
-  modifications: Modification[],
+  engines: Engine[];
+  drives: Drive[];
+  gearboxes: Gearbox[];
+  modifications: Modification[];
 }
 
 const initialState: InitialAppendState = {
@@ -71,8 +70,8 @@ const initialState: InitialAppendState = {
   yearValue: null,
   bodyValue: null,
   generationValue: null,
-  engineValue:null,
-  driveValue:null,
+  engineValue: null,
+  driveValue: null,
   gearboxValue: null,
   modificationValue: null,
   images: null,
@@ -87,12 +86,12 @@ const initialState: InitialAppendState = {
   brands: [],
   models: [],
   years: [],
-  bodies:[],
-  generations:[],
-  engines:[],
-  drives:[],
-  gearboxes:[],
-  modifications:[]
+  bodies: [],
+  generations: [],
+  engines: [],
+  drives: [],
+  gearboxes: [],
+  modifications: [],
 };
 
 const appendSlice = createSlice({
@@ -102,53 +101,53 @@ const appendSlice = createSlice({
     setBrands: (state, action: PayloadAction<{ brands: Brand[] }>) => {
       state.brands = action.payload.brands;
     },
-    setModels: (state, action: PayloadAction<{ models: Model[]}>) => {
-      state.models = action.payload.models
+    setModels: (state, action: PayloadAction<{ models: Model[] }>) => {
+      state.models = action.payload.models;
     },
-    setYears: (state, action: PayloadAction<{ years: number[]}>) => {
-      state.years = action.payload.years
+    setYears: (state, action: PayloadAction<{ years: number[] }>) => {
+      state.years = action.payload.years;
     },
-    setBodies: (state, action: PayloadAction<{ bodies: Body[]}>) => {
-      state.bodies = action.payload.bodies
+    setBodies: (state, action: PayloadAction<{ bodies: Body[] }>) => {
+      state.bodies = action.payload.bodies;
     },
-    setGenerations: (state, action: PayloadAction<{ generations: Generation[]}>) => {
-      state.generations = action.payload.generations
+    setGenerations: (state, action: PayloadAction<{ generations: Generation[] }>) => {
+      state.generations = action.payload.generations;
     },
-    setEngines: (state, action: PayloadAction<{ engines: Engine[]}>) => {
-      state.engines = action.payload.engines
+    setEngines: (state, action: PayloadAction<{ engines: Engine[] }>) => {
+      state.engines = action.payload.engines;
     },
-    setDrives: (state, action: PayloadAction<{ drives: Drive[]}>) => {
-      state.drives = action.payload.drives
+    setDrives: (state, action: PayloadAction<{ drives: Drive[] }>) => {
+      state.drives = action.payload.drives;
     },
-    setGearboxes: (state, action: PayloadAction<{ gearboxes: Gearbox[]}>) => {
-      state.gearboxes = action.payload.gearboxes
+    setGearboxes: (state, action: PayloadAction<{ gearboxes: Gearbox[] }>) => {
+      state.gearboxes = action.payload.gearboxes;
     },
-    setModifications: (state, action: PayloadAction<{ modifications: Modification[]}>) => {
-      state.modifications = action.payload.modifications
+    setModifications: (state, action: PayloadAction<{ modifications: Modification[] }>) => {
+      state.modifications = action.payload.modifications;
     },
-    setImages: (state, action: PayloadAction<{ images: any}>) => {
-      state.images = action.payload.images
+    setImages: (state, action: PayloadAction<{ images: any }>) => {
+      state.images = action.payload.images;
     },
-    setVinNumber: (state, action: PayloadAction<{ vinNumber: any}>) => {
-      state.vinNumber = action.payload.vinNumber
+    setVinNumber: (state, action: PayloadAction<{ vinNumber: any }>) => {
+      state.vinNumber = action.payload.vinNumber;
     },
-    setMileage: (state, action: PayloadAction<{ mileage: any}>) => {
-      state.mileage = action.payload.mileage
+    setMileage: (state, action: PayloadAction<{ mileage: any }>) => {
+      state.mileage = action.payload.mileage;
     },
-    setColor: (state, action: PayloadAction<{ color: any}>) => {
-      state.color = action.payload.color
+    setColor: (state, action: PayloadAction<{ color: any }>) => {
+      state.color = action.payload.color;
     },
-    setComment: (state, action: PayloadAction<{ comment: any}>) => {
-      state.comment = action.payload.comment
+    setComment: (state, action: PayloadAction<{ comment: any }>) => {
+      state.comment = action.payload.comment;
     },
-    setPhone: (state, action: PayloadAction<{ phone: any}>) => {
-      state.phone = action.payload.phone
+    setPhone: (state, action: PayloadAction<{ phone: any }>) => {
+      state.phone = action.payload.phone;
     },
-    setCountOwners: (state, action: PayloadAction<{ countOwners: any}>) => {
-      state.countOwners = action.payload.countOwners
+    setCountOwners: (state, action: PayloadAction<{ countOwners: any }>) => {
+      state.countOwners = action.payload.countOwners;
     },
-    setPrice: (state, action: PayloadAction<{ price: any}>) => {
-      state.price = action.payload.price
+    setPrice: (state, action: PayloadAction<{ price: any }>) => {
+      state.price = action.payload.price;
     },
     setChangeBrand: (state, action: PayloadAction<string>) => {
       state.showModels = true;
@@ -167,7 +166,6 @@ const appendSlice = createSlice({
       state.engineValue = null;
       state.driveValue = null;
       state.gearboxValue = null;
-
     },
     setChangeModel: (state, action: PayloadAction<string>) => {
       state.showYear = true;
@@ -225,7 +223,7 @@ const appendSlice = createSlice({
       state.showDrive = true;
       state.showGearBox = false;
       state.showModification = false;
-      state.engineValue = action.payload
+      state.engineValue = action.payload;
       state.driveValue = null;
       state.gearboxValue = null;
     },
@@ -237,11 +235,11 @@ const appendSlice = createSlice({
     },
     setChangeGearBox: (state, action: PayloadAction<string>) => {
       state.showModification = true;
-      state.gearboxValue = action.payload
+      state.gearboxValue = action.payload;
     },
     setChangeModification: (state, action: PayloadAction<string>) => {
-      state.modificationValue = action.payload
-    }
+      state.modificationValue = action.payload;
+    },
   },
 });
 
@@ -276,25 +274,22 @@ export const {
 
 export const fetchBrands = (): AppThunk => {
   return async dispatch => {
-    try{
+    try {
       const brands: Brand[] = await AppendService.getBrands();
       dispatch(setBrands({ brands: brands }));
-    }catch (e) {
+    } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changeBrand = (brandValue: string): AppThunk => {
   return async dispatch => {
     try {
-
       dispatch(setChangeBrand(brandValue));
 
       const models: Model[] = await AppendService.getModels(brandValue);
-      dispatch(setModels( { models } ))
-
-
+      dispatch(setModels({ models }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
@@ -307,7 +302,6 @@ export const changeModel = (modelValue: string): AppThunk => {
       dispatch(setChangeModel(modelValue));
       const years: number[] = await AppendService.getYears(modelValue);
       dispatch(setYears({ years }));
-
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
@@ -318,180 +312,207 @@ export const changeYear = (yearValue: string, modelValue: string): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setChangeYear(yearValue));
-      const bodies: Body[] = await AppendService.getBodies(yearValue ,modelValue)
-      dispatch(setBodies({ bodies }))
+      const bodies: Body[] = await AppendService.getBodies(yearValue, modelValue);
+      dispatch(setBodies({ bodies }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
   };
 };
 
-export const changeBody = (bodyValue: string, year: string, modelValue: string):AppThunk => {
+export const changeBody = (bodyValue: string, year: string, modelValue: string): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setChangeBody(bodyValue))
-      const generations: Generation[] = await AppendService.getGenerations(modelValue, year, bodyValue)
-      dispatch(setGenerations({generations}))
-
+      dispatch(setChangeBody(bodyValue));
+      const generations: Generation[] = await AppendService.getGenerations(modelValue, year, bodyValue);
+      dispatch(setGenerations({ generations }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changeGeneration = (generationValue: string, modelValue: string, bodyValue: string): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setChangeGeneration(generationValue))
+      dispatch(setChangeGeneration(generationValue));
 
-      const engines: Engine[] = await AppendService.getEngines(modelValue, bodyValue, generationValue)
+      const engines: Engine[] = await AppendService.getEngines(modelValue, bodyValue, generationValue);
 
-      dispatch(setEngines({engines}))
+      dispatch(setEngines({ engines }));
     } catch (e) {
-
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changeEngine = (engineValue: string, modelValue: string, bodyValue: string, generationValue: string): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setChangeEngine(engineValue))
-      const drives: Drive[] = await AppendService.getDrives(modelValue, bodyValue, generationValue, engineValue)
-      dispatch(setDrives({drives}))
-
+      dispatch(setChangeEngine(engineValue));
+      const drives: Drive[] = await AppendService.getDrives(modelValue, bodyValue, generationValue, engineValue);
+      dispatch(setDrives({ drives }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
-export const changeDrive = (driveValue: string, modelValue: string, bodyValue: string, generationValue: string, engineValue: string): AppThunk => {
+export const changeDrive = (
+  driveValue: string,
+  modelValue: string,
+  bodyValue: string,
+  generationValue: string,
+  engineValue: string,
+): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setChangeDrive(driveValue))
-      const gearboxes: Gearbox[] = await AppendService.getGearboxes(modelValue, bodyValue, generationValue, engineValue, driveValue)
-      dispatch(setGearboxes({gearboxes}))
+      dispatch(setChangeDrive(driveValue));
+      const gearboxes: Gearbox[] = await AppendService.getGearboxes(modelValue, bodyValue, generationValue, engineValue, driveValue);
+      dispatch(setGearboxes({ gearboxes }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
-export const changeGearBox = (gearboxValue: string, modelValue: string, bodyValue: string, generationValue: string, engineValue: string, driveValue: string): AppThunk => {
+export const changeGearBox = (
+  gearboxValue: string,
+  modelValue: string,
+  bodyValue: string,
+  generationValue: string,
+  engineValue: string,
+  driveValue: string,
+): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setChangeGearBox(gearboxValue))
-      const modifications: Modification[] = await AppendService.getModifications(modelValue, bodyValue, generationValue, engineValue, driveValue, gearboxValue)
-      dispatch(setModifications({modifications}))
+      dispatch(setChangeGearBox(gearboxValue));
+      const modifications: Modification[] = await AppendService.getModifications(
+        modelValue,
+        bodyValue,
+        generationValue,
+        engineValue,
+        driveValue,
+        gearboxValue,
+      );
+      dispatch(setModifications({ modifications }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changeModification = (modificationValue: string): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setChangeModification(modificationValue))
+      dispatch(setChangeModification(modificationValue));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changeImages = (images: any): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setImages({images}))
+      dispatch(setImages({ images }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changeVinNumber = (vinNumber: any): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setVinNumber({vinNumber}))
+      dispatch(setVinNumber({ vinNumber }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changeMileage = (mileage: any): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setMileage({mileage}))
+      dispatch(setMileage({ mileage }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changeColor = (color: any): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setColor({color}))
+      dispatch(setColor({ color }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changeComment = (comment: any): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setComment({comment}))
+      dispatch(setComment({ comment }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changePhone = (phone: any): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setPhone({phone}))
+      dispatch(setPhone({ phone }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changeCountOwners = (countOwners: any): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setCountOwners({countOwners}))
+      dispatch(setCountOwners({ countOwners }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
 export const changePrice = (price: any): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setPrice({price}))
+      dispatch(setPrice({ price }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
 
-export const appendAdd = (history: History,modificationId: any, vinNumber: any, images: any, mileage: any, color: any, comment: any,  phone: any, countOwners: any,price: any): AppThunk => {
+export const appendAdd = (
+  history: History,
+  modificationId: any,
+  vinNumber: any,
+  images: any,
+  mileage: any,
+  color: any,
+  comment: any,
+  phone: any,
+  countOwners: any,
+  price: any,
+): AppThunk => {
   return async dispatch => {
     try {
-      await AppendService.appendAdd(modificationId, vinNumber, images, mileage, color, comment, phone, countOwners, price)
+      await AppendService.appendAdd(modificationId, vinNumber, images, mileage, color, comment, phone, countOwners, price);
       history.push(successAppendLink);
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
-
+  };
+};
 
 export const selectAppendState = (state: RootState) => state.append;
 

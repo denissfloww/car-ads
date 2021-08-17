@@ -1,8 +1,8 @@
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import LoginPage from './pages/Auth/LoginPage';
 import SignupPage from './pages/Auth/SignUpPage';
-import {appendAdLink, homeLink, loginLink, signupLink, successAppendLink} from './Links';
+import { appendAdLink, homeLink, loginLink, signupLink, successAppendLink } from './Links';
 import AppendAdPage from './pages/Main/AppendAdPage';
 import NotFoundPage from './pages/Main/NotFoundPage';
 import { useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import { selectAuthState } from './redux/slices/authSlice';
 import PersonalAccountPage from './pages/Main/PersonalAccountPage';
 import LocalStorageService from './services/LocalStorageService';
 import MainPage from './pages/Main/MainPage';
-import SuccessAppendPage from "./pages/Main/SuccessAppendPage";
+import SuccessAppendPage from './pages/Main/SuccessAppendPage';
 
 const Routes = () => {
   const { user } = useSelector(selectAuthState);

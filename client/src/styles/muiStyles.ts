@@ -112,10 +112,10 @@ export const useAppendPageStyles = makeStyles(theme => ({
     fontFamily: 'Nunito',
     paddingTop: '1.5em',
   },
-    directionCarIcon: {
-        fontSize: '4.5em',
-        marginRight: '0.2em'
-    },
+  directionCarIcon: {
+    fontSize: '4.5em',
+    marginRight: '0.2em',
+  },
   paper: {
     textAlign: 'left',
     display: 'flex',
@@ -129,19 +129,19 @@ export const useAppendPageStyles = makeStyles(theme => ({
       minHeight: 'calc(100vH - 80px)',
     },
   },
-    inputBlock:{
-        width: '50%'
-    },
-    textFieldBlock:{
-        width:'100%'
-    },
-    imageArea:{
-        width:'100%'
-    },
-    brandImage:{
-        width: '40px',
-        height: '40px'
-    },
+  inputBlock: {
+    width: '50%',
+  },
+  textFieldBlock: {
+    width: '100%',
+  },
+  imageArea: {
+    width: '100%',
+  },
+  brandImage: {
+    width: '40px',
+    height: '40px',
+  },
   image: {
     width: '70px',
     height: '70px',
@@ -364,15 +364,15 @@ export const useMainPageStyles = makeStyles(
         minHeight: 'calc(100vH - 80px)',
       },
     },
-      successAppendPaper: {
-          fontFamily: 'Nunito',
-          padding: '1.5em',
-          minHeight: 'calc(100vH - 130px)',
-          [theme.breakpoints.down('xs')]: {
-              padding: '0.5em 0.7em',
-              minHeight: 'calc(100vH - 80px)',
-          },
+    successAppendPaper: {
+      fontFamily: 'Nunito',
+      padding: '1.5em',
+      minHeight: 'calc(100vH - 130px)',
+      [theme.breakpoints.down('xs')]: {
+        padding: '0.5em 0.7em',
+        minHeight: 'calc(100vH - 80px)',
       },
+    },
     error404Image: {
       width: '250px',
       display: 'block',
@@ -382,7 +382,7 @@ export const useMainPageStyles = makeStyles(
       },
     },
     error404Text: {
-        fontFamily: 'Nunito',
+      fontFamily: 'Nunito',
       fontSize: '2.2em',
       textAlign: 'center',
       marginTop: '1em',
@@ -390,21 +390,21 @@ export const useMainPageStyles = makeStyles(
         fontSize: '1.5em',
       },
     },
-      successAppendText: {
-          fontFamily: 'Nunito',
-          fontSize: '2.2em',
-          textAlign: 'center',
-          marginTop: '1em',
-          [theme.breakpoints.down('xs')]: {
-              fontSize: '1.5em',
-          },
+    successAppendText: {
+      fontFamily: 'Nunito',
+      fontSize: '2.2em',
+      textAlign: 'center',
+      marginTop: '1em',
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '1.5em',
       },
+    },
     notFoundWrapper: {
       marginTop: '6em',
     },
-      successAppendWrapper: {
-          marginTop: '6em',
-      },
+    successAppendWrapper: {
+      marginTop: '6em',
+    },
   }),
   { index: 1 },
 );
@@ -462,9 +462,9 @@ export const useNavStyles = makeStyles(
       fontFamily: 'Nunito',
       size: '18px',
       color: 'white',
-        '&:hover': {
-            color: 'white',
-        }
+      '&:hover': {
+        color: 'white',
+      },
     },
     toolbar: {},
     logo: {

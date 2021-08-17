@@ -1,5 +1,5 @@
 import authReducer from './slices/authSlice';
-import { configureStore, Action } from '@reduxjs/toolkit';
+import { Action, configureStore } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
 import appendReducer from './slices/appendSlice';
 

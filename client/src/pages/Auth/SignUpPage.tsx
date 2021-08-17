@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAuthState, signup, setAuthError, clearAuthError } from '../../redux/slices/authSlice';
+import { clearAuthError, selectAuthState, setAuthError, signup } from '../../redux/slices/authSlice';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';

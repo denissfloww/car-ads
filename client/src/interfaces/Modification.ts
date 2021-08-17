@@ -1,5 +1,5 @@
 export interface Modification {
-    id: string;
-    engineCapacity: string;
-    hp: string;
+  id: string;
+  engineCapacity: string;
+  hp: string;
 }

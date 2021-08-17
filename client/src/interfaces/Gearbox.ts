@@ -1,4 +1,4 @@
 export interface Gearbox {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 }

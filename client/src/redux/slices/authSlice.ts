@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../store';
-import { UserState, CredentialsPayload } from '../types';
+import { CredentialsPayload, UserState } from '../types';
 import AuthService from '../../services/AuthService';
 import LocalStorageService from '../../services/LocalStorageService';
 import { History } from 'history';
-import {homeLink, loginLink} from '../../Links';
+import { homeLink, loginLink } from '../../Links';
 import { getErrorMsg } from '../../utils/HelperFunc';
 
 interface InitialAuthState {
@@ -80,7 +80,7 @@ export const logout = (history: any): AppThunk => {
   return dispatch => {
     dispatch(removeUser());
     LocalStorageService.removeUser();
-    history.push(loginLink)
+    history.push(loginLink);
   };
 };
 

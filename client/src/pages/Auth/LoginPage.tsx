@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, selectAuthState, clearAuthError } from '../../redux/slices/authSlice';
+import { clearAuthError, login, selectAuthState } from '../../redux/slices/authSlice';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import CarIcon from '../../svg/logo.png';
 import { Button, IconButton, InputAdornment, Link, TextField, Typography } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
 import { useAuthPageStyles } from '../../styles/muiStyles';
-
 import PersonIcon from '@material-ui/icons/Person';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
