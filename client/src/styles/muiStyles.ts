@@ -171,7 +171,6 @@ export const useAppendPageStyles = makeStyles(theme => ({
 
 export const usePersonalAccountStyles = makeStyles(theme => ({
   root: {
-    width: '100',
     minHeight: 'calc(100vH - 130px)',
     fontFamily: 'Nunito',
     paddingTop: '1.5em',
@@ -194,9 +193,13 @@ export const usePersonalAccountStyles = makeStyles(theme => ({
     },
   },
   tabs: {
-    flexGrow: 1,
     color: 'black',
   },
+  tabsButton: {
+    fontFamily: 'Nunito',
+    textTransform: 'inherit',
+    fontSize: '12pt'
+  }
 }));
 
 export const useMainPageStyles = makeStyles(

@@ -17,7 +17,7 @@
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": "off",
-    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-imports": "off",
     "unused-imports/no-unused-vars": [
       "off",
       {
@@ -27,7 +27,7 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "sort-imports": ["error", {
+    "sort-imports": ["off", {
       "ignoreCase": false,
       "ignoreDeclarationSort": true,
       "ignoreMemberSort": false,

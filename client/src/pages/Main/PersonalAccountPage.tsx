@@ -1,10 +1,11 @@
 import React from 'react';
 import { usePersonalAccountStyles } from '../../styles/muiStyles';
 import {
+  Container,
   Grid,
   Paper,
-  Tab,
-} from '@material-ui/core';
+  Tab
+} from "@material-ui/core";
 import Tabs from '@material-ui/core/Tabs';
 import TabPanel from '../../components/TabPanel';
 import UserAdCard from '../../components/UserAdCard';
@@ -19,15 +20,18 @@ const PersonalAccountPage = () => {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <div className={classes.tabs}>
-          <Grid item md={11} style={{ margin: '0 auto' }}>
-            <Tabs value={value} onChange={handleChange}>
-              <Tab style={{ fontFamily: 'Nunito' }} label='Мои Объявления' />
-              <Tab style={{ fontFamily: 'Nunito' }} label='Настройки профиля' />
-            </Tabs>
-          </Grid>
+          <Container maxWidth="md">
+            <Grid style={{ margin: '0 auto', textTransform: 'inherit' }}>
+              <Tabs value={value} onChange={handleChange}>
+                <Tab className={classes.tabsButton} label='Мои объявления' />
+                <Tab className={classes.tabsButton} label='Настройки профиля' />
+              </Tabs>
+            </Grid>
+          </Container>
+
+
 
           <TabPanel index={0} value={value}>
-            <UserAdCard />
             <UserAdCard />
           </TabPanel>
           <TabPanel index={1} value={value}>
