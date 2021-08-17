@@ -1,4 +1,5 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToMany } from "typeorm";
+import { Ads } from "./Ads";
 import BaseModel from './BaseModel';
 
 @Entity({ name: 'users' })
@@ -8,4 +9,6 @@ export class User extends BaseModel {
 
   @Column()
   passwordHash: string;
+  @OneToMany(() => Ads, (ads) => ads.user)
+  ads: Ads[];
 }

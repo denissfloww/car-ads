@@ -3,9 +3,10 @@ import {
   Entity,
   Index,
   JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
+  ManyToOne, OneToMany,
+  PrimaryGeneratedColumn
 } from "typeorm";
+import { Ads } from "./Ads";
 import { Bodies } from "./Bodies";
 import { Drives } from "./Drives";
 import { EngineTypes } from "./EngineTypes";
@@ -70,7 +71,6 @@ export class Modifications {
   })
   @JoinColumn([{ name: "gearbox_id", referencedColumnName: "id" }])
   gearbox: Gearboxes;
-
   @ManyToOne(() => Generations, (generations) => generations.modifications, {
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
@@ -82,6 +82,9 @@ export class Modifications {
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
   })
+
   @JoinColumn([{ name: "model_id", referencedColumnName: "id" }])
   model: Models;
+  @OneToMany(() => Ads, (ads) => ads.modification)
+  ads: Ads[];
 }

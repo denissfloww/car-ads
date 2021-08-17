@@ -10,6 +10,7 @@ const MainPage = () => {
         <div className={classes.notFoundWrapper}>
           <Typography color='inherit' variant='h6' className={classes.error404Text}>
             <p>Главная страница</p>
+            <img src='http://localhost:3005/add/test' />
           </Typography>
         </div>
       </Paper>

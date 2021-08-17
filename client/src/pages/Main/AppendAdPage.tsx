@@ -47,6 +47,7 @@ import { palette } from '../../const/palette';
 import AppendInputAutoComplete from '../../components/AppendFormComponents/AutoComplete';
 import GenerationSelector from '../../components/AppendFormComponents/GenerationSelector';
 import ModificationSelector from '../../components/AppendFormComponents/ModificationSelector';
+import Animate from '@charlesvien/react-animatecss';
 
 const validationSchema = yup.object({
   mileage: yup.string().required('Заполните это поле!'),
@@ -229,30 +230,69 @@ const AppendAdPage = () => {
               </p>
               {showModels ? (
                 <p>
-                  <h3>Выберите модель</h3>
-                  <AppendInputAutoComplete handleChange={handleModelChange} value={modelValue} options={models} optionLabel='Модель' />
+                  <Animate
+                    animationIn="fadeIn"
+                    animationOut="fadeOut"
+                    inDuration={400}
+                    outDuration={400}
+                    visible={showModels}
+                  >
+                    <h3>Выберите модель</h3>
+                    <AppendInputAutoComplete handleChange={handleModelChange} value={modelValue} options={models} optionLabel='Модель' />
+                  </Animate>
                 </p>
               ) : null}
               {showYear ? (
                 <p>
+                  <Animate
+                    animationIn="fadeIn"
+                    animationOut="fadeOut"
+                    inDuration={400}
+                    outDuration={400}
+                    visible={showYear}
+                  >
                   <h3>Выберите год выпуска авто</h3>
-                  <AppendInputAutoComplete handleChange={handleYearChange} value={yearValue} options={years} optionLabel='Год выпуска' />
-                </p>
+                    <AppendInputAutoComplete handleChange={handleYearChange} value={yearValue} options={years} optionLabel='Год выпуска' />
+                  </Animate>
+                  </p>
               ) : null}
               {showBody ? (
                 <p>
-                  <h3>Выберите тип кузова</h3>
-                  <AppendInputAutoComplete handleChange={handleBodyChange} value={bodyValue} options={bodies} optionLabel='Тип кузова' />
-                </p>
+                  <Animate
+                    animationIn="fadeIn"
+                    animationOut="fadeOut"
+                    inDuration={400}
+                    outDuration={400}
+                    visible={showBody}
+                  >
+                    <h3>Выберите тип кузова</h3>
+                    <AppendInputAutoComplete handleChange={handleBodyChange} value={bodyValue} options={bodies} optionLabel='Тип кузова' />
+                  </Animate>
+                  </p>
               ) : null}
               {showGeneration ? (
                 <p>
+                  <Animate
+                    animationIn="fadeIn"
+                    animationOut="fadeOut"
+                    inDuration={400}
+                    outDuration={400}
+                    visible={showGeneration}
+                  >
                   <h3>Поколение</h3>
                   <GenerationSelector generations={generations} handleGenerationChange={handleGenerationChange} />
+                  </Animate>
                 </p>
               ) : null}
               {showEngine ? (
                 <p>
+                  <Animate
+                    animationIn="fadeIn"
+                    animationOut="fadeOut"
+                    inDuration={400}
+                    outDuration={400}
+                    visible={showEngine}
+                  >
                   <h3>Выберите тип двигателя</h3>
                   <AppendInputAutoComplete
                     handleChange={handleEngineChange}
@@ -260,28 +300,53 @@ const AppendAdPage = () => {
                     options={engines}
                     optionLabel='Тип двигателя'
                   />
+                  </Animate>
                 </p>
               ) : null}
               {showDrive ? (
                 <p>
+                  <Animate
+                    animationIn="fadeIn"
+                    animationOut="fadeOut"
+                    inDuration={400}
+                    outDuration={400}
+                    visible={showDrive}
+                  >
                   <h3>Выберите привод</h3>
                   <AppendInputAutoComplete handleChange={handleDriveChange} value={driveValue} options={drives} optionLabel='Тип' />
+                  </Animate>
                 </p>
               ) : null}
               {showGearBox ? (
                 <p>
+                  <Animate
+                    animationIn="fadeIn"
+                    animationOut="fadeOut"
+                    inDuration={400}
+                    outDuration={400}
+                    visible={showGearBox}
+                  >
                   <h3>Выберите коробку передач</h3>
                   <AppendInputAutoComplete handleChange={handleGearboxChange} value={gearboxValue} options={gearboxes} optionLabel='Тип' />
+                  </Animate>
                 </p>
               ) : null}
               {showModification ? (
                 <p>
+                  <Animate
+                    animationIn="fadeIn"
+                    animationOut="fadeOut"
+                    inDuration={400}
+                    outDuration={400}
+                    visible={showModification}
+                  >
                   <h3>Модификация</h3>
                   <ModificationSelector
                     modifications={modifications}
                     modificationValue={modificationValue}
                     handleModificationChange={handleModificationChange}
                   />
+                  </Animate>
                 </p>
               ) : null}
               <p>

@@ -4,3 +4,4 @@
 /server/build/
 /server/.idea
 /client/.idea/
+/server/upload/**

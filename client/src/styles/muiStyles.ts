@@ -453,14 +453,18 @@ export const useNavStyles = makeStyles(
       paddingBottom: '0.2em',
     },
     menuButton: {
+      textTransform: 'capitalize',
       fontFamily: 'Nunito',
-      size: '18px',
+      size: '24px',
+      fontSize:'12pt',
       marginLeft: '38px',
       color: 'white',
     },
     iconButton: {
+      textTransform: 'inherit',
       fontFamily: 'Nunito',
-      size: '18px',
+      size: '24px',
+      fontSize:'12pt',
       color: 'white',
       '&:hover': {
         color: 'white',
