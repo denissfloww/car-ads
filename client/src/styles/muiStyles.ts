@@ -192,6 +192,9 @@ export const usePersonalAccountStyles = makeStyles(theme => ({
       minHeight: 'calc(100vH - 80px)',
     },
   },
+  cardGrid: {
+    paddingBottom: theme.spacing(8),
+  },
   tabs: {
     color: 'black',
   },

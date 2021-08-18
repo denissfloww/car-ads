@@ -1,13 +1,15 @@
 import express from 'express';
-import {getBrands} from "../controllers/brand";
+import multer from "multer";
+import { saveAd } from "../controllers/AdController";
+import {getBrands} from "../controllers/BrandController";
+import { getModels } from '../controllers/ModelController';
 import {
     getBodies, getDrives, getEngines, getGearboxes,
     getGenerations,
-    getModels, getModifications,
+    getModifications,
     getYears
+} from "../controllers/ModificationController";
 
-
-} from "../controllers/model";
 
 const router = express.Router();
 
@@ -20,5 +22,6 @@ router.get('/engines', getEngines)
 router.get('/drives', getDrives)
 router.get('/gearboxes', getGearboxes)
 router.get('/modifications', getModifications)
+
 
 export default router;

@@ -8,19 +8,6 @@ import {EngineTypes} from "../entity/EngineTypes";
 import {Drives} from "../entity/Drives";
 import {Gearboxes} from "../entity/Gearboxes";
 
-export const getModels = async (req: Request, res: Response) => {
-    const brandId = Number(req.query.brandId);
-    const models = await getRepository(Models)
-        .createQueryBuilder("model")
-        .where(
-            "model.brand_id = :id", { id: brandId }
-        ).getMany();
-    if (!models){
-        return res.status(404).send('Не найдено');
-    }
-    return res.status(200).json(models);
-};
-
 export const getYears = async (req: Request, res: Response) => {
     const modelId = Number(req.query.modelId)
     const years = await getRepository(Modifications)
