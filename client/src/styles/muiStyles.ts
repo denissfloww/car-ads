@@ -484,6 +484,7 @@ export const useNavStyles = makeStyles(
       position: 'sticky',
       top: 0,
       zIndex: 100,
+        width:'100%',
     },
     leftPortion: {
       flexGrow: 1,
