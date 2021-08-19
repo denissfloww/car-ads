@@ -22,9 +22,9 @@ const PersonalAccountPage = () => {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <div className={classes.tabs}>
-          <Container maxWidth="md">
-            <Grid style={{ margin: '0 auto', textTransform: 'inherit' }}>
-              <Tabs value={value} onChange={handleChange}>
+          <Container maxWidth="xl">
+            <Grid >
+              <Tabs value={value} onChange={handleChange} className={classes.tabs}>
                 <Tab className={classes.tabsButton} label='Мои объявления' />
                 <Tab className={classes.tabsButton} label='Настройки профиля' />
               </Tabs>

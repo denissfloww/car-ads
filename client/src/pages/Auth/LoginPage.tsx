@@ -6,7 +6,7 @@ import { clearAuthError, login, selectAuthState } from '../../redux/slices/authS
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CarIcon from '../../svg/logo.png';
-import { Button, IconButton, InputAdornment, Link, TextField, Typography } from '@material-ui/core';
+import { Button, CircularProgress, IconButton, InputAdornment, Link, TextField, Typography } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
 import { useAuthPageStyles } from '../../styles/muiStyles';
 import PersonIcon from '@material-ui/icons/Person';
@@ -104,12 +104,11 @@ const LoginPage = () => {
             variant='contained'
             size='large'
             fullWidth
-            startIcon={<ExitToAppIcon />}
             type='submit'
             className={classes.submitButton}
             disabled={loading}
           >
-            Войти
+            {loading?  <CircularProgress /> : <>Войти</>}
           </Button>
           <DemoCreds />
         </form>

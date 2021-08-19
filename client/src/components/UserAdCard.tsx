@@ -62,7 +62,7 @@ const UserAdCard = (props: IProps) => {
         <CardMedia>
           <Carousel autoPlay={false} timeout={200}>
             {images.map((item, i) => (
-              <img style={{ borderRadius: 5 }} width={420} src={item} />
+              <img style={{ borderRadius: 5 }} width='100%' src={item} />
             ))}
           </Carousel>
         </CardMedia>
@@ -75,6 +75,12 @@ const UserAdCard = (props: IProps) => {
           </Typography>
           <Typography color="textSecondary" style={{marginTop:'10px', fontSize:'11pt', color:'#388e3c'}}>
             Активно
+          </Typography>
+          <Typography color="textSecondary">
+            <b>Описание:</b> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur deleniti eius laborum molestias pariatur vel. Ab, autem eligendi eum harum iste laudantium modi nam necessitatibus nihil quae tempore ut.
+          </Typography>
+          <Typography color="textSecondary">
+            <b>Колличество владельцев:</b> 3
           </Typography>
         </CardContent>
         <CardActions className={classes.cardAction}>
