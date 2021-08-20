@@ -1,12 +1,15 @@
+import adSlice from "./slices/adSlice";
 import authReducer from './slices/authSlice';
 import { Action, configureStore } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
 import appendReducer from './slices/appendSlice';
+import adReducer from "./slices/adSlice"
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     append: appendReducer,
+    ad: adReducer,
   },
 });
 

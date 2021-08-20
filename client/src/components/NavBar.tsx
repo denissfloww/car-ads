@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { AppBar, Button, Toolbar } from '@material-ui/core';
-import { loginLink, mainLink } from '../Links';
+import { catalogLink, loginLink, mainLink } from "../Links";
 import { useNavStyles } from '../styles/muiStyles';
 import CarIcon from '../svg/logo.png';
 import LocalStorageService from '../services/LocalStorageService';
@@ -31,8 +31,12 @@ const NavBar = () => {
             <Button to={mainLink} component={RouterLink}>
               <img src={CarIcon} alt='' />
             </Button>
-            <Button className={classes.menuButton}>Объявления</Button>
-            <Button className={classes.menuButton}>Новости</Button>
+            <Button to={catalogLink} component={RouterLink} className={classes.menuButton} >
+              Объявления
+            </Button>
+            <Button className={classes.menuButton}>
+              Новости
+            </Button>
           </div>
           {!isAuth ? <AuthButton /> : null}
           {isAuth ? <PersonalAccountButton handleLogout={handleLogout} /> : null}

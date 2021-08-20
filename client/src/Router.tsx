@@ -2,8 +2,9 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import LoginPage from './pages/Auth/LoginPage';
 import SignupPage from './pages/Auth/SignUpPage';
-import { appendAdLink, homeLink, loginLink, signupLink, successAppendLink } from './Links';
+import { appendAdLink, catalogLink, homeLink, loginLink, signupLink, successAppendLink } from "./Links";
 import AppendAdPage from './pages/Main/AppendAdPage';
+import CatalogAdsPage from "./pages/Main/CatalogAdsPage";
 import NotFoundPage from './pages/Main/NotFoundPage';
 import { useSelector } from 'react-redux';
 import { selectAuthState } from './redux/slices/authSlice';
@@ -20,6 +21,9 @@ const Routes = () => {
   return (
     <Container>
       <Switch>
+        <Route exact path={catalogLink}>
+          <CatalogAdsPage />
+        </Route>
         <Route exact path='/'>
           <MainPage />
         </Route>

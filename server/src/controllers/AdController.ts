@@ -36,6 +36,7 @@ export const saveAd = async (req: Request, res: Response) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   req.files.map(async (file: any) => {
+    console.log(file)
     const ad_image = await getRepository(AdImage).save({
       ad: ad.id as any,
       imageName: file.filename,

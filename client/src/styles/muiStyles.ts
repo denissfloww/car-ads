@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { theme } from "./theme";
 
 export const useBodyStyles = (darkMode: boolean) =>
   makeStyles(
@@ -198,14 +199,109 @@ export const usePersonalAccountStyles = makeStyles(theme => ({
   },
   cardGrid: {
     paddingBottom: theme.spacing(8),
-    textAlign:'left'
+    textAlign:'left',
+  },
+  cardContent: {
+    fontFamily: 'Nunito',
+    flexGrow: 1,
+  },
+  cardAction:{
+    justifyContent:"center"
+  },
+  card: {
+    fontFamily: 'Nunito',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cover: {
+    width: 151,
+  },
+  controls: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 0 auto',
   },
   tabsButton: {
     fontFamily: 'Nunito',
     textTransform: 'inherit',
     fontSize: '12pt'
+  },
+  icon: {
+    marginRight: theme.spacing(2),
+  },
+  noAdsBlock:{
+    textAlign:"center",
+    margin: "0 auto",
+    justifyContent:"center",
+    marginTop:"20%"
   }
 }));
+
+export const useCatalogPageStyles = makeStyles(
+  theme => ({
+    root: {
+      padding: '1em 0',
+      [theme.breakpoints.down('xs')]: {
+        padding: '0.5em 0.5em',
+      },
+    },
+    paper:{
+      fontFamily: 'Nunito',
+      padding: '1.5em',
+      minHeight: 'calc(100vH - 130px)',
+      [theme.breakpoints.down('xs')]: {
+        padding: '0.5em 0.7em',
+        minHeight: 'calc(100vH - 80px)',
+      },
+    },
+    headerPaper: {
+      padding: '0.8em 1.5em',
+      marginBottom: '1em',
+      display: 'flex',
+      alignItems: 'center',
+      [theme.breakpoints.down('xs')]: {
+        padding: '0.3em 0.5em',
+        marginBottom: '0.5em',
+      },
+    },
+    card: {
+      display: 'flex',
+    },
+    cardDetails: {
+      flex: 1,
+      textAlign: "left"
+    },
+    cardMedia: {
+      width: 560,
+      height: "auto"
+    },
+    details: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    content: {
+      flex: '1 0 auto',
+    },
+    cover: {
+      width: 151,
+    },
+    controls: {
+      display: 'flex',
+      alignItems: 'center',
+      paddingLeft: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+    },
+  })
+)
 
 export const useMainPageStyles = makeStyles(
   theme => ({

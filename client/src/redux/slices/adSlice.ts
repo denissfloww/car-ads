@@ -8,11 +8,11 @@ import { AppThunk, RootState } from "../store";
 import { setBrands } from "./appendSlice";
 import { setAuthError } from "./authSlice";
 
-interface InitialAppendState {
+interface InitialAdState {
   userAds: Ad[]
 }
 
-const initialState: InitialAppendState = {
+const initialState: InitialAdState = {
   userAds: []
 }
 
@@ -41,6 +41,6 @@ export const fetchUserAds = (userId: string): AppThunk => {
   };
 };
 
-export const selectAdState = (state: RootState) => state.append;
+export const selectAdState = (state: RootState) => state.ad;
 
 export default adSlice.reducer;

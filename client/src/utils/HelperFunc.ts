@@ -1,3 +1,5 @@
+import backEndUrl from "../BackEndUrl";
+
 interface ReturnedError {
   response?: {
     data?: {
@@ -14,3 +16,9 @@ export const getErrorMsg = (err: ReturnedError) => {
     return err.message;
   }
 };
+
+export const getFullImageUrl = (imageName: string) => {
+  if (imageName != null) {
+    return `${backEndUrl}/ad/image/${imageName}`
+  }
+}

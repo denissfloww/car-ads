@@ -7,6 +7,7 @@ export interface Ad {
   mileage: number;
   description: string;
   ownersCount: number;
+  price: number;
   modification: Modification
   adImages:AdImage[]
 }

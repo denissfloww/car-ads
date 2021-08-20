@@ -28,6 +28,8 @@ import {
   fetchBrands,
   selectAppendState,
 } from '../../redux/slices/appendSlice';
+import { selectAuthState } from "../../redux/slices/authSlice";
+import LocalStorageService from "../../services/LocalStorageService";
 import { useAppendPageStyles } from '../../styles/muiStyles';
 import DirectionsCarIcon from '@material-ui/icons/DirectionsCar';
 import { Autocomplete } from '@material-ui/lab';
@@ -180,6 +182,7 @@ const AppendAdPage = () => {
     resolver: yupResolver(validationSchema),
   });
 
+  const { user } = useSelector(selectAuthState);
   const handleAppend = () => {
     dispatch(appendAdd(history, modificationValue, vinNumber, images, mileage, color, comment, phone, countOwners, price));
   };

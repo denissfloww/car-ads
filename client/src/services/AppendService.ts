@@ -1,5 +1,7 @@
 import axios from 'axios';
 import backEndUrl from '../BackEndUrl';
+import AuthService from "./AuthService";
+import LocalStorageService from "./LocalStorageService";
 
 const getBrands = async () => {
   const response = await axios.get(`${backEndUrl}/append/brands`);
@@ -123,7 +125,34 @@ const appendAdd = async (
   countOwners: any,
   price: any,
 ) => {
+  const user = LocalStorageService.getUser()
+  console.log(user.token)
   console.log(modificationId, vinNumber, images, mileage, color, comment, phone, countOwners, price);
+
+  const bodyFormData = new FormData();
+  images.forEach((image: any)=>{
+    bodyFormData.append("images", image);
+  });
+
+  bodyFormData.append("modificationId", modificationId);
+  bodyFormData.append("mileage", mileage);
+  bodyFormData.append("vin", vinNumber);
+  bodyFormData.append("color", color);
+  bodyFormData.append("description", comment);
+  bodyFormData.append("phone", phone);
+  bodyFormData.append("ownersСount", countOwners);
+  bodyFormData.append("price", price);
+  bodyFormData.append("userId", user.id);
+
+  await axios.post(
+    `${backEndUrl}/ad/upload`,
+    bodyFormData,{
+    headers:{
+      'x-auth-token':user.token,
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+
 };
 
 const AppendService = {

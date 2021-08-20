@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link as RouterLink } from "react-router-dom";
+import { Ad } from "../../interfaces/Ad";
+import { fetchUserAds, selectAdState } from "../../redux/slices/adSlice";
+import { selectAuthState } from "../../redux/slices/authSlice";
+import LocalStorageService from "../../services/LocalStorageService";
 import { usePersonalAccountStyles } from '../../styles/muiStyles';
 import {
+  Button,
   Container,
   Grid,
   Paper,
@@ -9,8 +16,8 @@ import {
 import Tabs from '@material-ui/core/Tabs';
 import TabPanel from '../../components/TabPanel';
 import UserAdCard from '../../components/UserAdCard';
-
-const cards = [1, 2,1, 2];
+import { appendAdLink } from "../../Links";
+import AppendAdPage from "./AppendAdPage";
 
 const PersonalAccountPage = () => {
   const classes = usePersonalAccountStyles();
@@ -18,6 +25,16 @@ const PersonalAccountPage = () => {
   const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
     setValue(newValue);
   };
+
+  const dispatch = useDispatch()
+  const { user } = useSelector(selectAuthState);
+  const userId = user? user.id : LocalStorageService.getUser().id;
+  useEffect(() => {
+    dispatch(fetchUserAds(userId))
+  }, [])
+
+  const { userAds } = useSelector(selectAdState)
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -33,9 +50,28 @@ const PersonalAccountPage = () => {
           <TabPanel index={0} value={value}>
             <Container maxWidth="md" className={classes.cardGrid}>
               <Grid container spacing={2}>
-                {cards.map((card) => (
-                  <UserAdCard brand={'BMW'} model={'3'} images={['https://avatars.mds.yandex.net/get-autoru-vos/1711983/4c3361bade11d7b9fbd81257ab3f19e3/1200x900n','https://avatars.mds.yandex.net/get-autoru-vos/1711983/4c3361bade11d7b9fbd81257ab3f19e3/1200x900n']}/>
-                ))}
+                {userAds.length? (
+                  userAds.map((ad: Ad) => (
+                    <UserAdCard
+                      description={ad.description}
+                      price={ad.price}
+                      brand={ad.modification.model.brand.name}
+                      model={ad.modification.model.name}
+                      countOwners={ad.ownersCount}
+                      images={
+                        ad.adImages
+                      }/>
+                  ))
+                ) :
+                  <div className={classes.noAdsBlock}>
+                    <p>У вас пока нет объявлений</p>
+                    <p>
+                      <Button variant="contained" color="primary" to={appendAdLink} component={RouterLink}>
+                        Подать
+                      </Button>
+                    </p>
+                  </div>
+                }
               </Grid>
             </Container>
           </TabPanel>
