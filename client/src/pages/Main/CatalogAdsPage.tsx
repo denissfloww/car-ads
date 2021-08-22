@@ -1,9 +1,28 @@
-import { Paper, Box, CardActionArea, Card, CardContent, Typography, CardMedia, Hidden } from "@material-ui/core";
+import {
+  Paper,
+  Box,
+  CardActionArea,
+  Card,
+  CardContent,
+  Typography,
+  CardMedia,
+  Hidden,
+  IconButton, ButtonBase,Grid
+} from "@material-ui/core";
 import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
 import React from "react";
 import { useCatalogPageStyles, useMainPageStyles } from "../../styles/muiStyles";
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Row, Col } from 'react-flexbox-grid';
+import {theme} from "../../styles/theme";
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+import Carousel from "react-material-ui-carousel";
+import {getFullImageUrl} from "../../utils/HelperFunc";
+import NumberFormat from "react-number-format";
+import CatalogAdCard from "../../components/CatalogAdCard";
 
+const images = [1,2,3]
 const CatalogAdsPage = () => {
 
   const classes = useCatalogPageStyles();
@@ -14,17 +33,8 @@ const CatalogAdsPage = () => {
         <h1>Найти объявление</h1>
       </Paper>
       <Paper className={classes.paper}>
-        <Box display="flex" flexDirection="row" p={1} m={1} bgcolor="background.paper">
-          <Box p={1} bgcolor="grey.300">
-            Item 1
-          </Box>
-          <Box p={1} bgcolor="grey.300">
-            Item 2
-          </Box>
-          <Box p={1} bgcolor="grey.300">
-            Item 3
-          </Box>
-        </Box>
+          <CatalogAdCard loading={true} />
+          <CatalogAdCard />
       </Paper>
     </div>
   )

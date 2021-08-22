@@ -254,9 +254,43 @@ export const useCatalogPageStyles = makeStyles(
         padding: '0.5em 0.5em',
       },
     },
+      cardRoot:{
+          marginBottom:20,
+      },
+      imgGrid:{
+          margin:'10px'
+      },
+      cardImg:{
+          height: '100%',
+          width: '100%',
+          maxWidth:'900px',
+          borderRadius:'1%'
+      },
+      cardInfo:{
+          textAlign:'left'
+      },
+      priceHeader:{
+          borderBottom: '7px groove #55A62A'
+      },
+      media:{
+          height: 140,
+      },
+
+      img: {
+
+
+          maxWidth: '100%',
+          maxHeight: '100%',
+          border:'2px solid black'
+      },
+      image: {
+          width: 300,
+          height: 250,
+      },
     paper:{
       fontFamily: 'Nunito',
       padding: '1.5em',
+        flexGrow: 1,
       minHeight: 'calc(100vH - 130px)',
       [theme.breakpoints.down('xs')]: {
         padding: '0.5em 0.7em',
@@ -292,13 +326,8 @@ export const useCatalogPageStyles = makeStyles(
       flex: '1 0 auto',
     },
     cover: {
-      width: 151,
-    },
-    controls: {
-      display: 'flex',
-      alignItems: 'center',
-      paddingLeft: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
+        width:300,
+        height:200
     },
   })
 )
