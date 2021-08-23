@@ -213,6 +213,10 @@ export const usePersonalAccountStyles = makeStyles(theme => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    '&:hover': {
+      cursor: 'pointer',
+      backgroundColor: '#f6f5f5',
+    },
   },
   cover: {
     width: 151,
@@ -256,6 +260,10 @@ export const useCatalogPageStyles = makeStyles(
     },
       cardRoot:{
           marginBottom:20,
+        '&:hover': {
+          cursor: 'pointer',
+          backgroundColor: '#f6f5f5',
+        },
       },
       imgGrid:{
           margin:'10px'

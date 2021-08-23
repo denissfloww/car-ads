@@ -36,7 +36,7 @@ export const saveAd = async (req: Request, res: Response) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   req.files.map(async (file: any) => {
-    console.log(file)
+    console.log(file);
     const ad_image = await getRepository(AdImage).save({
       ad: ad.id as any,
       imageName: file.filename,
@@ -49,7 +49,12 @@ export const getUserAds = async (req: Request, res: Response) => {
   const { userId } = req.params;
   const ads = await getRepository(Ads)
     .createQueryBuilder("ad")
-    .leftJoinAndMapOne( "ad.modification",Modifications, "modification", "ad.modification_id = modification.id")
+    .leftJoinAndMapOne(
+      "ad.modification",
+      Modifications,
+      "modification",
+      "ad.modification_id = modification.id"
+    )
     .leftJoinAndSelect("modification.model", "model")
     .leftJoinAndSelect("model.brand", "brand")
     .leftJoinAndSelect("ad.adImages", "image")
@@ -58,7 +63,7 @@ export const getUserAds = async (req: Request, res: Response) => {
   return res.status(200).json(ads);
 };
 
-export const getImageTest = async (req: Request, res: Response) => {
+export const getImage = async (req: Request, res: Response) => {
   const { imageName } = req.params;
   console.log(imageName);
   res.set({ "Content-Type": "image/png", "Access-Control-Allow-Origin": "*" });
@@ -66,3 +71,20 @@ export const getImageTest = async (req: Request, res: Response) => {
   console.log(pathToImage);
   return res.status(200).sendFile(pathToImage);
 };
+
+export const getAds = async (req: Request, res: Response) => {
+  const ads = await getRepository(Ads)
+    .createQueryBuilder("ad")
+    .leftJoinAndMapOne(
+      "ad.modification",
+      Modifications,
+      "modification",
+      "ad.modification_id = modification.id"
+    )
+    .leftJoinAndSelect("modification.model", "model")
+    .leftJoinAndSelect("model.brand", "brand")
+    .leftJoinAndSelect("ad.adImages", "image")
+    .leftJoinAndSelect("modification.gearbox", "gearbox")
+    .getMany();
+  return res.status(200).json(ads);
+}

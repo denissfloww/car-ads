@@ -9,37 +9,72 @@ import { setBrands } from "./appendSlice";
 import { setAuthError } from "./authSlice";
 
 interface InitialAdState {
-  userAds: Ad[]
+  userAds: Ad[],
+  ads: Ad[],
+  adsLoading: boolean,
+  userAdsLoading: boolean,
+  error:  string | null;
 }
 
 const initialState: InitialAdState = {
-  userAds: []
+  userAds: [],
+  ads: [],
+  adsLoading: false,
+  userAdsLoading: false,
+  error: null
 }
 
 const adSlice = createSlice({
   name: 'ad',
   initialState,
   reducers: {
-    setAds: (state, action: PayloadAction<{ userAds: Ad[] }>) => {
+    setUserAds: (state, action: PayloadAction<{ userAds: Ad[] }>) => {
       state.userAds = action.payload.userAds;
+      state.userAdsLoading = false
     },
+    setAds: (state, action: PayloadAction<{ ads: Ad[] }>) => {
+      state.ads = action.payload.ads;
+      state.adsLoading = false;
+    },
+    setAdsLoading: state => {
+      state.adsLoading = true;
+    },
+    setUserAdsLoading: state => {
+      state.userAdsLoading = true
+    }
   }
 });
 
 export const {
-  setAds
+  setUserAds,
+  setAdsLoading,
+  setAds,
+  setUserAdsLoading
 } = adSlice.actions;
 
 export const fetchUserAds = (userId: string): AppThunk => {
   return async dispatch => {
     try {
+      dispatch(setUserAdsLoading())
       const ads: Ad[] = await AdService.getUserAds(userId);
-      dispatch(setAds({userAds: ads}));
+      dispatch(setUserAds({userAds: ads}));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
   };
 };
+
+export const fetchAds = (): AppThunk => {
+  return async dispatch => {
+    try {
+      dispatch(setAdsLoading())
+      const ads: Ad[] = await AdService.getAds();
+      dispatch(setAds({ads: ads}))
+    } catch (e) {
+      dispatch(setAuthError(getErrorMsg(e)));
+    }
+  }
+}
 
 export const selectAdState = (state: RootState) => state.ad;
 

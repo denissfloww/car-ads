@@ -4,9 +4,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Carousel from 'react-material-ui-carousel';
 import NumberFormat from 'react-number-format';
-import { AdImage } from "../interfaces/AdImage";
-import { usePersonalAccountStyles } from "../styles/muiStyles";
-import { getFullImageUrl } from "../utils/HelperFunc";
+import { NoImageUrl } from "../../const/noImageUrl";
+import { AdImage } from "../../interfaces/AdImage";
+import { usePersonalAccountStyles } from "../../styles/muiStyles";
+import { getFullImageUrl } from "../../utils/HelperFunc";
 
 interface IProps {
   brand: string;
@@ -25,11 +26,21 @@ const UserAdCard = (props: IProps) => {
     <Grid item xs={12} sm={12} md={6}>
       <Card className={classes.card}>
         <CardMedia>
-          <Carousel autoPlay={false} timeout={200}>
-            {images.map((item, i) => (
-              <img style={{ borderRadius: 5 }} width='100%' src={getFullImageUrl(item.imageName)} />
-            ))}
-          </Carousel>
+          {images.length ? (
+            <Carousel autoPlay={false} timeout={200}>
+              {images.map((item, i) => (
+                <img style={{ borderRadius: 5 }}
+                     onError={
+                       ((event: any) => event.target.src = 'https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/NO_IMG_600x600.png')
+                     }
+                     width='100%'
+                     src={getFullImageUrl(item.imageName)} />
+              ))}
+            </Carousel>
+          ): (
+            <img style={{ borderRadius: 5 }} width='100%' src={NoImageUrl} />
+          )}
+
         </CardMedia>
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant='h6' component='h3'>
