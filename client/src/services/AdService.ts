@@ -16,10 +16,22 @@ const getAd = async (adId: string) => {
   return response.data;
 }
 
+const checkComparedAd = async (adId: string, userId: string) => {
+  const response = await axios.get(`${backEndUrl}/ad/compare/check`, {
+    params:{
+      userId: userId,
+      adId: adId
+    }
+
+  });
+  return response.data;
+}
+
 const AdService = {
   getUserAds,
   getAds,
-  getAd
+  getAd,
+  checkComparedAd
 };
 
 export default AdService;

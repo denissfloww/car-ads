@@ -10,6 +10,8 @@ import {
 import { AdImage } from "./AdImage";
 import { Modifications } from "./Modifications";
 import { User } from "./User";
+import { UserCompareAd } from "./UserCompareAd";
+import { UserFavouriteAd } from "./UserFavouriteAd";
 
 @Index("ads_pk", ["id"], { unique: true })
 @Entity("ads", { schema: "public" })
@@ -23,11 +25,11 @@ export class Ads {
   @Column("integer", { name: "mileage", nullable: true })
   mileage: number | null;
 
-  @Column("character varying", { name: "color" })
-  color: string;
+  @Column("character varying", { name: "color", nullable: true })
+  color: string | null;
 
-  @Column("character varying", { name: "description" })
-  description: string;
+  @Column("character varying", { name: "description", nullable: true })
+  description: string | null;
 
   @Column("bigint", { name: "phone", nullable: true })
   phone: string | null;
@@ -66,4 +68,10 @@ export class Ads {
   })
   @JoinColumn([{ name: "user_id", referencedColumnName: "id" }])
   user: User;
+
+  @OneToMany(() => UserCompareAd, (userCompareAd) => userCompareAd.ad)
+  userCompareAds: UserCompareAd[];
+
+  @OneToMany(() => UserFavouriteAd, (userFavouriteAd) => userFavouriteAd.ad)
+  userFavouriteAds: UserFavouriteAd[];
 }

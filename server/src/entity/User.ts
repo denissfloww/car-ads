@@ -1,6 +1,8 @@
 import { Entity, Column, OneToMany } from "typeorm";
 import { Ads } from "./Ads";
 import BaseModel from './BaseModel';
+import {UserCompareAd} from "./UserCompareAd";
+import {UserFavouriteAd} from "./UserFavouriteAd";
 
 @Entity({ name: 'users' })
 export class User extends BaseModel {
@@ -11,4 +13,9 @@ export class User extends BaseModel {
   passwordHash: string;
   @OneToMany(() => Ads, (ads) => ads.user)
   ads: Ads[];
+  @OneToMany(() => UserCompareAd, (userCompareAd) => userCompareAd.user)
+  userCompareAds: UserCompareAd[];
+
+  @OneToMany(() => UserFavouriteAd, (userFavouriteAd) => userFavouriteAd.user)
+  userFavouriteAds: UserFavouriteAd[];
 }

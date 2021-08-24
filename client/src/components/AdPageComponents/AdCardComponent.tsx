@@ -1,12 +1,26 @@
-import { Button, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Tooltip
+} from '@material-ui/core';
 import CompareIcon from '@material-ui/icons/Compare';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ImageGallery from 'react-image-gallery';
 import NumberFormat from 'react-number-format';
 import { NoImageUrl } from '../../const/noImageUrl';
 import { Ad } from '../../interfaces/Ad';
 import { getFullImageUrl } from '../../utils/HelperFunc';
+import {useDispatch, useSelector} from "react-redux";
+import {selectAuthState} from "../../redux/slices/authSlice";
+import LocalStorageService from "../../services/LocalStorageService";
+import {checkCompareAd, fetchAd, selectAdState} from "../../redux/slices/adSlice";
 
 interface AdCardProps {
   ad: Ad;
@@ -15,6 +29,16 @@ interface AdCardProps {
 const AdCard = (props: AdCardProps) => {
   const { ad } = props;
   const images: any[] = [];
+  const dispatch = useDispatch();
+  const { user } = useSelector(selectAuthState);
+  const isAuth = user || LocalStorageService.getUser();
+  useEffect(() => {
+    if(isAuth){
+      dispatch(checkCompareAd(ad.id, LocalStorageService.getUser().id))
+    }
+  }, []);
+
+  const { isAdAlreadyComparing } = useSelector(selectAdState);
 
   ad.adImages.map((value, index) => {
     images.push({ original: getFullImageUrl(value.imageName), thumbnail: getFullImageUrl(value.imageName) });
@@ -27,11 +51,21 @@ const AdCard = (props: AdCardProps) => {
             {ad.modification.model.brand.name} {ad.modification.model.name}{' '}
           </h1>
           <div style={{ margin: '10px 0px 10px 0px' }}>
-            <Tooltip title='Добавить в сравнение'>
-              <Button>
-                <CompareIcon />
-              </Button>
-            </Tooltip>
+          {isAuth? (
+              isAdAlreadyComparing? (
+                  <Tooltip title='Уже в вашем сравнении'>
+                    <Button>
+                        <CompareIcon color="disabled"  />
+                    </Button>
+                  </Tooltip>
+              ): (
+                  <Tooltip title='Добавить в сравнение'>
+                    <Button>
+                      <CompareIcon />
+                    </Button>
+                  </Tooltip>
+              )
+          ) : null}
             <Tooltip title='Добавить в избранное'>
               <Button>
                 <FavoriteBorderIcon />

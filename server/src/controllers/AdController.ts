@@ -7,6 +7,8 @@ import { Ads } from "../entity/Ads";
 import { Bodies } from "../entity/Bodies";
 import { Models } from "../entity/Models";
 import { Modifications } from "../entity/Modifications";
+import {UserFavouriteAd} from "../entity/UserFavouriteAd";
+import {UserCompareAd} from "../entity/UserCompareAd";
 
 export const saveAd = async (req: Request, res: Response) => {
   const {
@@ -108,5 +110,96 @@ export const getAdById = async (req: Request, res: Response) => {
     .getOne();
 
   return res.status(200).json(ad);
+}
 
+export const insertFavouriteUserAd = async (req: Request, res: Response) => {
+  const {userId, adId} = req.body;
+  console.log(userId, adId)
+  await getRepository(UserFavouriteAd)
+      .createQueryBuilder()
+      .insert()
+      .values({
+        user: userId,
+        ad: adId
+      })
+      .execute();
+  return res.status(200).json("success");
+}
+
+export const deleteFavouriteUserAd = async (req: Request, res: Response) => {
+  const {id} = req.params;
+  await getRepository(UserFavouriteAd)
+      .createQueryBuilder("user_favourite_ad")
+      .delete()
+      .where("user_favourite_ad.id = :id",{id} )
+      .execute();
+  return res.status(200).json("success");
+}
+
+export const getUserFavouriteAds = async (req: Request, res: Response) => {
+  const {userId} = req.query;
+  const favouriteAds = await getRepository(UserFavouriteAd)
+      .createQueryBuilder("user_favourite_ad")
+      .where("user_favourite_ad.user_id = :userId", {userId})
+      .getMany()
+  return res.status(200).json(favouriteAds);
+}
+
+export const checkAlreadyInUserFavouriteAd = async (req: Request, res: Response) => {
+  const {userId, adId} = req.query;
+
+  const [ list, count ] = await getRepository(UserFavouriteAd)
+      .findAndCount({
+        where: [
+          {user: userId, ad: adId}
+        ]
+      })
+  return res.status(200).json(count >= 1);
+}
+
+export const insertCompareUserAd = async (req: Request, res: Response) => {
+  const {userId, adId} = req.body;
+  console.log(userId, adId)
+  await getRepository(UserCompareAd)
+      .createQueryBuilder()
+      .insert()
+      .values({
+        user: userId,
+        ad: adId
+      })
+      .execute();
+  return res.status(200).json("success");
+}
+
+export const deleteCompareUserAd = async (req: Request, res: Response) => {
+  const {id} = req.params;
+  await getRepository(UserCompareAd)
+      .createQueryBuilder("user_compare_ad")
+      .delete()
+      .where("user_compare_ad.id = :id",{id} )
+      .execute();
+  return res.status(200).json("success");
+}
+
+export const getUserCompareAds = async (req: Request, res: Response) => {
+  const {userId} = req.query;
+  console.log(userId)
+  const favouriteAds = await getRepository(UserCompareAd)
+      .createQueryBuilder("user_compare_ad")
+      .where("user_compare_ad.user_id = :userId", {userId})
+      .getMany()
+  console.log(favouriteAds)
+  return res.status(200).json(favouriteAds);
+}
+
+export const checkAlreadyInUserCompareAd = async (req: Request, res: Response) => {
+  const {userId, adId} = req.query;
+
+  const [ list, count ] = await getRepository(UserCompareAd)
+      .findAndCount({
+        where: [
+          {user: userId, ad: adId}
+        ]
+      })
+  return res.status(200).json(count >= 1);
 }

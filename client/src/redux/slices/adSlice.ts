@@ -18,6 +18,7 @@ interface InitialAdState {
   error: string | null;
   ad: Ad | null;
   adLoading: boolean;
+  isAdAlreadyComparing: boolean;
 }
 
 const initialState: InitialAdState = {
@@ -28,6 +29,7 @@ const initialState: InitialAdState = {
   error: null,
   ad: null,
   adLoading: false,
+  isAdAlreadyComparing: false,
 };
 
 const adSlice = createSlice({
@@ -55,10 +57,13 @@ const adSlice = createSlice({
       state.ad = action.payload.ad;
       state.adLoading = false;
     },
+    setCheckAdAlreadyComparing: (state, action: PayloadAction<{ checkAdAlreadyCompare: any }>) => {
+      state.isAdAlreadyComparing = action.payload.checkAdAlreadyCompare
+    },
   },
 });
 
-export const { setUserAds, setAdsLoading, setAds, setUserAdsLoading, setAdLoading, setAd } = adSlice.actions;
+export const { setUserAds, setAdsLoading, setAds, setUserAdsLoading, setAdLoading, setAd, setCheckAdAlreadyComparing } = adSlice.actions;
 
 export const fetchUserAds = (userId: string): AppThunk => {
   return async dispatch => {
@@ -95,6 +100,18 @@ export const fetchAd = (adId: string): AppThunk => {
     }
   };
 };
+
+export const checkCompareAd = (adId: string, userId: string): AppThunk => {
+  return async dispatch => {
+    try {
+      const checkAdAlreadyCompare = await AdService.checkComparedAd(adId, userId)
+      dispatch(setCheckAdAlreadyComparing( { checkAdAlreadyCompare }));
+      console.log(checkAdAlreadyCompare)
+    } catch (e) {
+      dispatch(setAuthError(getErrorMsg(e)));
+    }
+  };
+}
 
 export const selectAdState = (state: RootState) => state.ad;
 

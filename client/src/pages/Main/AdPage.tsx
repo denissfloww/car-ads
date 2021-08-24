@@ -7,12 +7,15 @@ import SkeletonAdCard from "../../components/AdPageComponents/SkeletonAdCardComp
 import { Ad } from '../../interfaces/Ad';
 import { useParams, useHistory } from 'react-router-dom';
 import { catalogLink } from "../../Links";
-import { fetchAd, fetchAds, selectAdState } from '../../redux/slices/adSlice';
+import {checkCompareAd, fetchAd, fetchAds, selectAdState} from '../../redux/slices/adSlice';
 import { useAdPageStyles } from '../../styles/muiStyles';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import CompareIcon from '@material-ui/icons/Compare';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import AuthService from "../../services/AuthService";
+import {selectAuthState} from "../../redux/slices/authSlice";
+import LocalStorageService from "../../services/LocalStorageService";
 
 interface ParamTypes {
   adId: string;
@@ -22,11 +25,11 @@ const AdPage = () => {
   const classes = useAdPageStyles();
   const dispatch = useDispatch();
   const { adId } = useParams<ParamTypes>();
-  const history = useHistory()
   useEffect(() => {
     dispatch(fetchAd(adId));
   }, []);
-  const { adLoading, ad } = useSelector(selectAdState);
+
+  const { adLoading, ad} = useSelector(selectAdState);
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>{adLoading ? <SkeletonAdCard /> : ad ? <AdCard ad={ad} /> : null}</Paper>
