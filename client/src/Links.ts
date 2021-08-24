@@ -11,3 +11,5 @@ export const appendAdLink = '/append';
 export const successAppendLink = '/success';
 
 export const catalogLink = '/catalog'
+
+export const adLink = '/ad'

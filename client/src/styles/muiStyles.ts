@@ -106,6 +106,27 @@ export const useFormStyles = makeStyles(
   { index: 1 },
 );
 
+export const useAdPageStyles = makeStyles(theme => ({
+  root:{
+    width: '100',
+    minHeight: 'calc(100vH - 130px)',
+    paddingTop: '1.5em',
+  },
+  paper: {
+    textAlign: 'left',
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '1.5em',
+    minHeight: 'calc(100vH - 80px)',
+    paddingLeft: '1.5em',
+    marginTop: '1.5em',
+    [theme.breakpoints.down('xs')]: {
+      padding: '0.5em 0.7em',
+      minHeight: 'calc(100vH - 80px)',
+    },
+  },
+}));
+
 export const useAppendPageStyles = makeStyles(theme => ({
   root: {
     width: '100',

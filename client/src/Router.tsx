@@ -2,7 +2,8 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import LoginPage from './pages/Auth/LoginPage';
 import SignupPage from './pages/Auth/SignUpPage';
-import { appendAdLink, catalogLink, homeLink, loginLink, signupLink, successAppendLink } from "./Links";
+import { adLink, appendAdLink, catalogLink, homeLink, loginLink, signupLink, successAppendLink } from "./Links";
+import AdPage from "./pages/Main/AdPage";
 import AppendAdPage from './pages/Main/AppendAdPage';
 import CatalogAdsPage from "./pages/Main/CatalogAdsPage";
 import NotFoundPage from './pages/Main/NotFoundPage';
@@ -29,6 +30,9 @@ const Routes = () => {
         </Route>
         <Route exact path='/car-ads'>
           <MainPage />
+        </Route>
+        <Route exact path={`${adLink}/:adId`}>
+          <AdPage />
         </Route>
         <Route exact path={homeLink}>
           {isAuth ? <PersonalAccountPage /> : <Redirect to='/login' />}

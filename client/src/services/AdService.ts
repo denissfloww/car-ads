@@ -11,9 +11,15 @@ const getAds = async () => {
   return response.data;
 }
 
+const getAd = async (adId: string) => {
+  const response = await axios.get(`${backEndUrl}/ad/${adId}`);
+  return response.data;
+}
+
 const AdService = {
   getUserAds,
-  getAds
+  getAds,
+  getAd
 };
 
 export default AdService;

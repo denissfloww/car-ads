@@ -88,3 +88,25 @@ export const getAds = async (req: Request, res: Response) => {
     .getMany();
   return res.status(200).json(ads);
 }
+
+export const getAdById = async (req: Request, res: Response) => {
+  const adId = req.params.adId
+
+  const ad = await getRepository(Ads)
+    .createQueryBuilder("ad")
+    .leftJoinAndMapOne(
+      "ad.modification",
+      Modifications,
+      "modification",
+      "ad.modification_id = modification.id"
+    )
+    .leftJoinAndSelect("modification.model", "model")
+    .leftJoinAndSelect("model.brand", "brand")
+    .leftJoinAndSelect("ad.adImages", "image")
+    .leftJoinAndSelect("modification.gearbox", "gearbox")
+    .where("ad.id = :adId", { adId })
+    .getOne();
+
+  return res.status(200).json(ad);
+
+}

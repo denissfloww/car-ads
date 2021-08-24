@@ -1,15 +1,17 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from '@material-ui/core';
 import React from 'react';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Carousel from 'react-material-ui-carousel';
 import NumberFormat from 'react-number-format';
+import { Link as RouterLink } from "react-router-dom";
 import { NoImageUrl } from "../../const/noImageUrl";
 import { AdImage } from "../../interfaces/AdImage";
 import { usePersonalAccountStyles } from "../../styles/muiStyles";
 import { getFullImageUrl } from "../../utils/HelperFunc";
+import { Link } from 'react-router-dom';
 
 interface IProps {
+  id: string;
   brand: string;
   model: string;
   images: AdImage[];
@@ -20,10 +22,13 @@ interface IProps {
 
 
 const UserAdCard = (props: IProps) => {
-  const { brand, model, images, countOwners, price, description } = props;
+  const { brand, model, images, countOwners, price, description, id } = props;
   const classes = usePersonalAccountStyles();
   return (
+
     <Grid item xs={12} sm={12} md={6}>
+      <Link style={{ textDecoration: 'none' }} to={`ad/${id}`}>
+      {/*<Button style={{ textTransform: 'capitalize' }}  to={`ad/${id}`} component={RouterLink}>*/}
       <Card className={classes.card}>
         <CardMedia>
           {images.length ? (
@@ -63,6 +68,8 @@ const UserAdCard = (props: IProps) => {
           <Button color='secondary'>Удалить</Button>
         </CardActions>
       </Card>
+      {/*</Button>*/}
+      </Link>
     </Grid>
   );
 };

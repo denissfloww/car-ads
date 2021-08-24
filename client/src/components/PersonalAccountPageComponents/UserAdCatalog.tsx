@@ -24,6 +24,7 @@ const UserAdCatalog = () => {
           userAds.length? (
             userAds.map((ad: Ad) => (
               <UserAdCard
+                id={ad.id}
                 description={ad.description}
                 price={ad.price}
                 brand={ad.modification.model.brand.name}
