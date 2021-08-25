@@ -19,6 +19,7 @@ interface InitialAdState {
   ad: Ad | null;
   adLoading: boolean;
   isAdAlreadyComparing: boolean;
+  isAdAlreadyFavourite: boolean;
 }
 
 const initialState: InitialAdState = {
@@ -30,6 +31,7 @@ const initialState: InitialAdState = {
   ad: null,
   adLoading: false,
   isAdAlreadyComparing: false,
+  isAdAlreadyFavourite: false,
 };
 
 const adSlice = createSlice({
@@ -60,10 +62,13 @@ const adSlice = createSlice({
     setCheckAdAlreadyComparing: (state, action: PayloadAction<{ checkAdAlreadyCompare: any }>) => {
       state.isAdAlreadyComparing = action.payload.checkAdAlreadyCompare
     },
+    setCheckAdAlreadyFavourite: (state, action: PayloadAction<{ isAdAlreadyFavourite: any }>) => {
+      state.isAdAlreadyFavourite = action.payload.isAdAlreadyFavourite
+    }
   },
 });
 
-export const { setUserAds, setAdsLoading, setAds, setUserAdsLoading, setAdLoading, setAd, setCheckAdAlreadyComparing } = adSlice.actions;
+export const { setUserAds, setAdsLoading, setAds, setUserAdsLoading, setAdLoading, setAd, setCheckAdAlreadyComparing, setCheckAdAlreadyFavourite } = adSlice.actions;
 
 export const fetchUserAds = (userId: string): AppThunk => {
   return async dispatch => {
@@ -106,7 +111,17 @@ export const checkCompareAd = (adId: string, userId: string): AppThunk => {
     try {
       const checkAdAlreadyCompare = await AdService.checkComparedAd(adId, userId)
       dispatch(setCheckAdAlreadyComparing( { checkAdAlreadyCompare }));
-      console.log(checkAdAlreadyCompare)
+    } catch (e) {
+      dispatch(setAuthError(getErrorMsg(e)));
+    }
+  };
+}
+
+export const checkFavouriteAd = (adId: string, userId: string): AppThunk => {
+  return async dispatch => {
+    try {
+      const isAdAlreadyFavourite = await AdService.checkAdIsFavorite(adId, userId)
+      dispatch(setCheckAdAlreadyFavourite( { isAdAlreadyFavourite }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
@@ -114,7 +129,25 @@ export const checkCompareAd = (adId: string, userId: string): AppThunk => {
 }
 
 export const insertAdToCompare = (adId: string): AppThunk => {
+  return async dispatch => {
+    try{
+      await AdService.insertAdToCompare(adId)
+      dispatch(setCheckAdAlreadyComparing( { checkAdAlreadyCompare: true }));
+    } catch (e) {
+      dispatch(setAuthError(getErrorMsg(e)));
+    }
+  };
+}
 
+export const insertAdToFavourite = (adId: string): AppThunk => {
+  return async dispatch => {
+    try{
+      await AdService.insertAdToFavourite(adId)
+      dispatch(setCheckAdAlreadyFavourite( { isAdAlreadyFavourite: true }));
+    } catch (e) {
+      dispatch(setAuthError(getErrorMsg(e)));
+    }
+  };
 }
 
 export const selectAdState = (state: RootState) => state.ad;

@@ -21,6 +21,7 @@ import TabPanel from '../../components/TabPanel';
 import UserAdCard from '../../components/PersonalAccountPageComponents/UserAdCard';
 import { appendAdLink } from "../../Links";
 import AppendAdPage from "./AppendAdPage";
+import CompareAdsTab from "../../components/CompareAdsComponents/CompareAdsTab";
 
 const PersonalAccountPage = () => {
   const classes = usePersonalAccountStyles();
@@ -43,6 +44,7 @@ const PersonalAccountPage = () => {
             <Grid >
               <Tabs value={value} onChange={handleChange} className={classes.tabs}>
                 <Tab className={classes.tabsButton} label='Мои объявления' />
+                <Tab className={classes.tabsButton} label='Сравнения' />
                 <Tab className={classes.tabsButton} label='Настройки профиля' />
               </Tabs>
             </Grid>
@@ -51,6 +53,9 @@ const PersonalAccountPage = () => {
            <UserAdCatalog />
           </TabPanel>
           <TabPanel index={1} value={value}>
+            <CompareAdsTab />
+          </TabPanel>
+          <TabPanel index={2} value={value}>
             Тут мои найстройки
           </TabPanel>
         </div>

@@ -10,7 +10,15 @@ import { getFullImageUrl } from '../../utils/HelperFunc';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthState } from '../../redux/slices/authSlice';
 import LocalStorageService from '../../services/LocalStorageService';
-import { checkCompareAd, fetchAd, selectAdState } from '../../redux/slices/adSlice';
+import {
+  checkCompareAd,
+  checkFavouriteAd,
+  fetchAd,
+  insertAdToCompare,
+  insertAdToFavourite,
+  selectAdState
+} from '../../redux/slices/adSlice';
+import {changeYear} from "../../redux/slices/appendSlice";
 
 interface AdCardProps {
   ad: Ad;
@@ -25,11 +33,18 @@ const AdCard = (props: AdCardProps) => {
   useEffect(() => {
     if (isAuth) {
       dispatch(checkCompareAd(ad.id, LocalStorageService.getUser().id));
+      dispatch(checkFavouriteAd(ad.id, LocalStorageService.getUser().id))
     }
   }, []);
 
-  const { isAdAlreadyComparing } = useSelector(selectAdState);
 
+  const handleCompareButtonClick = (e: any) => {
+    dispatch(insertAdToCompare(ad.id));
+  };
+  const handleFavouriteButtonClick = (e: any) => {
+    dispatch(insertAdToFavourite(ad.id));
+  };
+  const { isAdAlreadyComparing, isAdAlreadyFavourite } = useSelector(selectAdState);
   ad.adImages.map((value, index) => {
     images.push({ original: getFullImageUrl(value.imageName), thumbnail: getFullImageUrl(value.imageName) });
   });
@@ -44,30 +59,38 @@ const AdCard = (props: AdCardProps) => {
             {isAuth ? (
               isAdAlreadyComparing ? (
                 <Tooltip title='Уже в вашем сравнении'>
-                  <Button>
+                  <Button >
                     <CompareIcon color='disabled' />
                   </Button>
                 </Tooltip>
               ) : (
                 <Tooltip title='Добавить в сравнение'>
-                  <Button>
+                  <Button onClick={handleCompareButtonClick}>
                     <CompareIcon />
                   </Button>
                 </Tooltip>
               )
             ) : null}
-            <Tooltip title='Добавить в избранное'>
-              <Button>
-                <FavoriteBorderIcon />
-              </Button>
-            </Tooltip>
+            {isAuth ? (
+                isAdAlreadyFavourite ? (
+                    <Tooltip title='Уже в избранном'>
+                      <Button >
+                        <FavoriteBorderIcon color='disabled' />
+                      </Button>
+                    </Tooltip>
+                ) : (
+                    <Tooltip title='Добавить в избранное'>
+                      <Button onClick={handleFavouriteButtonClick}>
+                        <FavoriteBorderIcon />
+                      </Button>
+                    </Tooltip>
+                )
+            ) : null}
           </div>
           {ad.adImages.length ? <ImageGallery items={images} /> : <img src={NoImageUrl} alt='' />}
           <h1>Описание</h1>
           <div style={{ textAlign: 'justify', lineHeight: 2.0 }}>
-            {ad.description} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis deleniti deserunt dicta ducimus, illo
-            illum ipsa minima molestiae qui voluptatum. Alias exercitationem iure natus provident quidem quisquam ullam voluptates!
-            Laboriosam.
+            {ad.description}
           </div>
         </Grid>
       </Grid>

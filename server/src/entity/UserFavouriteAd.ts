@@ -15,9 +15,6 @@ export class UserFavouriteAd {
   @PrimaryGeneratedColumn({ type: "integer", name: "id" })
   id: number;
 
-  @Column("character varying", { name: "image_name", nullable: true })
-  imageName: string | null;
-
   @Column("timestamp without time zone", {
     name: "createdAt",
     default: () => "now()",

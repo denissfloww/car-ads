@@ -27,6 +27,16 @@ const checkComparedAd = async (adId: string, userId: string) => {
   return response.data;
 };
 
+const checkAdIsFavorite = async (adId: string, userId: string) => {
+  const response = await axios.get(`${backEndUrl}/ad/favourite/check`, {
+    params: {
+      userId: userId,
+      adId: adId,
+    },
+  });
+  return response.data;
+};
+
 const insertAdToCompare = async (adId: string) => {
   const user = LocalStorageService.getUser();
   await axios.post(
@@ -43,11 +53,30 @@ const insertAdToCompare = async (adId: string) => {
   );
 };
 
+const insertAdToFavourite = async (adId: string) => {
+  const user = LocalStorageService.getUser();
+  await axios.post(
+      `${backEndUrl}/ad/favourite/insert`,
+      {
+        userId: user.id,
+        adId: adId,
+      },
+      {
+        headers: {
+          'x-auth-token': user.token,
+        },
+      },
+  );
+}
+
 const AdService = {
   getUserAds,
   getAds,
   getAd,
   checkComparedAd,
+  insertAdToCompare,
+  checkAdIsFavorite,
+  insertAdToFavourite
 };
 
 export default AdService;
