@@ -1,5 +1,6 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import bcrypt from 'bcrypt';
+import { testUserUUID } from "./const";
 
 export class createSchema1610529720088 implements MigrationInterface {
   name = 'createSchema1610529720088';
@@ -18,7 +19,7 @@ export class createSchema1610529720088 implements MigrationInterface {
                 )`
     );
     await queryRunner.query(
-        `INSERT INTO "users" VALUES (uuid_generate_v4(), now(), now(), 'test', '${password}') `
+        `INSERT INTO "users" VALUES ('${testUserUUID}', now(), now(), 'test', '${password}') `
     );
   }
 
