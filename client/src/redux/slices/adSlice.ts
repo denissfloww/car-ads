@@ -113,6 +113,10 @@ export const checkCompareAd = (adId: string, userId: string): AppThunk => {
   };
 }
 
+export const insertAdToCompare = (adId: string): AppThunk => {
+
+}
+
 export const selectAdState = (state: RootState) => state.ad;
 
 export default adSlice.reducer;
