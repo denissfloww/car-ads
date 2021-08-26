@@ -9,7 +9,7 @@ import {
   getAds,
   getImage,
   getUserAds, getUserFavouriteAds, insertFavouriteUserAd, insertCompareUserAd,
-  saveAd, deleteCompareUserAd, getUserCompareAds, checkAlreadyInUserCompareAd
+  saveAd, deleteCompareUserAd, getUserCompareAds, checkAlreadyInUserCompareAd, getCountPage
 } from "../controllers/AdController";
 
 const router = express.Router();
@@ -18,6 +18,7 @@ router.get("/favourite", getUserFavouriteAds)
 router.get("/compare", getUserCompareAds)
 router.get("/compare/check", checkAlreadyInUserCompareAd)
 router.get("/favourite/check", checkAlreadyInUserFavouriteAd)
+router.get("/page/count", getCountPage)
 router.get("/ads", getAds);
 router.get("/image/:imageName", getImage);
 router.get("/ads/:userId", getUserAds);

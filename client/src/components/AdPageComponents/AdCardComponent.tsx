@@ -53,7 +53,7 @@ const AdCard = (props: AdCardProps) => {
       <Grid item container md={8}>
         <Grid md item>
           <h1 style={{ margin: 0 }}>
-            {ad.modification.model.brand.name} {ad.modification.model.name}{' '}
+            {ad.modification.model.brand.name} {ad.modification.model.name} {ad.modification.generation.name}{' '}
           </h1>
           <div style={{ margin: '10px 0px 10px 0px' }}>
             {isAuth ? (
@@ -107,7 +107,7 @@ const AdCard = (props: AdCardProps) => {
               </TableRow>
               <TableRow>
                 <TableCell align='left'>Двигатель</TableCell>
-                <TableCell align='center'>!!!!!!!!!</TableCell>
+                <TableCell align='center'>{ad.modification.drive.name}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell align='left'>Пробег</TableCell>

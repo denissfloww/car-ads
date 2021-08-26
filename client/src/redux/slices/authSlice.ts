@@ -6,6 +6,8 @@ import LocalStorageService from '../../services/LocalStorageService';
 import { History } from 'history';
 import { homeLink, loginLink } from '../../Links';
 import { getErrorMsg } from '../../utils/HelperFunc';
+import {push} from 'react-router-redux'
+import {fetchUserAds} from "./adSlice";
 
 interface InitialAuthState {
   user: UserState | null;
@@ -80,7 +82,17 @@ export const logout = (history: any): AppThunk => {
   return dispatch => {
     dispatch(removeUser());
     LocalStorageService.removeUser();
-    history.push(loginLink);
+    push(loginLink)
+  };
+};
+
+export const autoLogin = (): AppThunk => {
+  return (dispatch) => {
+    const loggedUser = LocalStorageService.getUser();
+    if (loggedUser) {
+      dispatch(setUser(loggedUser));
+      dispatch(fetchUserAds(loggedUser.id));
+    }
   };
 };
 

@@ -74,7 +74,18 @@ export const getImage = async (req: Request, res: Response) => {
   return res.status(200).sendFile(pathToImage);
 };
 
+export const getCountPage = async (req: Request, res: Response) => {
+  const size: number = +(req.query.size || 5);
+  const [list, count] = await getRepository(Ads).findAndCount()
+  const pageCount = Math.ceil(count / size);
+  return res.status(200).json(pageCount);
+}
+
 export const getAds = async (req: Request, res: Response) => {
+  const page: number =  +(req.query.page || 1);
+  const size:number = +(req.query.size || 5);
+  const skippedItems: number = (page - 1) * size;
+
   const ads = await getRepository(Ads)
     .createQueryBuilder("ad")
     .leftJoinAndMapOne(
@@ -87,6 +98,10 @@ export const getAds = async (req: Request, res: Response) => {
     .leftJoinAndSelect("model.brand", "brand")
     .leftJoinAndSelect("ad.adImages", "image")
     .leftJoinAndSelect("modification.gearbox", "gearbox")
+      .leftJoinAndSelect("modification.drive", "drive")
+      .leftJoinAndSelect("modification.generation", "generation")
+      .skip(skippedItems)
+      .take(size)
     .getMany();
   return res.status(200).json(ads);
 };
@@ -106,6 +121,8 @@ export const getAdById = async (req: Request, res: Response) => {
     .leftJoinAndSelect("model.brand", "brand")
     .leftJoinAndSelect("ad.adImages", "image")
     .leftJoinAndSelect("modification.gearbox", "gearbox")
+      .leftJoinAndSelect("modification.drive", "drive")
+      .leftJoinAndSelect("modification.generation", "generation")
     .where("ad.id = :adId", { adId })
     .getOne();
 

@@ -22,20 +22,18 @@ const Routes = () => {
   return (
     <Container>
       <Switch>
-        <Route exact path={catalogLink}>
-          <CatalogAdsPage />
-        </Route>
         <Route exact path='/'>
           <MainPage />
         </Route>
         <Route exact path='/car-ads'>
           <MainPage />
         </Route>
+        <Route exact path={catalogLink}>
+          <CatalogAdsPage />
+        </Route>
+
         <Route exact path={`${adLink}/:adId`}>
           <AdPage />
-        </Route>
-        <Route exact path={homeLink}>
-          {isAuth ? <PersonalAccountPage /> : <Redirect to='/login' />}
         </Route>
         <Route exact path={appendAdLink}>
           {isAuth ? <AppendAdPage /> : <Redirect to={loginLink} />}
@@ -49,6 +47,10 @@ const Routes = () => {
         <Route exact path={signupLink}>
           {!isAuth ? <SignupPage /> : <Redirect to={homeLink} />}
         </Route>
+        <Route exact path={homeLink}>
+          {isAuth ? <PersonalAccountPage /> : <Redirect to='/login' />}
+        </Route>
+
         <Route>
           <NotFoundPage />
         </Route>

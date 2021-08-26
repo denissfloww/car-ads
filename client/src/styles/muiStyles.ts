@@ -279,6 +279,10 @@ export const useCatalogPageStyles = makeStyles(
         padding: '0.5em 0.5em',
       },
     },
+      directionSearchIcon: {
+          fontSize: '4.5em',
+          marginRight: '0.2em',
+      },
       cardRoot:{
           marginBottom:20,
         '&:hover': {
@@ -327,10 +331,13 @@ export const useCatalogPageStyles = makeStyles(
       },
     },
     headerPaper: {
-      padding: '0.8em 1.5em',
-      marginBottom: '1em',
-      display: 'flex',
-      alignItems: 'center',
+        padding: '1.0em',
+        paddingLeft: '1.5em',
+        marginBottom: '1.5em',
+        minHeight: 'calc(15vH - 100px)',
+        textAlign: 'left',
+        display: 'flex',
+        alignItems: 'center',
       [theme.breakpoints.down('xs')]: {
         padding: '0.3em 0.5em',
         marginBottom: '0.5em',

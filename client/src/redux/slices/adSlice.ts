@@ -22,6 +22,7 @@ interface InitialAdState {
   isAdAlreadyComparing: boolean;
   isAdAlreadyFavourite: boolean;
   userComparedAds: UserCompareAd[];
+  countPage: number
 }
 
 const initialState: InitialAdState = {
@@ -35,6 +36,7 @@ const initialState: InitialAdState = {
   isAdAlreadyComparing: false,
   isAdAlreadyFavourite: false,
   userComparedAds: [],
+  countPage: 1
 };
 
 const adSlice = createSlice({
@@ -71,6 +73,9 @@ const adSlice = createSlice({
     setUserComparedAds: (state, action: PayloadAction<{ userComparedAds: UserCompareAd[] }>) => {
       state.userComparedAds = action.payload.userComparedAds;
     },
+    setCountPage: (state, action: PayloadAction<{ countPage: number }>) => {
+      state.countPage = action.payload.countPage
+    }
   },
 });
 
@@ -84,6 +89,7 @@ export const {
   setCheckAdAlreadyComparing,
   setUserComparedAds,
   setCheckAdAlreadyFavourite,
+  setCountPage
 } = adSlice.actions;
 
 export const fetchUserAds = (userId: string): AppThunk => {
@@ -98,11 +104,13 @@ export const fetchUserAds = (userId: string): AppThunk => {
   };
 };
 
-export const fetchAds = (): AppThunk => {
+export const fetchAds = (page: number, size: number): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setAdsLoading());
-      const ads: Ad[] = await AdService.getAds();
+      const countPage: number = await AdService.getPageCount(size)
+      dispatch(setCountPage({countPage}))
+      const ads: Ad[] = await AdService.getAds(page, size);
       dispatch(setAds({ ads: ads }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));

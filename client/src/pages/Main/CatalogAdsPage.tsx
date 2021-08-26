@@ -28,21 +28,33 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Carousel from 'react-material-ui-carousel';
 import { getFullImageUrl } from '../../utils/HelperFunc';
 import NumberFormat from 'react-number-format';
+import SearchIcon from '@material-ui/icons/Search';
 import CatalogAdCard from '../../components/CatalogPageComponent/CatalogAdCard';
+import {Pagination} from "@material-ui/lab";
 
 const CatalogAdsPage = () => {
   const dispatch = useDispatch();
   const classes = useCatalogPageStyles();
 
+
   useEffect(() => {
-    dispatch(fetchAds());
+    dispatch(fetchAds(1, 5));
   }, []);
-  const { adsLoading, ads } = useSelector(selectAdState);
+
+  const handlePaginationClick = (e: any, value: any) =>{
+    dispatch(fetchAds(value, 5));
+  }
+
+  const { adsLoading, ads, countPage } = useSelector(selectAdState);
   return (
+
     <div className={classes.root}>
       <Paper className={classes.headerPaper}>
-        <h1>Найти объявление</h1>
+        <h1>
+          Найти объявление
+        </h1>
       </Paper>
+      <Grid md container direction="column" item>
       <Paper className={classes.paper}>
         {adsLoading
           ? Array(10)
@@ -53,8 +65,14 @@ const CatalogAdsPage = () => {
                 <CatalogAdCard ad={item} />
             </Link>
             ))}
+
+          <Grid container md justify="center" style={{marginTop: 'calc(30% + 60px)', bottom: 0,}}>
+            <Pagination count={countPage} shape="rounded" onChange={handlePaginationClick} />
+          </Grid>
       </Paper>
+      </Grid>
     </div>
+
   );
 };
 

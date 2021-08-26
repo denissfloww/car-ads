@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link as RouterLink } from "react-router-dom";
+import {Link as RouterLink, Redirect, useHistory} from "react-router-dom";
 import UserAdCatalog from "../../components/PersonalAccountPageComponents/UserAdCatalog";
 import SkeletonCatalogAdCard from "../../components/CatalogPageComponent/SkeletonCatalogAdCard";
 import SkeletonUserAdCard from "../../components/PersonalAccountPageComponents/SkeletonUserAdCard";
@@ -19,7 +19,7 @@ import {
 import Tabs from '@material-ui/core/Tabs';
 import TabPanel from '../../components/TabPanel';
 import UserAdCard from '../../components/PersonalAccountPageComponents/UserAdCard';
-import { appendAdLink } from "../../Links";
+import {appendAdLink, homeLink, loginLink} from "../../Links";
 import AppendAdPage from "./AppendAdPage";
 import CompareAdsTab from "../../components/CompareAdsComponents/CompareAdsTab";
 
@@ -31,6 +31,7 @@ const PersonalAccountPage = () => {
   };
   const dispatch = useDispatch()
   const { user } = useSelector(selectAuthState);
+  const history = useHistory();
   const userId = user? user.id : LocalStorageService.getUser().id;
   useEffect(() => {
     dispatch(fetchUserAds(userId))

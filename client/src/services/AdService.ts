@@ -7,8 +7,22 @@ const getUserAds = async (userId: string) => {
   return response.data;
 };
 
-const getAds = async () => {
-  const response = await axios.get(`${backEndUrl}/ad/ads`);
+const getAds = async (page: number ,size: number) => {
+  const response = await axios.get(`${backEndUrl}/ad/ads`, {
+    params: {
+      page: page,
+      size: size,
+    }
+  });
+  return response.data;
+};
+
+const getPageCount = async (size: number) => {
+  const response = await axios.get(`${backEndUrl}/ad/page/count`, {
+    params: {
+      size: size,
+    }
+  });
   return response.data;
 };
 
@@ -86,7 +100,8 @@ const AdService = {
   insertAdToCompare,
   checkAdIsFavorite,
   insertAdToFavourite,
-  getUserComparedAds
+  getUserComparedAds,
+  getPageCount
 };
 
 export default AdService;

@@ -41,13 +41,13 @@ const CatalogAdCard = (props: CatalogAdProps) => {
         </Grid>
         <Grid item md={4} className={classes.cardInfo}>
           <h1>
-            {ad.modification.model.brand.name} {ad.modification.model.name}{' '}
+            {ad.modification.model.brand.name} {ad.modification.model.name} {ad.modification.generation.name}{' '}
           </h1>
           <p>
             Объем -<b>{ad.modification.engineCapacity} л</b>
           </p>
           <p>
-            Двигатель - !!!!!!!!!<b></b>
+            Двигатель - <b>{ad.modification.drive.name}</b>
           </p>
           <p>
             <b>{ad.modification.hp} л.с</b>
