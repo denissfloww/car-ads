@@ -1,30 +1,47 @@
-import {Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Button} from "@material-ui/core";
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Button } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import CompareTable from "./CompareTable";
-import CompareChart from "./CompareChart";
-
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkCompareAd, checkFavouriteAd, fetchAds, fetchUserCompareAds, selectAdState } from '../../redux/slices/adSlice';
+import { selectAuthState } from '../../redux/slices/authSlice';
+import ExcelExportService from '../../services/ExcelExportService';
+import LocalStorageService from '../../services/LocalStorageService';
+import CompareTable from './CompareTable';
+import CompareChart from './CompareChart';
 
 const CompareAdsTab = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector(selectAuthState);
+  const isAuth = user || LocalStorageService.getUser();
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(fetchUserCompareAds(LocalStorageService.getUser().id));
+    }
+  }, []);
 
-    return (
-        <Grid container>
-            <Grid item md>
-                <Typography variant="h5" id="tableTitle" component="div">
-                    Характеристики сравниваемых автомобилей
-                </Typography>
-                <CompareTable />
-                <Grid container md justify="flex-end" style={{marginTop:'3%'}}>
-                    <Button variant="contained" color="secondary" style={{backgroundColor:'#4CAF50'}}>
-                        Экспорт в Excel
-                    </Button>
-                </Grid>
-                <Grid container md justify="center" style={{marginTop:'15%'}}>
-                    <CompareChart />
-                </Grid>
+  const { userComparedAds } = useSelector(selectAdState);
+  const handleExportClick = async () => {
+    await ExcelExportService.exportToExcel(userComparedAds);
+  };
 
-            </Grid>
+  return (
+    <Grid container>
+      <Grid item md>
+        <Typography variant='h5' id='tableTitle' component='div'>
+          Характеристики сравниваемых автомобилей
+        </Typography>
+        <CompareTable userComparedAds={userComparedAds} />
+        <Grid container md justify='flex-end' style={{ marginTop: '3%' }}>
+          <Button variant='contained' color='secondary' style={{ backgroundColor: '#4CAF50' }} onClick={() => handleExportClick()}>
+            Экспорт в Excel
+          </Button>
         </Grid>
-    )
-}
+        <Grid container md justify='center' style={{ marginTop: '15%' }}>
+          <CompareChart userComparedAds={userComparedAds} />
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+};
 
 export default CompareAdsTab;

@@ -69,6 +69,15 @@ const insertAdToFavourite = async (adId: string) => {
   );
 }
 
+const getUserComparedAds = async (userId: string) => {
+  const response = await axios.get(`${backEndUrl}/ad/compare`, {
+    params: {
+      userId: userId,
+    },
+  });
+  return response.data;
+}
+
 const AdService = {
   getUserAds,
   getAds,
@@ -76,7 +85,8 @@ const AdService = {
   checkComparedAd,
   insertAdToCompare,
   checkAdIsFavorite,
-  insertAdToFavourite
+  insertAdToFavourite,
+  getUserComparedAds
 };
 
 export default AdService;

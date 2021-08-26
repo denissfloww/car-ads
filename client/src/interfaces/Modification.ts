@@ -7,5 +7,6 @@ export interface Modification {
   hp: string;
   model: Model
   yearRelease: string,
-  gearbox: Gearbox
+  gearbox: Gearbox,
+
 }
