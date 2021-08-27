@@ -7,7 +7,7 @@
     "build": "tsc",
     "dev": "cross-env NODE_ENV=test ts-node-dev --respawn ./src/server.ts",
     "drop db": "npx typeorm schema:drop",
-    "migrate": "npx typeorm migrations:run",
+    "migrate": "npx typeorm migration:run",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "lint": "eslint --ext .ts ."
   },
