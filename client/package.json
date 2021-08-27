@@ -41,6 +41,8 @@
     "react-router-dom": "^5.2.0",
     "react-router-redux": "^4.0.8",
     "react-scripts": "4.0.1",
+    "file-saver": "^2.0.5",
+    "react-number-format": "^4.6.4",
     "recharts": "^2.1.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
@@ -85,10 +87,8 @@
     "@types/react-router-redux": "^5.0.19",
     "eslint": "^7.31.0",
     "eslint-plugin-unused-imports": "^1.1.2",
-    "file-saver": "^2.0.5",
     "gh-pages": "^3.2.3",
     "prettier": "2.3.2",
-    "react-number-format": "^4.6.4",
     "web-vitals": "^2.1.0"
   }
 }
