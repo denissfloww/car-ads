@@ -1,2 +1,2 @@
-const backEndUrl = 'http://localhost:3005';
+const backEndUrl = 'https://ads-platform.herokuapp.com';
 export default backEndUrl;
