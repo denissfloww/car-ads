@@ -9,6 +9,8 @@ import { Models } from "../entity/Models";
 import { Modifications } from "../entity/Modifications";
 import { UserFavouriteAd } from "../entity/UserFavouriteAd";
 import { UserCompareAd } from "../entity/UserCompareAd";
+// @ts-ignore
+import EasyYandexS3 from "easy-yandex-s3"
 
 export const saveAd = async (req: Request, res: Response) => {
   const {
@@ -24,6 +26,13 @@ export const saveAd = async (req: Request, res: Response) => {
     images,
   } = req.body;
 
+  const s3 = new EasyYandexS3({
+    auth: {
+      accessKeyId: process.env.ACCESS_KEY_ID,
+      secretAccessKey: process.env.SECRET_ACCESS_KEY
+    },
+    Bucket: process.env.BUCKET_NAME
+  })
   const ad = await getRepository(Ads).save({
     user: userId,
     modification: modificationId,
@@ -38,10 +47,11 @@ export const saveAd = async (req: Request, res: Response) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   req.files.map(async (file: any) => {
-    console.log(file);
-    const ad_image = await getRepository(AdImage).save({
+    const buffer = file.buffer
+    const upload = await s3.Upload({buffer}, '/images/')
+    await getRepository(AdImage).save({
       ad: ad.id as any,
-      imageName: file.filename,
+      imageName: upload.Location,
     });
   });
   return res.status(200).send("saved!");

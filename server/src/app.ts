@@ -7,13 +7,14 @@ import authRoutes from './routes/AuthRoutes';
 import userRoutes from './routes/UserRoutes';
 import appendRoutes from './routes/ModificationRoutes';
 import adRoutes from './routes/AdRoutes'
+import multer from "multer";
 
 const app = express();
 
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
-
+app.use(multer().any());
 
 app.use('/', authRoutes);
 app.use('/users', userRoutes);

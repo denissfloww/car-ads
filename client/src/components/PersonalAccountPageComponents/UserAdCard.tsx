@@ -7,7 +7,6 @@ import { Link as RouterLink } from "react-router-dom";
 import { NoImageUrl } from "../../const/noImageUrl";
 import { AdImage } from "../../interfaces/AdImage";
 import { usePersonalAccountStyles } from "../../styles/muiStyles";
-import { getFullImageUrl } from "../../utils/HelperFunc";
 import { Link } from 'react-router-dom';
 
 interface IProps {
@@ -39,7 +38,7 @@ const UserAdCard = (props: IProps) => {
                        ((event: any) => event.target.src = 'https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/NO_IMG_600x600.png')
                      }
                      width='100%'
-                     src={getFullImageUrl(item.imageName)} />
+                     src={item.imageName} />
               ))}
             </Carousel>
           ): (

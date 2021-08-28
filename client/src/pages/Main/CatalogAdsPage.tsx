@@ -26,7 +26,6 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Carousel from 'react-material-ui-carousel';
-import { getFullImageUrl } from '../../utils/HelperFunc';
 import NumberFormat from 'react-number-format';
 import SearchIcon from '@material-ui/icons/Search';
 import CatalogAdCard from '../../components/CatalogPageComponent/CatalogAdCard';

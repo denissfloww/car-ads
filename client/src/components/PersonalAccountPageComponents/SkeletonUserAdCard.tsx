@@ -7,7 +7,6 @@ import Carousel from 'react-material-ui-carousel';
 import NumberFormat from 'react-number-format';
 import { AdImage } from "../../interfaces/AdImage";
 import { usePersonalAccountStyles } from "../../styles/muiStyles";
-import { getFullImageUrl } from "../../utils/HelperFunc";
 
 
 

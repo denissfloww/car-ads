@@ -6,7 +6,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Ad } from '../../interfaces/Ad';
 import { useCatalogPageStyles } from '../../styles/muiStyles';
 import { Skeleton } from '@material-ui/lab';
-import { getFullImageUrl } from '../../utils/HelperFunc';
 import { NoImageUrl } from '../../const/noImageUrl';
 
 interface CatalogAdProps {
@@ -29,7 +28,7 @@ const CatalogAdCard = (props: CatalogAdProps) => {
                     onError={(event: any) =>
                       (event.target.src = 'https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/NO_IMG_600x600.png')
                     }
-                    src={getFullImageUrl(item.imageName)}
+                    src={item.imageName}
                     className={classes.cardImg}
                   />
                 ))}

@@ -19,23 +19,27 @@ export class AdsImagesTable1629183829034 implements MigrationInterface {
 
 
         await queryRunner.query(
-          `INSERT INTO "ad_image" VALUES (1, 1, '1629443665870ea0552ff-640c-4ab9-951c-d80f9a0dcc09') `
+          `INSERT INTO "ad_image" VALUES (1, 1, 'https://car-ads.storage.yandexcloud.net/images/2d722d0745ed2fc5f52eb7fddb191e21.jpg') `
         );
 
         await queryRunner.query(
-          `INSERT INTO "ad_image" VALUES (2, 1, '1629569874379cb3d6c2c-4f18-4532-8bc1-a95d44e42ec5') `
+          `INSERT INTO "ad_image" VALUES (2, 1, 'https://car-ads.storage.yandexcloud.net/images/7f06f0b38d95039ee55328ffaf64c81f.jpg') `
         );
 
         await queryRunner.query(
-          `INSERT INTO "ad_image" VALUES (3, 1, '16295698743746b2ca3b7-7140-45b7-a660-efc604df5f1c') `
+          `INSERT INTO "ad_image" VALUES (3, 1, 'https://car-ads.storage.yandexcloud.net/images/42dc4ed29d8de9ab87e8c7d3409acaad.jpg') `
         );
 
         await queryRunner.query(
-          `INSERT INTO "ad_image" VALUES (4, 1, '162944366587049db6d26-8dbe-4c25-acfa-f1c5dad5c203') `
+          `INSERT INTO "ad_image" VALUES (4, 1, 'https://car-ads.storage.yandexcloud.net/images/857d92d5a22f9fc8a18ffa43b934a4b0.jpg') `
         );
 
         await queryRunner.query(
-          `INSERT INTO "ad_image" VALUES (5, 1, '162956987437893dffdec-0080-448c-8ef2-77e21f177162') `
+          `INSERT INTO "ad_image" VALUES (5, 1, 'https://car-ads.storage.yandexcloud.net/images/031109409a0d6a471d9be250575f6df9.jpg') `
+        );
+
+        await queryRunner.query(
+            `INSERT INTO "ad_image" VALUES (6, 1, 'https://car-ads.storage.yandexcloud.net/images/f404baa70866bc57bbf8aebb11a1dc00.jpg') `
         );
     }
 

@@ -7,7 +7,6 @@ import ImageGallery from 'react-image-gallery';
 import NumberFormat from 'react-number-format';
 import { NoImageUrl } from '../../const/noImageUrl';
 import { Ad } from '../../interfaces/Ad';
-import { getFullImageUrl } from '../../utils/HelperFunc';
 
 const SkeletonAdCard = () => {
   return (

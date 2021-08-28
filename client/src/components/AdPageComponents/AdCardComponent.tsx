@@ -6,7 +6,6 @@ import ImageGallery from 'react-image-gallery';
 import NumberFormat from 'react-number-format';
 import { NoImageUrl } from '../../const/noImageUrl';
 import { Ad } from '../../interfaces/Ad';
-import { getFullImageUrl } from '../../utils/HelperFunc';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthState } from '../../redux/slices/authSlice';
 import LocalStorageService from '../../services/LocalStorageService';
@@ -46,7 +45,7 @@ const AdCard = (props: AdCardProps) => {
   };
   const { isAdAlreadyComparing, isAdAlreadyFavourite } = useSelector(selectAdState);
   ad.adImages.map((value, index) => {
-    images.push({ original: getFullImageUrl(value.imageName), thumbnail: getFullImageUrl(value.imageName) });
+    images.push({ original: value.imageName, thumbnail: value.imageName });
   });
   return (
     <Grid container spacing={3}>

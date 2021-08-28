@@ -11,6 +11,8 @@ import {
   getUserAds, getUserFavouriteAds, insertFavouriteUserAd, insertCompareUserAd,
   saveAd, deleteCompareUserAd, getUserCompareAds, checkAlreadyInUserCompareAd, getCountPage
 } from "../controllers/AdController";
+// @ts-ignore
+import EasyYandexS3 from "easy-yandex-s3"
 
 const router = express.Router();
 
@@ -30,13 +32,14 @@ router.post("/compare/insert", insertCompareUserAd)
 router.delete("/compare/delete/:id", deleteCompareUserAd)
 
 
-var upload = multer({ storage: storageConfig });
+// var upload = multer({ storage: storageConfig });
 const { auth } = middleware;
+
 
 router.post("/favourite/insert", auth, insertFavouriteUserAd)
 router.delete("/favourite/delete/:id", auth, deleteFavouriteUserAd)
 
-router.post("/upload", upload.array("images", 5), auth, saveAd);
-
+// router.post("/upload", upload.array("images", 10), auth, saveAd);
+router.post("/upload", auth, saveAd);
 
 export default router;
