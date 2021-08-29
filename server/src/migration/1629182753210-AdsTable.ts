@@ -6,7 +6,9 @@ export class AdsTable1629182753210 implements MigrationInterface {
     await queryRunner.query(
       `CREATE TABLE "ads"
             (
-                "id" serial not null constraint ads_pk primary key,
+              "id" integer generated always as identity
+                constraint ads_pk
+                  primary key,
                 "user_id" uuid
                     constraint users_ads_fk
                         references users
@@ -24,12 +26,14 @@ export class AdsTable1629182753210 implements MigrationInterface {
                 "price" bigint,
                 "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
                 "updatedAt" TIMESTAMP NOT NULL DEFAULT now()
-            )`
+            )
+            
+            
+            `
     );
 
     await queryRunner.query(
-      `INSERT INTO "ads" VALUES (
-                          1,
+      `INSERT INTO "ads" (user_id, modification_id, vin, mileage, color, description, phone, owners_count, price) VALUES (                         
                           '${testUserUUID}',
                           '1',
                           'TEST2344VIN',
@@ -44,8 +48,7 @@ export class AdsTable1629182753210 implements MigrationInterface {
     );
 
     await queryRunner.query(
-      `INSERT INTO "ads" VALUES (
-                          2,
+      `INSERT INTO "ads" (user_id, modification_id, vin, mileage, color, description, phone, owners_count, price) VALUES (                        
                           '${testUserUUID}',
                           '1',
                           'TEST3084VIN',

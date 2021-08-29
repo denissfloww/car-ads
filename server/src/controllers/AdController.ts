@@ -33,6 +33,8 @@ export const saveAd = async (req: Request, res: Response) => {
     },
     Bucket: process.env.BUCKET_NAME
   })
+  console.log()
+
   const ad = await getRepository(Ads).save({
     user: userId,
     modification: modificationId,
@@ -49,7 +51,7 @@ export const saveAd = async (req: Request, res: Response) => {
   req.files.map(async (file: any) => {
     const buffer = file.buffer
     const upload = await s3.Upload({buffer}, '/images/')
-    await getRepository(AdImage).save({
+    const ad_image = await getRepository(AdImage).save({
       ad: ad.id as any,
       imageName: upload.Location,
     });
