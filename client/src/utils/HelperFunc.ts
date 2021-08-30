@@ -17,8 +17,3 @@ export const getErrorMsg = (err: ReturnedError) => {
   }
 };
 
-export const getFullImageUrl = (imageName: string) => {
-  if (imageName != null) {
-    return `${backEndUrl}/ad/image/${imageName}`
-  }
-}
