@@ -4,9 +4,11 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import React, { useEffect, useState } from 'react';
 import ImageGallery from 'react-image-gallery';
 import NumberFormat from 'react-number-format';
+import { Link as RouterLink } from "react-router-dom";
 import { NoImageUrl } from '../../const/noImageUrl';
 import { Ad } from '../../interfaces/Ad';
 import { useDispatch, useSelector } from 'react-redux';
+import { homeLink } from "../../Links";
 import { selectAuthState } from '../../redux/slices/authSlice';
 import LocalStorageService from '../../services/LocalStorageService';
 import {

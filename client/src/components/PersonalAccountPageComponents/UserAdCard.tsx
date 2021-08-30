@@ -3,9 +3,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Carousel from 'react-material-ui-carousel';
 import NumberFormat from 'react-number-format';
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Redirect, useHistory } from "react-router-dom";
 import { NoImageUrl } from "../../const/noImageUrl";
 import { AdImage } from "../../interfaces/AdImage";
+import { homeLink } from "../../Links";
 import { usePersonalAccountStyles } from "../../styles/muiStyles";
 import { Link } from 'react-router-dom';
 
@@ -23,19 +24,24 @@ interface IProps {
 const UserAdCard = (props: IProps) => {
   const { brand, model, images, countOwners, price, description, id } = props;
   const classes = usePersonalAccountStyles();
-  return (
+  const history = useHistory();
 
+  const handleAdClick = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+    history.push(`ad/${id}`)
+  }
+
+  return (
     <Grid item xs={12} sm={12} md={6}>
-      <Link style={{ textDecoration: 'none' }} to={`ad/${id}`}>
-      {/*<Button style={{ textTransform: 'capitalize' }}  to={`ad/${id}`} component={RouterLink}>*/}
-      <Card className={classes.card}>
+      <Card className={classes.card} onClick={handleAdClick}>
         <CardMedia>
           {images.length ? (
             <Carousel autoPlay={false} timeout={200}>
               {images.map((item, i) => (
                 <img style={{ borderRadius: 5 }}
                      onError={
-                       ((event: any) => event.target.src = 'https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/NO_IMG_600x600.png')
+                       ((event: any) => event.target.src = NoImageUrl)
                      }
                      width='100%'
                      src={item.imageName} />
@@ -67,8 +73,6 @@ const UserAdCard = (props: IProps) => {
           <Button color='secondary'>Удалить</Button>
         </CardActions>
       </Card>
-      {/*</Button>*/}
-      </Link>
     </Grid>
   );
 };

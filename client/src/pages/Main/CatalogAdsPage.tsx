@@ -13,7 +13,7 @@ import {
   Button,
 } from '@material-ui/core';
 import DirectionsCarIcon from '@material-ui/icons/DirectionsCar';
-import { Link, Link as RouterLink } from "react-router-dom";
+import { Link, Link as RouterLink } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SkeletonCatalogAdCard from '../../components/CatalogPageComponent/SkeletonCatalogAdCard';
@@ -29,49 +29,40 @@ import Carousel from 'react-material-ui-carousel';
 import NumberFormat from 'react-number-format';
 import SearchIcon from '@material-ui/icons/Search';
 import CatalogAdCard from '../../components/CatalogPageComponent/CatalogAdCard';
-import {Pagination} from "@material-ui/lab";
+import { Pagination } from '@material-ui/lab';
 
 const CatalogAdsPage = () => {
   const dispatch = useDispatch();
   const classes = useCatalogPageStyles();
 
-
   useEffect(() => {
     dispatch(fetchAds(1, 5));
   }, []);
 
-  const handlePaginationClick = (e: any, value: any) =>{
+  const handlePaginationClick = (e: any, value: any) => {
     dispatch(fetchAds(value, 5));
-  }
+  };
 
   const { adsLoading, ads, countPage } = useSelector(selectAdState);
   return (
-
     <div className={classes.root}>
       <Paper className={classes.headerPaper}>
-        <h1>
-          Найти объявление
-        </h1>
+        <h1>Найти объявление</h1>
       </Paper>
-      <Grid md container direction="column" item>
-      <Paper className={classes.paper}>
-        {adsLoading
-          ? Array(10)
-              .fill(0)
-              .map((item, i) => <SkeletonCatalogAdCard />)
-          : ads.map((item: Ad) => (
-            <Link style={{ textDecoration: 'none' }} to={`ad/${item.id}`}>
-                <CatalogAdCard ad={item} />
-            </Link>
-            ))}
+      <Grid md container direction='column' item>
+        <Paper className={classes.paper}>
+          {adsLoading
+            ? Array(10)
+                .fill(0)
+                .map((item, i) => <SkeletonCatalogAdCard />)
+            : ads.map((item: Ad) => <CatalogAdCard ad={item} />)}
 
-          <Grid container md justify="center" style={{marginTop: 'calc(30% + 60px)', bottom: 0,}}>
-            <Pagination count={countPage} shape="rounded" onChange={handlePaginationClick} />
+          <Grid container md justify='center' style={{ marginTop: 'calc(30% + 60px)', bottom: 0 }}>
+            <Pagination count={countPage} shape='rounded' onChange={handlePaginationClick} />
           </Grid>
-      </Paper>
+        </Paper>
       </Grid>
     </div>
-
   );
 };
 
