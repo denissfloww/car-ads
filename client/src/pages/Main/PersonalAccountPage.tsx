@@ -29,13 +29,6 @@ const PersonalAccountPage = () => {
   const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
     setValue(newValue);
   };
-  const dispatch = useDispatch()
-  const { user } = useSelector(selectAuthState);
-  const history = useHistory();
-  const userId = user? user.id : LocalStorageService.getUser().id;
-  useEffect(() => {
-    dispatch(fetchUserAds(userId))
-  }, [])
 
   return (
     <div className={classes.root}>

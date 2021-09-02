@@ -1,6 +1,9 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { UserCompareAd } from '../../interfaces/UserCompareAd';
+import { useDispatch } from 'react-redux';
+import { deleteAdFromCompare, fetchUserCompareAds } from '../../redux/slices/adSlice';
+import LocalStorageService from '../../services/LocalStorageService';
 
 interface CompareTableProps {
   userComparedAds: UserCompareAd[];
@@ -8,7 +11,12 @@ interface CompareTableProps {
 
 const CompareTable = (props: CompareTableProps) => {
   const { userComparedAds } = props;
-
+  const dispatch = useDispatch();
+  const userId = LocalStorageService.getUser().id;
+  const handleDeleteFromCompare = (id: string) => {
+    dispatch(deleteAdFromCompare(id));
+    dispatch(fetchUserCompareAds(userId));
+  };
   return (
     <TableContainer style={{ marginTop: '2%' }}>
       <Table aria-label='a dense table'>
@@ -50,16 +58,18 @@ const CompareTable = (props: CompareTableProps) => {
               <TableCell>
                 {compareAd.ad.modification.model.brand.name} {compareAd.ad.modification.model.name}
               </TableCell>
-              <TableCell>!!!!!!</TableCell>
+              <TableCell>{compareAd.ad.modification.drive.name}</TableCell>
               <TableCell>{compareAd.ad.modification.yearRelease}</TableCell>
               <TableCell>{compareAd.ad.ownersCount}</TableCell>
               <TableCell>{compareAd.ad.modification.hp}</TableCell>
               <TableCell>{compareAd.ad.modification.engineCapacity}</TableCell>
-              <TableCell>!!!!</TableCell>
+              <TableCell>{compareAd.ad.modification.engineType.name}</TableCell>
               <TableCell>{compareAd.ad.modification.gearbox.name}</TableCell>
               <TableCell>{compareAd.ad.price}</TableCell>
               <TableCell>
-                <DeleteOutlineIcon />
+                <Button onClick={() => handleDeleteFromCompare(compareAd.id)}>
+                  <DeleteOutlineIcon />
+                </Button>
               </TableCell>
             </TableRow>
           ))}

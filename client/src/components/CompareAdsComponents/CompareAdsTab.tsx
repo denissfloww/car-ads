@@ -14,9 +14,10 @@ const CompareAdsTab = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(selectAuthState);
   const isAuth = user || LocalStorageService.getUser();
+  const userId = LocalStorageService.getUser().id
   useEffect(() => {
     if (isAuth) {
-      dispatch(fetchUserCompareAds(LocalStorageService.getUser().id));
+      dispatch(fetchUserCompareAds(userId));
     }
   }, []);
 

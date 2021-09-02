@@ -51,7 +51,7 @@ const CatalogAdCard = (props: CatalogAdProps) => {
               Объем -<b>{ad.modification.engineCapacity} л</b>
             </p>
             <p>
-              Двигатель - <b>{ad.modification.drive.name}</b>
+              Двигатель - <b>{ad.modification.engineType.name}</b>
             </p>
             <p>
               <b>{ad.modification.hp} л.с</b>

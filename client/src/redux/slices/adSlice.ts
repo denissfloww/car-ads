@@ -10,6 +10,7 @@ import { getErrorMsg } from '../../utils/HelperFunc';
 import { AppThunk, RootState } from '../store';
 import { setBrands } from './appendSlice';
 import { setAuthError } from './authSlice';
+import LocalStorageService from "../../services/LocalStorageService";
 
 interface InitialAdState {
   userAds: Ad[];
@@ -163,6 +164,16 @@ export const insertAdToCompare = (adId: string): AppThunk => {
   };
 };
 
+export const deleteAdFromCompare = (id: string): AppThunk => {
+  return async dispatch => {
+    try {
+      await AdService.deleteCompareUserAd(id);
+    } catch (e) {
+      dispatch(setAuthError(getErrorMsg(e)));
+    }
+  };
+};
+
 export const insertAdToFavourite = (adId: string): AppThunk => {
   return async dispatch => {
     try {
@@ -184,6 +195,19 @@ export const fetchUserCompareAds = (userId: string): AppThunk => {
     }
   };
 };
+
+export const deleteAd = (adId: string): AppThunk => {
+  return async dispatch => {
+    try {
+     await AdService.deleteAd(adId);
+     const userId = LocalStorageService.getUser().id
+      const ads: Ad[] = await AdService.getUserAds(userId);
+      dispatch(setUserAds({ userAds: ads }));
+    } catch (e) {
+      dispatch(setAuthError(getErrorMsg(e)));
+    }
+  }
+}
 
 export const selectAdState = (state: RootState) => state.ad;
 

@@ -10,7 +10,7 @@ import { Modifications } from "../entity/Modifications";
 import { UserFavouriteAd } from "../entity/UserFavouriteAd";
 import { UserCompareAd } from "../entity/UserCompareAd";
 // @ts-ignore
-import EasyYandexS3 from "easy-yandex-s3"
+import EasyYandexS3 from "easy-yandex-s3";
 
 export const saveAd = async (req: Request, res: Response) => {
   const {
@@ -29,11 +29,10 @@ export const saveAd = async (req: Request, res: Response) => {
   const s3 = new EasyYandexS3({
     auth: {
       accessKeyId: process.env.ACCESS_KEY_ID,
-      secretAccessKey: process.env.SECRET_ACCESS_KEY
+      secretAccessKey: process.env.SECRET_ACCESS_KEY,
     },
-    Bucket: process.env.BUCKET_NAME
-  })
-  console.log()
+    Bucket: process.env.BUCKET_NAME,
+  });
 
   const ad = await getRepository(Ads).save({
     user: userId,
@@ -49,14 +48,24 @@ export const saveAd = async (req: Request, res: Response) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   req.files.map(async (file: any) => {
-    const buffer = file.buffer
-    const upload = await s3.Upload({buffer}, '/images/')
+    const buffer = file.buffer;
+    const upload = await s3.Upload({ buffer }, "/images/");
     const ad_image = await getRepository(AdImage).save({
       ad: ad.id as any,
       imageName: upload.Location,
     });
   });
   return res.status(200).send("saved!");
+};
+
+export const deleteAd = async (req: Request, res: Response) => {
+  const { id } = req.body;
+  await getRepository(Ads)
+    .createQueryBuilder()
+    .delete()
+    .where("id = :id", { id: id })
+    .execute();
+  return res.status(200).send("deleted");
 };
 
 export const getUserAds = async (req: Request, res: Response) => {
@@ -88,14 +97,14 @@ export const getImage = async (req: Request, res: Response) => {
 
 export const getCountPage = async (req: Request, res: Response) => {
   const size: number = +(req.query.size || 5);
-  const [list, count] = await getRepository(Ads).findAndCount()
+  const [list, count] = await getRepository(Ads).findAndCount();
   const pageCount = Math.ceil(count / size);
   return res.status(200).json(pageCount);
-}
+};
 
 export const getAds = async (req: Request, res: Response) => {
-  const page: number =  +(req.query.page || 1);
-  const size:number = +(req.query.size || 5);
+  const page: number = +(req.query.page || 1);
+  const size: number = +(req.query.size || 5);
   const skippedItems: number = (page - 1) * size;
 
   const ads = await getRepository(Ads)
@@ -110,10 +119,11 @@ export const getAds = async (req: Request, res: Response) => {
     .leftJoinAndSelect("model.brand", "brand")
     .leftJoinAndSelect("ad.adImages", "image")
     .leftJoinAndSelect("modification.gearbox", "gearbox")
-      .leftJoinAndSelect("modification.drive", "drive")
-      .leftJoinAndSelect("modification.generation", "generation")
-      .skip(skippedItems)
-      .take(size)
+    .leftJoinAndSelect("modification.drive", "drive")
+    .leftJoinAndSelect("modification.generation", "generation")
+    .leftJoinAndSelect("modification.engineType", "engineType")
+    .skip(skippedItems)
+    .take(size)
     .getMany();
   return res.status(200).json(ads);
 };
@@ -133,8 +143,9 @@ export const getAdById = async (req: Request, res: Response) => {
     .leftJoinAndSelect("model.brand", "brand")
     .leftJoinAndSelect("ad.adImages", "image")
     .leftJoinAndSelect("modification.gearbox", "gearbox")
-      .leftJoinAndSelect("modification.drive", "drive")
-      .leftJoinAndSelect("modification.generation", "generation")
+    .leftJoinAndSelect("modification.drive", "drive")
+    .leftJoinAndSelect("modification.generation", "generation")
+    .leftJoinAndSelect("modification.engineType", "engineType")
     .where("ad.id = :adId", { adId })
     .getOne();
 
@@ -230,6 +241,8 @@ export const getUserCompareAds = async (req: Request, res: Response) => {
     .leftJoinAndSelect("model.brand", "brand")
     .leftJoinAndSelect("ad.adImages", "image")
     .leftJoinAndSelect("modification.gearbox", "gearbox")
+    .leftJoinAndSelect("modification.drive", "drive")
+    .leftJoinAndSelect("modification.engineType", "engineType")
     .where("user_compare_ad.user_id = :userId", { userId })
     .getMany();
   console.log(favouriteAds);

@@ -108,7 +108,7 @@ const AdCard = (props: AdCardProps) => {
               </TableRow>
               <TableRow>
                 <TableCell align='left'>Двигатель</TableCell>
-                <TableCell align='center'>{ad.modification.drive.name}</TableCell>
+                <TableCell align='center'>{ad.modification.engineType.name}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell align='left'>Пробег</TableCell>

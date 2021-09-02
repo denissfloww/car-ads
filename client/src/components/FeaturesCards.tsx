@@ -8,6 +8,10 @@ import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
 import ListIcon from '@material-ui/icons/List';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import RssFeedOutlinedIcon from '@material-ui/icons/RssFeedOutlined';
+import ReportIcon from '@material-ui/icons/Report';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import PhotoIcon from '@material-ui/icons/Photo';
 import { useMainPageStyles } from "../styles/muiStyles";
 
 const iconSize = 30;
@@ -29,33 +33,33 @@ const features = [
   },
   {
     headline: 'Отзывы',
-    text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
+    text: 'Отдел на реализации',
     icon: <AnnouncementOutlinedIcon style={{ fontSize: iconSize }} />,
   },
   {
-    headline: 'Feature 5',
-    text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
+    headline: 'Сравнивайте',
+    text: 'Возможность сравнения интересующих авто по характеристикам',
     icon: <BarChartIcon style={{ fontSize: iconSize }} />,
   },
   {
-    headline: 'Feature 6',
-    text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
-    icon: <HeadsetMicIcon style={{ fontSize: iconSize }} />,
+    headline: 'Отчёт сравнения',
+    text: 'Экспортируйте отчёт сравнения автомобилей в Excel формате ',
+    icon: <ReportIcon style={{ fontSize: iconSize }} />,
   },
   {
-    headline: 'Feature 7',
-    text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
-    icon: <CloudIcon style={{ fontSize: iconSize }} />,
+    headline: 'Авторизация и регистрация',
+    text: 'Необходимо для подачи объявлений и полноценном использовании приложения',
+    icon: <LockOpenIcon style={{ fontSize: iconSize }} />,
   },
   {
-    headline: 'Feature 8',
-    text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
-    icon: <CodeIcon style={{ fontSize: iconSize }} />,
+    headline: 'Избранное',
+    text: 'Добавляйте объявления в избранное, чтобы следить за изменениями',
+    icon: <FavoriteBorderIcon style={{ fontSize: iconSize }} />,
   },
   {
-    headline: 'Feature 9',
-    text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
-    icon: <CancelIcon style={{ fontSize: iconSize }} />,
+    headline: 'Фото авто',
+    text: 'Просматривайте фотографии автомобиля в объявлении для лучшего представления о нём',
+    icon: <PhotoIcon style={{ fontSize: iconSize }} />,
   },
 ];
 
