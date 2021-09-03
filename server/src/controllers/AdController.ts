@@ -1,16 +1,14 @@
-import exp from "constants";
-import { Request, Response } from "express";
+import {Request, Response} from "express";
 import path from "path";
-import { getConnection, getRepository } from "typeorm";
-import { AdImage } from "../entity/AdImage";
-import { Ads } from "../entity/Ads";
-import { Bodies } from "../entity/Bodies";
-import { Models } from "../entity/Models";
-import { Modifications } from "../entity/Modifications";
-import { UserFavouriteAd } from "../entity/UserFavouriteAd";
-import { UserCompareAd } from "../entity/UserCompareAd";
+import {getRepository} from "typeorm";
+import {AdImage} from "../entity/AdImage";
+import {Ads} from "../entity/Ads";
+import {Modifications} from "../entity/Modifications";
+import {UserFavouriteAd} from "../entity/UserFavouriteAd";
+import {UserCompareAd} from "../entity/UserCompareAd";
 // @ts-ignore
 import EasyYandexS3 from "easy-yandex-s3";
+import {Status} from "../enums/AdStatusEnum";
 
 export const saveAd = async (req: Request, res: Response) => {
   const {
@@ -44,6 +42,7 @@ export const saveAd = async (req: Request, res: Response) => {
     phone: phone,
     ownersCount: ownersСount,
     price: price,
+    status: Status.Active
   });
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

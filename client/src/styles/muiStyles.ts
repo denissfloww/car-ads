@@ -305,6 +305,9 @@ export const useCatalogPageStyles = makeStyles(
       priceHeader:{
           borderBottom: '7px groove #55A62A'
       },
+      sellHeader:{
+
+      },
       media:{
           height: 140,
       },

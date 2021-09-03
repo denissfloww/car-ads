@@ -18,6 +18,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import DeleteConfirmDialog from './DeleteConfirmDialog';
+import {AdStatus} from "../../const/AdStatus";
 
 interface IProps {
   id: string;
@@ -27,10 +28,11 @@ interface IProps {
   countOwners: number;
   price: number;
   description: string;
+  status: string;
 }
 
 const UserAdCard = (props: IProps) => {
-  const { brand, model, images, countOwners, price, description, id } = props;
+  const { brand, model, images, countOwners, price, description, id, status } = props;
   const classes = usePersonalAccountStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -81,8 +83,8 @@ const UserAdCard = (props: IProps) => {
               <Typography variant='h5' component='h2'>
                 <NumberFormat value={price} displayType='text' thousandSeparator=' ' prefix='₽ ' />
               </Typography>
-              <Typography color='textSecondary' style={{ marginTop: '10px', fontSize: '11pt', color: '#388e3c' }}>
-                Активно
+              <Typography color='textSecondary' style={{ marginTop: '10px', fontSize: '11pt', color: `${AdStatus[status].color}`}}>
+                {AdStatus[status].description}
               </Typography>
               <Typography color='textSecondary'>
                 <b>Описание:</b> {description}

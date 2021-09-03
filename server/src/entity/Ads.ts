@@ -12,6 +12,7 @@ import { Modifications } from "./Modifications";
 import { User } from "./User";
 import { UserCompareAd } from "./UserCompareAd";
 import { UserFavouriteAd } from "./UserFavouriteAd";
+import {Status} from "../enums/AdStatusEnum";
 
 @Index("ads_pk", ["id"], { unique: true })
 @Entity("ads", { schema: "public" })
@@ -39,6 +40,9 @@ export class Ads {
 
   @Column("bigint", { name: "price", nullable: true })
   price: string | null;
+
+  @Column("character varying", { name: "status" })
+  status: Status;
 
   @Column("timestamp without time zone", {
     name: "createdAt",

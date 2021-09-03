@@ -38,6 +38,7 @@ const UserAdCatalog = () => {
               model={ad.modification.model.name}
               countOwners={ad.ownersCount}
               images={ad.adImages}
+              status={ad.status}
             />
           ))
         ) : (

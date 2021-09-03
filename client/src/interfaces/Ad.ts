@@ -9,5 +9,6 @@ export interface Ad {
   ownersCount: number;
   price: number;
   modification: Modification
-  adImages:AdImage[]
+  adImages:AdImage[];
+  status: string
 }

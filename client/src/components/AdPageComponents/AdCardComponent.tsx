@@ -20,6 +20,8 @@ import {
   selectAdState
 } from '../../redux/slices/adSlice';
 import {changeYear} from "../../redux/slices/appendSlice";
+import {Alert, AlertTitle} from "@material-ui/lab";
+import {AdStatus, Status} from "../../const/AdStatus";
 
 interface AdCardProps {
   ad: Ad;
@@ -96,9 +98,17 @@ const AdCard = (props: AdCardProps) => {
         </Grid>
       </Grid>
       <Grid md item>
-        <h1 style={{ margin: 0, textAlign: 'right' }}>
-          <NumberFormat value={ad.price} displayType='text' thousandSeparator=' ' prefix='₽ ' />
-        </h1>
+        {ad.status == Status.Sell ? (
+            <h1 style={{ margin: 0, textAlign: 'center' }}>
+              <Alert severity='error'>
+                <AlertTitle>Авто продано</AlertTitle>
+              </Alert>
+            </h1>
+        ) : (
+            <h1 style={{ margin: 0, textAlign: 'right' }}>
+              <NumberFormat value={ad.price} displayType='text' thousandSeparator=' ' prefix='₽ ' />
+            </h1>
+        )}
         <TableContainer style={{ marginTop: '20%' }}>
           <Table>
             <TableBody>
