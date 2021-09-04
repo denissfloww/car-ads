@@ -6,7 +6,8 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         await queryRunner.query(
             `CREATE TABLE "modifications"
                     (
-                        "id" serial not null constraint modifications_pk primary key,                    
+                        "id" integer generated always as identity
+                            constraint modifications_pk primary key,                    
                         "model_id" int
                             constraint modifications_models_fk
                                 references models
@@ -45,41 +46,75 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
         await queryRunner.query(
-            `INSERT INTO "modifications" VALUES
-                            (
-                             '1', --ид                            
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, year_release, wheel)
+                        VALUES
+                            (                                               
                              '1', --модель
                              '3', --тип двигателя
                              '1', --привод
                              '1', --коробка
                              '5', --кузов
-                             '7', --поколение
+                             '1', --поколение
                              '1.8',--объем
                              '98', --мощность
                              '2019',--год выпуска
-                             'Левый', --руль
-                             now(),
-                             now()
+                             'Левый' --руль                  
                             ) `
         );
 
         await queryRunner.query(
-            `INSERT INTO "modifications" VALUES
-            (
-                '2', --ид
-                '1', --модель
-                '1', --тип двигателя
-                '3', --привод
-                '2', --коробка
-                '1', --кузов
-                '8', --поколение
-                '1.6',--объем
-                '122', --мощность
-                '2020',--год выпуска
-                'Левый', --руль
-                now(),
-                now()
-            ) `
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, year_release, wheel)
+                        VALUES
+                            (                                               
+                             '1', --модель
+                             '3', --тип двигателя
+                             '1', --привод
+                             '1', --коробка
+                             '5', --кузов
+                             '2', --поколение
+                             '1.8',--объем
+                             '98', --мощность
+                             '2019',--год выпуска
+                             'Левый' --руль                  
+                            ) `
+        );
+
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, year_release, wheel)
+                        VALUES
+                            (                                               
+                             '2', --модель
+                             '3', --тип двигателя
+                             '1', --привод
+                             '1', --коробка
+                             '5', --кузов
+                             '3', --поколение
+                             '1.8',--объем
+                             '98', --мощность
+                             '2019',--год выпуска
+                             'Левый' --руль                  
+                            ) `
+        );
+
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, year_release, wheel)
+                        VALUES
+                            (                                               
+                             '2', --модель
+                             '3', --тип двигателя
+                             '1', --привод
+                             '1', --коробка
+                             '5', --кузов
+                             '4', --поколение
+                             '1.8',--объем
+                             '98', --мощность
+                             '2019',--год выпуска
+                             'Левый' --руль                  
+                            ) `
         );
     }
 
