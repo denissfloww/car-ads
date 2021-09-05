@@ -18,7 +18,7 @@ const GenerationSelector: React.FC<{ generations: any[]; handleGenerationChange:
               onChange={e => {
                 handleGenerationChange(e, e.target.value);
               }}
-              value={item.name}
+              value={item.id}
               id={item.name}
               className='input-hidden'
             />

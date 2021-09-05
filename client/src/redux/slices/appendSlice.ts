@@ -312,7 +312,7 @@ export const changeYear = (yearValue: string, modelValue: string): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setChangeYear(yearValue));
-      const bodies: Body[] = await AppendService.getBodies(yearValue, modelValue);
+      const bodies: Body[] = await AppendService.getBodies(modelValue, yearValue);
       dispatch(setBodies({ bodies }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
@@ -336,7 +336,7 @@ export const changeGeneration = (generationValue: string, modelValue: string, bo
   return async dispatch => {
     try {
       dispatch(setChangeGeneration(generationValue));
-
+      console.log(generationValue)
       const engines: Engine[] = await AppendService.getEngines(modelValue, bodyValue, generationValue);
 
       dispatch(setEngines({ engines }));

@@ -7,25 +7,28 @@ import {Generations} from "../entity/Generations";
 import {EngineTypes} from "../entity/EngineTypes";
 import {Drives} from "../entity/Drives";
 import {Gearboxes} from "../entity/Gearboxes";
+import {countYears} from "../utils/helperFunc";
 
 export const getYears = async (req: Request, res: Response) => {
     const modelId = Number(req.query.modelId)
     const years = await getRepository(Modifications)
         .createQueryBuilder("modification")
-        .select("modification")
+        .leftJoinAndSelect("modification.generation", "generation")
         .where(
             "modification.model_id= :id", {id: modelId}
         )
-        .select(["modification.year_release"])
-        .execute();
+        .select(["generation.year_from", "generation.year_to"])
+        .distinct()
+        .execute()
 
     if(!years){
         return res.status(404).send('Не найдено');
     }
 
-    let result = years.map(({ year_release } : any) => year_release)
-
-    return res.status(200).json(result);
+    const yearsFromArray: number[] = years.map(({ year_from } : any) => year_from)
+    const yearsToArray: number[] = years.map(({ year_to } : any) => year_to)
+    const countedYears = await countYears(yearsToArray, yearsFromArray);
+    return res.status(200).json(countedYears);
 }
 
 export const getBodies = async (req: Request, res: Response) => {
@@ -35,10 +38,14 @@ export const getBodies = async (req: Request, res: Response) => {
     const bodies = await getRepository(Modifications)
         .createQueryBuilder("modification")
         .leftJoinAndMapOne( "modification.id",Bodies, "body", "modification.body_id = body.id")
+        .leftJoinAndSelect("modification.generation", "generation")
         .select(["body.id AS id", "body.name AS name"])
-        .where("modification.year_release = :year", {year: year})
+        .where("generation.year_from <= :year", {year: year})
+        .andWhere("generation.year_to >= :year", {year: year})
         .andWhere("modification.model_id = :modelId", {modelId: modelId})
+        .distinct()
         .execute()
+
 
     if(!bodies){
         return res.status(404).send('Не найдено');

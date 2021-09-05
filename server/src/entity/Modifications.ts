@@ -27,9 +27,6 @@ export class Modifications {
   @Column("integer", { name: "hp" })
   hp: number;
 
-  @Column("integer", { name: "year_release", nullable: true })
-  yearRelease: number | null;
-
   @Column("character varying", { name: "wheel" })
   wheel: string;
 

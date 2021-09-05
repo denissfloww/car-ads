@@ -28,8 +28,8 @@ module.exports = {
   },
   synchronize: false,
   logging: false,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  // ssl: {
+  //   rejectUnauthorized: false
+  // }
   // ssl:true,
 };
