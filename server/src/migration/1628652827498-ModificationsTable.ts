@@ -261,7 +261,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '3', --привод
                              '1', --коробка
                              '1', --кузов
-                             '12', --поколение
+                             '13', --поколение
                              '2.0',--объем
                              '190', --мощность                             
                              '${Wheel.Left}' --руль                  
@@ -277,7 +277,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '1', --привод
                              '1', --коробка
                              '1', --кузов
-                             '13', --поколение
+                             '14', --поколение
                              '1.5',--объем
                              '140', --мощность                             
                              '${Wheel.Left}' --руль                  
@@ -295,7 +295,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '3', --привод
                              '1', --коробка
                              '1', --кузов
-                             '14', --поколение
+                             '15', --поколение
                              '2.0',--объем
                              '190', --мощность                             
                              '${Wheel.Left}' --руль                  
@@ -311,7 +311,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '1', --привод
                              '1', --коробка
                              '1', --кузов
-                             '15', --поколение
+                             '16', --поколение
                              '1.5',--объем
                              '136', --мощность                             
                              '${Wheel.Left}' --руль                  
@@ -329,7 +329,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '3', --привод
                              '1', --коробка
                              '1', --кузов
-                             '16', --поколение
+                             '17', --поколение
                              '1.6',--объем
                              '106', --мощность                             
                              '${Wheel.Left}' --руль                  
@@ -345,7 +345,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '1', --привод
                              '1', --коробка
                              '1', --кузов
-                             '17', --поколение
+                             '18', --поколение
                              '1.5',--объем
                              '82', --мощность                             
                              '${Wheel.Left}' --руль                  
@@ -363,7 +363,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '3', --привод
                              '1', --коробка
                              '4', --кузов
-                             '18', --поколение
+                             '19', --поколение
                              '3.5',--объем
                              '249', --мощность                             
                              '${Wheel.Left}' --руль                  
@@ -379,7 +379,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '1', --привод
                              '1', --коробка
                              '4', --кузов
-                             '19', --поколение
+                             '20', --поколение
                              '3.5',--объем
                              '249', --мощность                                
                              '${Wheel.Left}' --руль                  
@@ -397,7 +397,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '3', --привод
                              '1', --коробка
                              '4', --кузов
-                             '20', --поколение
+                             '21', --поколение
                              '2.3',--объем
                              '300', --мощность                             
                              '${Wheel.Left}' --руль                  
@@ -413,13 +413,233 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '1', --привод
                              '1', --коробка
                              '4', --кузов
-                             '21', --поколение
+                             '22', --поколение
                              '3.5',--объем
                              '249', --мощность                                
                              '${Wheel.Left}' --руль                  
                             ) `
         );
 
+//kuga
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '12', --модель
+                             '2', --тип двигателя
+                             '3', --привод
+                             '1', --коробка
+                             '4', --кузов
+                             '23', --поколение
+                             '1.5',--объем
+                             '120', --мощность                             
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '12', --модель
+                             '1', --тип двигателя
+                             '1', --привод
+                             '1', --коробка
+                             '4', --кузов
+                             '24', --поколение
+                             '1.5',--объем
+                             '150', --мощность                                
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+//accord
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '13', --модель
+                             '2', --тип двигателя
+                             '3', --привод
+                             '1', --коробка
+                             '1', --кузов
+                             '25', --поколение
+                             '1.5',--объем
+                             '192', --мощность                             
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '13', --модель
+                             '1', --тип двигателя
+                             '1', --привод
+                             '1', --коробка
+                             '1', --кузов
+                             '26', --поколение
+                             '2.4',--объем
+                             '188', --мощность                                
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+//CR-V
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '14', --модель
+                             '2', --тип двигателя
+                             '3', --привод
+                             '1', --коробка
+                             '4', --кузов
+                             '27', --поколение
+                             '2.4',--объем
+                             '186', --мощность                             
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '14', --модель
+                             '1', --тип двигателя
+                             '1', --привод
+                             '1', --коробка
+                             '4', --кузов
+                             '28', --поколение
+                             '2.0',--объем
+                             '150', --мощность                                
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+
+//Ceed
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '15', --модель
+                             '2', --тип двигателя
+                             '3', --привод
+                             '1', --коробка
+                             '2', --кузов
+                             '29', --поколение
+                             '1.4',--объем
+                             '100', --мощность                             
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '15', --модель
+                             '1', --тип двигателя
+                             '1', --привод
+                             '1', --коробка
+                             '2', --кузов
+                             '30', --поколение
+                             '1.6',--объем
+                             '128', --мощность                                
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+
+//k5
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '16', --модель
+                             '2', --тип двигателя
+                             '3', --привод
+                             '1', --коробка
+                             '1', --кузов
+                             '31', --поколение
+                             '2.0',--объем
+                             '150', --мощность                             
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+
+
+//A4
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '17', --модель
+                             '2', --тип двигателя
+                             '3', --привод
+                             '1', --коробка
+                             '1', --кузов
+                             '32', --поколение
+                             '1.4',--объем
+                             '150', --мощность                             
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '17', --модель
+                             '1', --тип двигателя
+                             '1', --привод
+                             '1', --коробка
+                             '1', --кузов
+                             '33', --поколение
+                             '2.0',--объем
+                             '150', --мощность                                
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+
+//Q7
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '18', --модель
+                             '1', --тип двигателя
+                             '3', --привод
+                             '1', --коробка
+                             '4', --кузов
+                             '34', --поколение
+                             '3.0',--объем
+                             '249', --мощность                             
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
+        await queryRunner.query(
+            `INSERT INTO "modifications" 
+                (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
+                        VALUES
+                            (                                               
+                             '18', --модель
+                             '2', --тип двигателя
+                             '1', --привод
+                             '1', --коробка
+                             '4', --кузов
+                             '35', --поколение
+                             '3.0',--объем
+                             '249', --мощность                                
+                             '${Wheel.Left}' --руль                  
+                            ) `
+        );
 
 
     }
