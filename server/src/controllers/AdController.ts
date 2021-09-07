@@ -22,6 +22,7 @@ export const saveAd = async (req: Request, res: Response) => {
     ownersСount,
     price,
     images,
+    yearRelease,
   } = req.body;
 
   const s3 = new EasyYandexS3({
@@ -42,7 +43,8 @@ export const saveAd = async (req: Request, res: Response) => {
     phone: phone,
     ownersCount: ownersСount,
     price: price,
-    status: Status.Active
+    status: Status.Active,
+    yearRelease: yearRelease
   });
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

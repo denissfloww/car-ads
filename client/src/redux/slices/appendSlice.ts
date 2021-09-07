@@ -503,10 +503,11 @@ export const appendAdd = (
   phone: any,
   countOwners: any,
   price: any,
+  yearRelease: any,
 ): AppThunk => {
   return async dispatch => {
     try {
-      await AppendService.appendAdd(modificationId, vinNumber, images, mileage, color, comment, phone, countOwners, price);
+      await AppendService.appendAdd(modificationId, vinNumber, images, mileage, color, comment, phone, countOwners, price, yearRelease);
       history.push(successAppendLink);
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));

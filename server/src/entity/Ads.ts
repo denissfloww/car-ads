@@ -44,6 +44,9 @@ export class Ads {
   @Column("character varying", { name: "status" })
   status: Status;
 
+  @Column("integer", { name: "year_release", nullable: true })
+  yearRelease: number | null;
+
   @Column("timestamp without time zone", {
     name: "createdAt",
     default: () => "now()",

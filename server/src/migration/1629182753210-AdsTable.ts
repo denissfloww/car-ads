@@ -25,6 +25,7 @@ export class AdsTable1629182753210 implements MigrationInterface {
                 "phone" bigint,
                 "owners_count" bigint,
                 "price" bigint,      
+                "year_release" int,
                 "status" character varying,
                 "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
                 "updatedAt" TIMESTAMP NOT NULL DEFAULT now()
@@ -35,7 +36,7 @@ export class AdsTable1629182753210 implements MigrationInterface {
     );
 
     await queryRunner.query(
-      `INSERT INTO "ads" (user_id, modification_id, vin, mileage, color, description, phone, owners_count, price, status) VALUES (                         
+      `INSERT INTO "ads" (user_id, modification_id, vin, mileage, color, description, phone, owners_count, price, status, year_release) VALUES (                         
                           '${testUserUUID}',
                           '1',
                           'TEST2344VIN',
@@ -46,12 +47,13 @@ export class AdsTable1629182753210 implements MigrationInterface {
                             9199283415,
                           3,
                           6000000,
-                          '${Status.Active}'                                                                                      
+                          '${Status.Active}',
+                          '2016'                                                                                                              
                                   )`
     );
 
     await queryRunner.query(
-      `INSERT INTO "ads" (user_id, modification_id, vin, mileage, color, description, phone, owners_count, price, status) VALUES (                        
+      `INSERT INTO "ads" (user_id, modification_id, vin, mileage, color, description, phone, owners_count, price, status, year_release) VALUES (                        
                           '${testUserUUID}',
                           '1',
                           'TEST3084VIN',
@@ -70,8 +72,9 @@ export class AdsTable1629182753210 implements MigrationInterface {
                             9199283415,
                           3,
                           654000,
-                          '${Status.Active}'
-                                                                                                                         )`
+                          '${Status.Active}',
+                          '2017'
+                                                                                                                                              )`
     );
   }
 

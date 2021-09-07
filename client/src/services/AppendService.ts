@@ -121,6 +121,7 @@ const appendAdd = async (
   phone: any,
   countOwners: any,
   price: any,
+  yearRelease: any
 ) => {
   const user = LocalStorageService.getUser()
   console.log(user.token)
@@ -140,6 +141,7 @@ const appendAdd = async (
   bodyFormData.append("ownersСount", countOwners);
   bodyFormData.append("price", price);
   bodyFormData.append("userId", user.id);
+  bodyFormData.append("yearRelease", yearRelease);
 
   await axios.post(
     `${backEndUrl}/ad/upload`,

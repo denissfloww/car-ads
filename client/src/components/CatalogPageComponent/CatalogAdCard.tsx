@@ -61,7 +61,7 @@ const CatalogAdCard = (props: CatalogAdProps) => {
             Коробка передач - <b> {ad.modification.gearbox.name}</b>
           </p>
           <p>
-            Год выпуска - <b> {ad.modification.yearRelease}</b>
+            Год выпуска - <b> {ad.yearRelease}</b>
           </p>
         </Grid>
         <Grid md container justify='flex-end' item>

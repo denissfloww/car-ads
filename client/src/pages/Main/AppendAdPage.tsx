@@ -184,7 +184,7 @@ const AppendAdPage = () => {
 
   const { user } = useSelector(selectAuthState);
   const handleAppend = () => {
-    dispatch(appendAdd(history, modificationValue, vinNumber, images, mileage, color, comment, phone, countOwners, price));
+    dispatch(appendAdd(history, modificationValue, vinNumber, images, mileage, color, comment, phone, countOwners, price, yearValue));
   };
 
   return (

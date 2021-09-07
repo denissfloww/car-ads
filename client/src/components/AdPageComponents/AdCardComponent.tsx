@@ -133,7 +133,7 @@ const AdCard = (props: AdCardProps) => {
               </TableRow>{' '}
               <TableRow>
                 <TableCell align='left'>Год выпуска</TableCell>
-                <TableCell align='center'>{ad.modification.yearRelease}</TableCell>
+                <TableCell align='center'>{ad.yearRelease}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell align='left'>Мощность</TableCell>

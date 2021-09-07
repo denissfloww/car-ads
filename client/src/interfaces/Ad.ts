@@ -10,5 +10,6 @@ export interface Ad {
   price: number;
   modification: Modification
   adImages:AdImage[];
-  status: string
+  status: string,
+  yearRelease: string,
 }
