@@ -22,6 +22,7 @@ import UserAdCard from '../../components/PersonalAccountPageComponents/UserAdCar
 import {appendAdLink, homeLink, loginLink} from "../../Links";
 import AppendAdPage from "./AppendAdPage";
 import CompareAdsTab from "../../components/CompareAdsComponents/CompareAdsTab";
+import FavouriteTab from "../../components/FavouriteTabComponents/FavouriteTab";
 
 const PersonalAccountPage = () => {
   const classes = usePersonalAccountStyles();
@@ -39,6 +40,7 @@ const PersonalAccountPage = () => {
               <Tabs value={value} onChange={handleChange} className={classes.tabs}>
                 <Tab className={classes.tabsButton} label='Мои объявления' />
                 <Tab className={classes.tabsButton} label='Сравнения' />
+                <Tab className={classes.tabsButton} label='Избранное' />
                 <Tab className={classes.tabsButton} label='Настройки профиля' />
               </Tabs>
             </Grid>
@@ -50,6 +52,9 @@ const PersonalAccountPage = () => {
             <CompareAdsTab />
           </TabPanel>
           <TabPanel index={2} value={value}>
+            <FavouriteTab />
+          </TabPanel>
+          <TabPanel index={3} value={value}>
             Тут мои найстройки
           </TabPanel>
         </div>
