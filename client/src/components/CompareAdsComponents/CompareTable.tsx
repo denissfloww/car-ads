@@ -12,10 +12,8 @@ interface CompareTableProps {
 const CompareTable = (props: CompareTableProps) => {
   const { userComparedAds } = props;
   const dispatch = useDispatch();
-  const userId = LocalStorageService.getUser().id;
   const handleDeleteFromCompare = (id: string) => {
     dispatch(deleteAdFromCompare(id));
-    dispatch(fetchUserCompareAds(userId));
   };
   return (
     <TableContainer style={{ marginTop: '2%' }}>

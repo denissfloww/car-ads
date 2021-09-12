@@ -106,8 +106,28 @@ const deleteCompareUserAd = async (id: string) => {
   );
 }
 
+const deleteFavouriteAd = async (id: string) => {
+  const user = LocalStorageService.getUser();
+  await axios.delete(`${backEndUrl}/ad/favourite/delete/${id}`,
+      {
+        headers: {
+          'x-auth-token': user.token,
+        },
+      }
+  );
+}
+
 const getUserComparedAds = async (userId: string) => {
   const response = await axios.get(`${backEndUrl}/ad/compare`, {
+    params: {
+      userId: userId,
+    },
+  });
+  return response.data;
+}
+
+const getUserFavouriteAds = async (userId: string) => {
+  const response = await axios.get(`${backEndUrl}/ad/favourite`, {
     params: {
       userId: userId,
     },
@@ -126,7 +146,9 @@ const AdService = {
   getUserComparedAds,
   getPageCount,
   deleteAd,
-  deleteCompareUserAd
+  deleteCompareUserAd,
+  getUserFavouriteAds,
+  deleteFavouriteAd
 };
 
 export default AdService;

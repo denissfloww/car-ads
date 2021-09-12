@@ -732,3 +732,30 @@ export const useFooterStyles = makeStyles(
   }),
   { index: 1 },
 );
+
+export const useFavouriteTabStyles = makeStyles(
+    theme => ({
+        imgGrid:{
+            margin:'10px',
+            textAlign:'left'
+        },
+        cardImg:{
+            height: '100%',
+            width: '100%',
+            maxWidth:'300px',
+            borderRadius:'1%'
+        },
+        cardInfo:{
+            textAlign:'left'
+        },
+        card: {
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            '&:hover': {
+                cursor: 'pointer',
+                backgroundColor: '#f6f5f5',
+            },
+        },
+    })
+)

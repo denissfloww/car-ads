@@ -10,7 +10,8 @@ import { getErrorMsg } from '../../utils/HelperFunc';
 import { AppThunk, RootState } from '../store';
 import { setBrands } from './appendSlice';
 import { setAuthError } from './authSlice';
-import LocalStorageService from "../../services/LocalStorageService";
+import LocalStorageService from '../../services/LocalStorageService';
+import FavouriteAd from '../../interfaces/FavouriteAd';
 
 interface InitialAdState {
   userAds: Ad[];
@@ -22,8 +23,10 @@ interface InitialAdState {
   adLoading: boolean;
   isAdAlreadyComparing: boolean;
   isAdAlreadyFavourite: boolean;
+  favouriteAdsLoading: boolean;
   userComparedAds: UserCompareAd[];
-  countPage: number
+  favouriteAds: FavouriteAd[];
+  countPage: number;
 }
 
 const initialState: InitialAdState = {
@@ -37,7 +40,9 @@ const initialState: InitialAdState = {
   isAdAlreadyComparing: false,
   isAdAlreadyFavourite: false,
   userComparedAds: [],
-  countPage: 1
+  favouriteAds: [],
+  favouriteAdsLoading: false,
+  countPage: 1,
 };
 
 const adSlice = createSlice({
@@ -75,8 +80,15 @@ const adSlice = createSlice({
       state.userComparedAds = action.payload.userComparedAds;
     },
     setCountPage: (state, action: PayloadAction<{ countPage: number }>) => {
-      state.countPage = action.payload.countPage
-    }
+      state.countPage = action.payload.countPage;
+    },
+    setFavouriteAdsLoading: state => {
+      state.favouriteAdsLoading = true;
+    },
+    setFavouriteAds: (state, action: PayloadAction<{ favouriteAds: FavouriteAd[] }>) => {
+      state.favouriteAds = action.payload.favouriteAds;
+      state.favouriteAdsLoading = false;
+    },
   },
 });
 
@@ -90,7 +102,9 @@ export const {
   setCheckAdAlreadyComparing,
   setUserComparedAds,
   setCheckAdAlreadyFavourite,
-  setCountPage
+  setCountPage,
+  setFavouriteAdsLoading,
+  setFavouriteAds,
 } = adSlice.actions;
 
 export const fetchUserAds = (userId: string): AppThunk => {
@@ -109,8 +123,8 @@ export const fetchAds = (page: number, size: number): AppThunk => {
   return async dispatch => {
     try {
       dispatch(setAdsLoading());
-      const countPage: number = await AdService.getPageCount(size)
-      dispatch(setCountPage({countPage}))
+      const countPage: number = await AdService.getPageCount(size);
+      dispatch(setCountPage({ countPage }));
       const ads: Ad[] = await AdService.getAds(page, size);
       dispatch(setAds({ ads: ads }));
     } catch (e) {
@@ -168,6 +182,9 @@ export const deleteAdFromCompare = (id: string): AppThunk => {
   return async dispatch => {
     try {
       await AdService.deleteCompareUserAd(id);
+      const userId = LocalStorageService.getUser().id;
+      const userComparedAds: UserCompareAd[] = await AdService.getUserComparedAds(userId);
+      dispatch(setUserComparedAds({ userComparedAds }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
@@ -199,15 +216,41 @@ export const fetchUserCompareAds = (userId: string): AppThunk => {
 export const deleteAd = (adId: string): AppThunk => {
   return async dispatch => {
     try {
-     await AdService.deleteAd(adId);
-     const userId = LocalStorageService.getUser().id
+      await AdService.deleteAd(adId);
+      const userId = LocalStorageService.getUser().id;
       const ads: Ad[] = await AdService.getUserAds(userId);
       dispatch(setUserAds({ userAds: ads }));
     } catch (e) {
       dispatch(setAuthError(getErrorMsg(e)));
     }
-  }
-}
+  };
+};
+
+export const fetchFavouriteAds = (userId: string): AppThunk => {
+  return async dispatch => {
+    try {
+      dispatch(setFavouriteAdsLoading());
+      const favouriteAds: FavouriteAd[] = await AdService.getUserFavouriteAds(userId);
+      dispatch(setFavouriteAds({ favouriteAds }));
+    } catch (e) {
+      dispatch(setAuthError(getErrorMsg(e)));
+    }
+  };
+};
+
+export const deleteAdFromFavourite= (id: string): AppThunk => {
+  return async dispatch => {
+    try {
+      await AdService.deleteFavouriteAd(id);
+      const user = LocalStorageService.getUser();
+      dispatch(setFavouriteAdsLoading());
+      const favouriteAds: FavouriteAd[] = await AdService.getUserFavouriteAds(user.id);
+      dispatch(setFavouriteAds({ favouriteAds }));
+    } catch (e) {
+      dispatch(setAuthError(getErrorMsg(e)));
+    }
+  };
+};
 
 export const selectAdState = (state: RootState) => state.ad;
 

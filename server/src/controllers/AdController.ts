@@ -180,9 +180,28 @@ export const deleteFavouriteUserAd = async (req: Request, res: Response) => {
 export const getUserFavouriteAds = async (req: Request, res: Response) => {
   const { userId } = req.query;
   const favouriteAds = await getRepository(UserFavouriteAd)
-    .createQueryBuilder("user_favourite_ad")
-    .where("user_favourite_ad.user_id = :userId", { userId })
-    .getMany();
+      .createQueryBuilder("user_compare_ad")
+      .leftJoinAndMapOne(
+          "user_compare_ad.ad",
+          Ads,
+          "ad",
+          "user_compare_ad.ad_id = ad.id"
+      )
+      .leftJoinAndMapOne(
+          "ad.modification",
+          Modifications,
+          "modification",
+          "ad.modification_id = modification.id"
+      )
+      .leftJoinAndSelect("modification.model", "model")
+      .leftJoinAndSelect("model.brand", "brand")
+      .leftJoinAndSelect("ad.adImages", "image")
+      .leftJoinAndSelect("modification.gearbox", "gearbox")
+      .leftJoinAndSelect("modification.drive", "drive")
+      .leftJoinAndSelect("modification.generation", "generation")
+      .leftJoinAndSelect("modification.engineType", "engineType")
+      .where("user_compare_ad.user_id = :userId", { userId })
+      .getMany();
   return res.status(200).json(favouriteAds);
 };
 
