@@ -19,6 +19,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import DeleteConfirmDialog from './DeleteConfirmDialog';
 import { AdStatus } from '../../const/AdStatus';
+import UpdateConfirmDialog from "./UpdateConfirmDialog";
 
 interface IProps {
   id: string;
@@ -37,6 +38,7 @@ const UserAdCard = (props: IProps) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
+  const [openUpdateDialog, setOpenUpdateDialog] = React.useState(false);
 
   const handleClickOpenDeleteDialog = () => {
     setOpenDeleteDialog(true);
@@ -46,6 +48,14 @@ const UserAdCard = (props: IProps) => {
     setOpenDeleteDialog(false);
   };
 
+  const handleClickOpenUpdateDialog = () => {
+    setOpenUpdateDialog(true);
+  };
+
+  const handleCloseUpdateDialog = () => {
+    setOpenUpdateDialog(false);
+  };
+
   const handleAdClick = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
@@ -53,6 +63,10 @@ const UserAdCard = (props: IProps) => {
   };
   const handleDelete = () => {
     dispatch(deleteAd(id));
+  };
+
+  const handleUpdate = () => {
+    console.log('la')
   };
 
   return (
@@ -98,10 +112,14 @@ const UserAdCard = (props: IProps) => {
             <Button onClick={handleClickOpenDeleteDialog} color='secondary'>
               Удалить
             </Button>
+            <Button onClick={handleClickOpenUpdateDialog} color='primary'>
+              Продано
+            </Button>
           </CardActions>
         </Card>
       </Grid>
       <DeleteConfirmDialog handleClose={handleCloseDeleteDialog} open={openDeleteDialog} handleDelete={handleDelete} />
+      <UpdateConfirmDialog open={openUpdateDialog} handleClose={handleCloseUpdateDialog} handleUpdate={handleUpdate} />
     </>
   );
 };

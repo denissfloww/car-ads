@@ -280,3 +280,19 @@ export const checkAlreadyInUserCompareAd = async (
   });
   return res.status(200).json(count >= 1);
 };
+
+export const updateAdStatus = async (
+    req: Request,
+    res: Response
+) => {
+  const { id, status } = req.body;
+
+  await getRepository(Ads)
+      .createQueryBuilder("ad")
+      .update(Ads)
+      .set({ status:  status})
+      .where("id = :id", { id: id })
+      .execute();
+
+  return res.status(201);
+}
