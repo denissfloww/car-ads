@@ -294,5 +294,5 @@ export const updateAdStatus = async (
       .where("id = :id", { id: id })
       .execute();
 
-  return res.status(201);
+  return res.status(200).json('ok');
 }

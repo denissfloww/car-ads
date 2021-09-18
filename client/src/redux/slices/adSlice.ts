@@ -252,6 +252,20 @@ export const deleteAdFromFavourite= (id: string): AppThunk => {
   };
 };
 
+export const updateAdStatus = (id: string, status: string): AppThunk => {
+  return async dispatch => {
+    try {
+      await AdService.updateAdStatus(id, status);
+      dispatch(setUserAdsLoading());
+      const user = LocalStorageService.getUser();
+      const ads: Ad[] = await AdService.getUserAds(user.id);
+      dispatch(setUserAds({ userAds: ads }))
+    } catch (e) {
+      dispatch(setAuthError(getErrorMsg(e)));
+    }
+  }
+}
+
 export const selectAdState = (state: RootState) => state.ad;
 
 export default adSlice.reducer;

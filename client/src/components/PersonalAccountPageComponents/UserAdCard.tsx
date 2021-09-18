@@ -10,7 +10,7 @@ import { homeLink } from '../../Links';
 import { usePersonalAccountStyles } from '../../styles/muiStyles';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { deleteAd } from '../../redux/slices/adSlice';
+import {deleteAd, updateAdStatus} from '../../redux/slices/adSlice';
 import LocalStorageService from '../../services/LocalStorageService';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -18,7 +18,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import DeleteConfirmDialog from './DeleteConfirmDialog';
-import { AdStatus } from '../../const/AdStatus';
+import {AdStatus, Status} from '../../const/AdStatus';
 import UpdateConfirmDialog from "./UpdateConfirmDialog";
 
 interface IProps {
@@ -66,7 +66,7 @@ const UserAdCard = (props: IProps) => {
   };
 
   const handleUpdate = () => {
-    console.log('la')
+    dispatch(updateAdStatus(id, Status.Sell))
   };
 
   return (

@@ -18,6 +18,7 @@ import {
   checkAlreadyInUserCompareAd,
   getCountPage,
   deleteAd,
+  updateAdStatus
 } from "../controllers/AdController";
 // @ts-ignore
 import EasyYandexS3 from "easy-yandex-s3";
@@ -46,4 +47,5 @@ router.delete("/favourite/delete/:id", auth, deleteFavouriteUserAd);
 // router.post("/upload", upload.array("images", 10), auth, saveAd);
 router.post("/upload", auth, saveAd);
 router.delete("/delete", auth, deleteAd);
+router.put("/update", auth, updateAdStatus)
 export default router;
