@@ -49,7 +49,7 @@ const AdCard = (props: AdCardProps) => {
   };
   const { isAdAlreadyComparing, isAdAlreadyFavourite } = useSelector(selectAdState);
   ad.adImages.map((value, index) => {
-    images.push({ original: value.imageName, thumbnail: value.imageName });
+    images.push({ original: value.imageName, thumbnail: value.imageName,originalHeight:'500px' });
   });
   return (
     <Grid container spacing={3}>
