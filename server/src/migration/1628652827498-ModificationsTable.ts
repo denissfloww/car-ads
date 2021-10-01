@@ -45,6 +45,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                     )`
         );
 //Prius
+// 1
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -61,7 +62,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
-
+// 2
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -79,6 +80,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                             ) `
         );
 //Corolla
+// 3
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -95,7 +97,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
-
+// 4
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -113,7 +115,8 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                             ) `
         );
 
-//Avensis
+//Avensis 3
+// 5
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -130,6 +133,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+// 6
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -148,6 +152,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
 //Prado
+// 7
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -164,6 +169,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//8
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -181,6 +187,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                             ) `
         );
 //bmw x3
+// 9
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -197,6 +204,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//10
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -215,6 +223,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
 //1 series bmw
+// 11
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -231,6 +240,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//12
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -251,6 +261,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
 
 
 //2 series bmw
+//13
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -267,6 +278,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//14
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -285,6 +297,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
 //3 series bmw
+//15
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -301,6 +314,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//16
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -319,6 +333,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
 //almera
+//17
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -335,6 +350,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//18
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -353,6 +369,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
 //murano
+//19
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -369,6 +386,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//20
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -387,6 +405,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
 //explorer
+//21
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -403,6 +422,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//22
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -421,6 +441,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
 //kuga
+//23
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -437,6 +458,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//24
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -454,6 +476,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                             ) `
         );
 //accord
+//25
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -470,6 +493,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//26
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -487,6 +511,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                             ) `
         );
 //CR-V
+//27
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -503,6 +528,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//28
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -521,6 +547,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
 //Ceed
+//29
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -537,6 +564,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+//30
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -555,6 +583,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
 //k5
+//31
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -574,6 +603,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
 
 
 //A4
+// 32
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -590,6 +620,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+// 33
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -608,6 +639,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
         );
 
 //Q7
+// 34
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)
@@ -624,6 +656,7 @@ export class ModificationsTable1628652827498 implements MigrationInterface {
                              '${Wheel.Left}' --руль                  
                             ) `
         );
+// 35
         await queryRunner.query(
             `INSERT INTO "modifications" 
                 (model_id, engine_type_id, drive_id, gearbox_id, body_id, generation_id, engine_capacity, hp, wheel)

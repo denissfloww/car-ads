@@ -1,4 +1,4 @@
-import backEndUrl from "../BackEndUrl";
+import backendUrl from "../BackendUrl";
 
 interface ReturnedError {
   response?: {

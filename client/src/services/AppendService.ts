@@ -1,15 +1,15 @@
 import axios from 'axios';
-import backEndUrl from '../BackEndUrl';
+import backendUrl from '../BackendUrl';
 import AuthService from "./AuthService";
 import LocalStorageService from "./LocalStorageService";
 
 const getBrands = async () => {
-  const response = await axios.get(`${backEndUrl}/append/brands`);
+  const response = await axios.get(`${backendUrl}/append/brands`);
   return response.data;
 };
 
 const getModels = async (brandValue: any) => {
-  const response = await axios.get(`${backEndUrl}/append/models`, {
+  const response = await axios.get(`${backendUrl}/append/models`, {
     params: {
       brandId: brandValue.id,
     },
@@ -18,7 +18,7 @@ const getModels = async (brandValue: any) => {
 };
 
 const getYears = async (modelValue: any) => {
-  const response = await axios.get(`${backEndUrl}/append/years`, {
+  const response = await axios.get(`${backendUrl}/append/years`, {
     params: {
       modelId: modelValue.id,
     },
@@ -28,7 +28,7 @@ const getYears = async (modelValue: any) => {
 };
 
 const getBodies = async (modelValue: any, year: string) => {
-  const response = await axios.get(`${backEndUrl}/append/bodies`, {
+  const response = await axios.get(`${backendUrl}/append/bodies`, {
     params: {
       modelId: modelValue.id,
       year: year,
@@ -39,7 +39,7 @@ const getBodies = async (modelValue: any, year: string) => {
 };
 
 const getGenerations = async (modelValue: any, year: string, bodyValue: any) => {
-  const response = await axios.get(`${backEndUrl}/append/generations`, {
+  const response = await axios.get(`${backendUrl}/append/generations`, {
     params: {
       modelId: modelValue.id,
       year: year,
@@ -51,7 +51,7 @@ const getGenerations = async (modelValue: any, year: string, bodyValue: any) => 
 };
 
 const getEngines = async (modelValue: any, bodyValue: any, generationId: any) => {
-  const response = await axios.get(`${backEndUrl}/append/engines`, {
+  const response = await axios.get(`${backendUrl}/append/engines`, {
     params: {
       modelId: modelValue.id,
       bodyId: bodyValue.id,
@@ -63,7 +63,7 @@ const getEngines = async (modelValue: any, bodyValue: any, generationId: any) =>
 };
 
 const getDrives = async (modelValue: any, bodyValue: any, generationId: any, engineValue: any) => {
-  const response = await axios.get(`${backEndUrl}/append/drives`, {
+  const response = await axios.get(`${backendUrl}/append/drives`, {
     params: {
       modelId: modelValue.id,
       bodyId: bodyValue.id,
@@ -76,7 +76,7 @@ const getDrives = async (modelValue: any, bodyValue: any, generationId: any, eng
 };
 
 const getGearboxes = async (modelValue: any, bodyValue: any, generationId: any, engineValue: any, driveValue: any) => {
-  const response = await axios.get(`${backEndUrl}/append/gearboxes`, {
+  const response = await axios.get(`${backendUrl}/append/gearboxes`, {
     params: {
       modelId: modelValue.id,
       bodyId: bodyValue.id,
@@ -97,7 +97,7 @@ const getModifications = async (
   driveValue: any,
   gearboxValue: any,
 ) => {
-  const response = await axios.get(`${backEndUrl}/append/modifications`, {
+  const response = await axios.get(`${backendUrl}/append/modifications`, {
     params: {
       modelId: modelValue.id,
       bodyId: bodyValue.id,
@@ -144,7 +144,7 @@ const appendAdd = async (
   bodyFormData.append("yearRelease", yearRelease);
 
   await axios.post(
-    `${backEndUrl}/ad/upload`,
+    `${backendUrl}/ad/upload`,
     bodyFormData,{
     headers:{
       'x-auth-token':user.token,

@@ -1,14 +1,14 @@
 import axios from 'axios';
-import backEndUrl from '../BackEndUrl';
+import backendUrl from '../BackendUrl';
 import LocalStorageService from './LocalStorageService';
 
 const getUserAds = async (userId: string) => {
-  const response = await axios.get(`${backEndUrl}/ad/ads/${userId}`);
+  const response = await axios.get(`${backendUrl}/ad/ads/${userId}`);
   return response.data;
 };
 
 const getAds = async (page: number ,size: number) => {
-  const response = await axios.get(`${backEndUrl}/ad/ads`, {
+  const response = await axios.get(`${backendUrl}/ad/ads`, {
     params: {
       page: page,
       size: size,
@@ -19,7 +19,7 @@ const getAds = async (page: number ,size: number) => {
 
 const deleteAd = async (id: any) => {
   const user = LocalStorageService.getUser();
-  await axios.delete(`${backEndUrl}/ad/delete`, {
+  await axios.delete(`${backendUrl}/ad/delete`, {
     headers: {
       'x-auth-token': user.token,
     },
@@ -30,7 +30,7 @@ const deleteAd = async (id: any) => {
 }
 
 const getPageCount = async (size: number) => {
-  const response = await axios.get(`${backEndUrl}/ad/page/count`, {
+  const response = await axios.get(`${backendUrl}/ad/page/count`, {
     params: {
       size: size,
     }
@@ -39,12 +39,12 @@ const getPageCount = async (size: number) => {
 };
 
 const getAd = async (adId: string) => {
-  const response = await axios.get(`${backEndUrl}/ad/${adId}`);
+  const response = await axios.get(`${backendUrl}/ad/${adId}`);
   return response.data;
 };
 
 const checkComparedAd = async (adId: string, userId: string) => {
-  const response = await axios.get(`${backEndUrl}/ad/compare/check`, {
+  const response = await axios.get(`${backendUrl}/ad/compare/check`, {
     params: {
       userId: userId,
       adId: adId,
@@ -54,7 +54,7 @@ const checkComparedAd = async (adId: string, userId: string) => {
 };
 
 const checkAdIsFavorite = async (adId: string, userId: string) => {
-  const response = await axios.get(`${backEndUrl}/ad/favourite/check`, {
+  const response = await axios.get(`${backendUrl}/ad/favourite/check`, {
     params: {
       userId: userId,
       adId: adId,
@@ -66,7 +66,7 @@ const checkAdIsFavorite = async (adId: string, userId: string) => {
 const insertAdToCompare = async (adId: string) => {
   const user = LocalStorageService.getUser();
   await axios.post(
-    `${backEndUrl}/ad/compare/insert`,
+    `${backendUrl}/ad/compare/insert`,
     {
       userId: user.id,
       adId: adId,
@@ -82,7 +82,7 @@ const insertAdToCompare = async (adId: string) => {
 const insertAdToFavourite = async (adId: string) => {
   const user = LocalStorageService.getUser();
   await axios.post(
-      `${backEndUrl}/ad/favourite/insert`,
+      `${backendUrl}/ad/favourite/insert`,
       {
         userId: user.id,
         adId: adId,
@@ -97,7 +97,7 @@ const insertAdToFavourite = async (adId: string) => {
 
 const deleteCompareUserAd = async (id: string) => {
   const user = LocalStorageService.getUser();
-  await axios.delete(`${backEndUrl}/ad/compare/delete/${id}`,
+  await axios.delete(`${backendUrl}/ad/compare/delete/${id}`,
       {
         headers: {
           'x-auth-token': user.token,
@@ -108,7 +108,7 @@ const deleteCompareUserAd = async (id: string) => {
 
 const deleteFavouriteAd = async (id: string) => {
   const user = LocalStorageService.getUser();
-  await axios.delete(`${backEndUrl}/ad/favourite/delete/${id}`,
+  await axios.delete(`${backendUrl}/ad/favourite/delete/${id}`,
       {
         headers: {
           'x-auth-token': user.token,
@@ -120,7 +120,7 @@ const deleteFavouriteAd = async (id: string) => {
 const updateAdStatus = async (id: string, status: string) => {
   const user = LocalStorageService.getUser();
   await axios.put(
-      `${backEndUrl}/ad/update`,
+      `${backendUrl}/ad/update`,
       {
         id: id,
         status: status,
@@ -131,7 +131,7 @@ const updateAdStatus = async (id: string, status: string) => {
         },
       },
   );
-  // await axios.put(`${backEndUrl}/ad/update`,
+  // await axios.put(`${backendUrl}/ad/update`,
   //     {
   //       id: id,
   //       status: status,
@@ -145,7 +145,7 @@ const updateAdStatus = async (id: string, status: string) => {
 }
 
 const getUserComparedAds = async (userId: string) => {
-  const response = await axios.get(`${backEndUrl}/ad/compare`, {
+  const response = await axios.get(`${backendUrl}/ad/compare`, {
     params: {
       userId: userId,
     },
@@ -154,7 +154,7 @@ const getUserComparedAds = async (userId: string) => {
 }
 
 const getUserFavouriteAds = async (userId: string) => {
-  const response = await axios.get(`${backEndUrl}/ad/favourite`, {
+  const response = await axios.get(`${backendUrl}/ad/favourite`, {
     params: {
       userId: userId,
     },
