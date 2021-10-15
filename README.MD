@@ -12,4 +12,4 @@
 9. Изменение информации о пользователе.
 10. Просмотр новостей из мира авто.
 
-# **[Руководство пользователя]()**
+# **[Руководство пользователя](https://utmn-my.sharepoint.com/:w:/g/personal/stud0000212991_study_utmn_ru/EZB0ljDpTnRCgHiYu5ixTL0B0jEGgq1fu0MZ_ELC9yN6OQ?e=6gFb1M)**
