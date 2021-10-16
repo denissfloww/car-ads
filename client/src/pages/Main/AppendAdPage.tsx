@@ -29,14 +29,13 @@ import {
   selectAppendState,
 } from '../../redux/slices/appendSlice';
 import { selectAuthState } from "../../redux/slices/authSlice";
-import LocalStorageService from "../../services/LocalStorageService";
 import { useAppendPageStyles } from '../../styles/muiStyles';
 import DirectionsCarIcon from '@material-ui/icons/DirectionsCar';
 import { Autocomplete } from '@material-ui/lab';
 import { DropzoneArea } from 'material-ui-dropzone';
 import { ColorPalette } from 'material-ui-color';
 import MilageFormatCustom from '../../components/MilageTextMask';
-import ContactNumberMask from '../../components/ContactNumberMask';
+import PhoneMask from '../../components/PhoneMask';
 import { Radio } from '@material-ui/core';
 import PriceFormatCustom from '../../components/PriceFormatMask';
 import PublishIcon from '@material-ui/icons/Publish';
@@ -93,16 +92,17 @@ const AppendAdPage = () => {
     drives,
     gearboxes,
     modifications,
-    vinNumber,
-    mileage,
     color,
-    comment,
-    phone,
     countOwners,
-    price,
   }: any = useSelector(selectAppendState);
 
   const [images, setImages] = useState([]);
+  const [mileage, setMileage] = useState(43201);
+  const [comment, setComment] = useState('Комментарий')
+  const [phone, setPhone] = useState('9999999999')
+  const [price, setPrice] = useState('200000')
+  const [vinNumber, setVin] = useState('test')
+
   const maxNumber = 10;
   useEffect(() => {
     dispatch(fetchBrands());
@@ -149,19 +149,20 @@ const AppendAdPage = () => {
   };
 
   const handleVinNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(changeVinNumber(event.target.value));
+    setVin(event.target.value)
   };
 
+
   const handleMileageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(changeMileage(event.target.value));
+    setMileage(Number(event.target.value))
   };
 
   const handleCommentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(changeComment(event.target.value));
+    setComment(event.target.value)
   };
 
   const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(changePhone(event.target.value));
+    setPhone(event.target.value)
   };
 
   const handleCountOwnersChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -169,7 +170,7 @@ const AppendAdPage = () => {
   };
 
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(changePrice(event.target.value));
+    setPrice(event.target.value)
   };
 
   const {
@@ -182,7 +183,6 @@ const AppendAdPage = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const { user } = useSelector(selectAuthState);
   const handleAppend = () => {
     dispatch(appendAdd(history, modificationValue, vinNumber, images, mileage, color, comment, phone, countOwners, price, yearValue));
   };
@@ -443,7 +443,7 @@ const AppendAdPage = () => {
                   error={'phone' in errors}
                   helperText={'phone' in errors ? errors.phone.message : ''}
                   InputProps={{
-                    inputComponent: ContactNumberMask as any,
+                    inputComponent: PhoneMask as any,
                   }}
                 />
               </p>

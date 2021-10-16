@@ -8,6 +8,7 @@ import { theme } from "./styles/theme";
 import { useBodyStyles } from './styles/muiStyles';
 import {useDispatch} from "react-redux";
 import {autoLogin} from "./redux/slices/authSlice";
+import NotificationBox from "./components/NotificationBox";
 
 function App() {
   const classes = useBodyStyles(false)();
@@ -21,6 +22,7 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
           <NavBar />
+          <NotificationBox />
           <Routes />
           <Footer />
         </div>

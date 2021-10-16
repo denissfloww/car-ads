@@ -7,6 +7,7 @@ import authRoutes from './routes/AuthRoutes';
 import userRoutes from './routes/UserRoutes';
 import appendRoutes from './routes/ModificationRoutes';
 import adRoutes from './routes/AdRoutes'
+import newsRoutes from './routes/NewsRoutes'
 import multer from "multer";
 
 const app = express();
@@ -20,6 +21,7 @@ app.use('/', authRoutes);
 app.use('/users', userRoutes);
 app.use('/append', appendRoutes);
 app.use('/ad', adRoutes)
+app.use('/news', newsRoutes)
 
 app.use(middleware.unknownEndPointHandler);
 app.use(middleware.errorHandler);

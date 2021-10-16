@@ -371,6 +371,42 @@ export const useCatalogPageStyles = makeStyles(
   })
 )
 
+export const useNewsPageStyles = makeStyles(
+    theme => ({
+        root: {
+            padding: '1em 0',
+            [theme.breakpoints.down('xs')]: {
+                padding: '0.5em 0.5em',
+            },
+        },
+        newsPagePaper:{
+            fontFamily: 'Nunito',
+            padding: '1.5em',
+            minHeight: 'calc(100vH - 130px)',
+            [theme.breakpoints.down('xs')]: {
+                padding: '0.5em 0.7em',
+                minHeight: 'calc(100vH - 80px)',
+            },
+        },
+        headerPaper: {
+            padding: '1.0em',
+            paddingLeft: '1.5em',
+            marginBottom: '1.5em',
+            minHeight: 'calc(15vH - 100px)',
+            textAlign: 'left',
+            display: 'flex',
+            alignItems: 'center',
+            [theme.breakpoints.down('xs')]: {
+                padding: '0.3em 0.5em',
+                marginBottom: '0.5em',
+            },
+        },
+        testBorder:{
+            border:'2px solid black'
+        }
+    })
+)
+
 export const useMainPageStyles = makeStyles(
   theme => ({
     root: {

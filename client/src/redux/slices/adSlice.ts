@@ -12,6 +12,7 @@ import { setBrands } from './appendSlice';
 import { setAuthError } from './authSlice';
 import LocalStorageService from '../../services/LocalStorageService';
 import FavouriteAd from '../../interfaces/FavouriteAd';
+import {notify} from "./notifySlice";
 
 interface InitialAdState {
   userAds: Ad[];
@@ -114,7 +115,7 @@ export const fetchUserAds = (userId: string): AppThunk => {
       const ads: Ad[] = await AdService.getUserAds(userId);
       dispatch(setUserAds({ userAds: ads }));
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -128,7 +129,7 @@ export const fetchAds = (page: number, size: number): AppThunk => {
       const ads: Ad[] = await AdService.getAds(page, size);
       dispatch(setAds({ ads: ads }));
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -140,7 +141,7 @@ export const fetchAd = (adId: string): AppThunk => {
       const ad: Ad = await AdService.getAd(adId);
       dispatch(setAd({ ad }));
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -151,7 +152,7 @@ export const checkCompareAd = (adId: string, userId: string): AppThunk => {
       const checkAdAlreadyCompare = await AdService.checkComparedAd(adId, userId);
       dispatch(setCheckAdAlreadyComparing({ checkAdAlreadyCompare }));
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -162,7 +163,7 @@ export const checkFavouriteAd = (adId: string, userId: string): AppThunk => {
       const isAdAlreadyFavourite = await AdService.checkAdIsFavorite(adId, userId);
       dispatch(setCheckAdAlreadyFavourite({ isAdAlreadyFavourite }));
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -172,8 +173,9 @@ export const insertAdToCompare = (adId: string): AppThunk => {
     try {
       await AdService.insertAdToCompare(adId);
       dispatch(setCheckAdAlreadyComparing({ checkAdAlreadyCompare: true }));
+      dispatch(notify('Добавленно к сравнению', 'success'))
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -185,8 +187,9 @@ export const deleteAdFromCompare = (id: string): AppThunk => {
       const userId = LocalStorageService.getUser().id;
       const userComparedAds: UserCompareAd[] = await AdService.getUserComparedAds(userId);
       dispatch(setUserComparedAds({ userComparedAds }));
+      dispatch(notify('Удалено из сравнений', 'success'))
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -196,8 +199,9 @@ export const insertAdToFavourite = (adId: string): AppThunk => {
     try {
       await AdService.insertAdToFavourite(adId);
       dispatch(setCheckAdAlreadyFavourite({ isAdAlreadyFavourite: true }));
+      dispatch(notify('Добавленно в избранное', 'success'))
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -208,7 +212,7 @@ export const fetchUserCompareAds = (userId: string): AppThunk => {
       const userComparedAds: UserCompareAd[] = await AdService.getUserComparedAds(userId);
       dispatch(setUserComparedAds({ userComparedAds }));
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -220,8 +224,9 @@ export const deleteAd = (adId: string): AppThunk => {
       const userId = LocalStorageService.getUser().id;
       const ads: Ad[] = await AdService.getUserAds(userId);
       dispatch(setUserAds({ userAds: ads }));
+      dispatch(notify('Объявленние удалено!', 'success'))
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -233,7 +238,7 @@ export const fetchFavouriteAds = (userId: string): AppThunk => {
       const favouriteAds: FavouriteAd[] = await AdService.getUserFavouriteAds(userId);
       dispatch(setFavouriteAds({ favouriteAds }));
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -245,9 +250,10 @@ export const deleteAdFromFavourite= (id: string): AppThunk => {
       const user = LocalStorageService.getUser();
       dispatch(setFavouriteAdsLoading());
       const favouriteAds: FavouriteAd[] = await AdService.getUserFavouriteAds(user.id);
+      dispatch(notify('Удалено из избранного', 'success'))
       dispatch(setFavouriteAds({ favouriteAds }));
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   };
 };
@@ -260,8 +266,9 @@ export const updateAdStatus = (id: string, status: string): AppThunk => {
       const user = LocalStorageService.getUser();
       const ads: Ad[] = await AdService.getUserAds(user.id);
       dispatch(setUserAds({ userAds: ads }))
+      dispatch(notify('Статус обновлен!', 'success'))
     } catch (e) {
-      dispatch(setAuthError(getErrorMsg(e)));
+      dispatch(notify(getErrorMsg(e), 'error'))
     }
   }
 }
