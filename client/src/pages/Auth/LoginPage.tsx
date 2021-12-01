@@ -55,6 +55,7 @@ const LoginPage = () => {
           <div className={classes.inputField}>
             <TextField
               required
+              id="usernameField"
               fullWidth
               inputRef={register}
               type='text'
@@ -76,6 +77,7 @@ const LoginPage = () => {
             <TextField
               required
               fullWidth
+              id="passwordField"
               inputRef={register}
               type={showPass ? 'text' : 'password'}
               label='Пароль'
@@ -103,6 +105,7 @@ const LoginPage = () => {
             color='inherit'
             variant='contained'
             size='large'
+            id="submitLoginButton"
             fullWidth
             type='submit'
             className={classes.submitButton}

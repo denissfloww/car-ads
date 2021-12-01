@@ -99,7 +99,7 @@ const AppendAdPage = () => {
   const [images, setImages] = useState([]);
   const [mileage, setMileage] = useState(43201);
   const [comment, setComment] = useState('Комментарий')
-  const [phone, setPhone] = useState('9999999999')
+  const [phone, setPhone] = useState('')
   const [price, setPrice] = useState('200000')
   const [vinNumber, setVin] = useState('test')
 
@@ -207,6 +207,7 @@ const AppendAdPage = () => {
                   getOptionSelected={(option, value) => option.name === value.name}
                   includeInputInList
                   disableClearable
+                  id="brandSelect"
                   onChange={handleBrandChange}
                   renderInput={params => (
                     <TextField
@@ -241,7 +242,7 @@ const AppendAdPage = () => {
                     visible={showModels}
                   >
                     <h3>Выберите модель</h3>
-                    <AppendInputAutoComplete handleChange={handleModelChange} value={modelValue} options={models} optionLabel='Модель' />
+                    <AppendInputAutoComplete handleChange={handleModelChange} value={modelValue} options={models} optionLabel='Модель'  id='modelSelect'/>
                   </Animate>
                 </p>
               ) : null}
@@ -255,7 +256,7 @@ const AppendAdPage = () => {
                     visible={showYear}
                   >
                   <h3>Выберите год выпуска авто</h3>
-                    <AppendInputAutoComplete handleChange={handleYearChange} value={yearValue} options={years} optionLabel='Год выпуска' />
+                    <AppendInputAutoComplete handleChange={handleYearChange} value={yearValue} options={years} optionLabel='Год выпуска' id='yearSelect' />
                   </Animate>
                   </p>
               ) : null}
@@ -269,7 +270,7 @@ const AppendAdPage = () => {
                     visible={showBody}
                   >
                     <h3>Выберите тип кузова</h3>
-                    <AppendInputAutoComplete handleChange={handleBodyChange} value={bodyValue} options={bodies} optionLabel='Тип кузова' />
+                    <AppendInputAutoComplete handleChange={handleBodyChange} value={bodyValue} options={bodies} optionLabel='Тип кузова' id='bodyTypeSelect' />
                   </Animate>
                   </p>
               ) : null}
@@ -302,6 +303,7 @@ const AppendAdPage = () => {
                     value={engineValue}
                     options={engines}
                     optionLabel='Тип двигателя'
+                    id='engineType'
                   />
                   </Animate>
                 </p>
@@ -316,7 +318,7 @@ const AppendAdPage = () => {
                     visible={showDrive}
                   >
                   <h3>Выберите привод</h3>
-                  <AppendInputAutoComplete handleChange={handleDriveChange} value={driveValue} options={drives} optionLabel='Тип' />
+                  <AppendInputAutoComplete handleChange={handleDriveChange} value={driveValue} options={drives} optionLabel='Тип' id='driveTypeSelect' />
                   </Animate>
                 </p>
               ) : null}
@@ -330,7 +332,7 @@ const AppendAdPage = () => {
                     visible={showGearBox}
                   >
                   <h3>Выберите коробку передач</h3>
-                  <AppendInputAutoComplete handleChange={handleGearboxChange} value={gearboxValue} options={gearboxes} optionLabel='Тип' />
+                  <AppendInputAutoComplete handleChange={handleGearboxChange} value={gearboxValue} options={gearboxes} optionLabel='Тип' id='gearBoxSelect' />
                   </Animate>
                 </p>
               ) : null}
@@ -364,7 +366,7 @@ const AppendAdPage = () => {
                   onChange={handleVinNumberChange}
                   variant='outlined'
                   value={vinNumber}
-                  id='formatted-numberformat-input'
+                  id='vinNumber'
                   error={'vin' in errors}
                   helperText={'vin' in errors ? errors.vin.message : ''}
                 />
@@ -397,7 +399,7 @@ const AppendAdPage = () => {
                   type='text'
                   variant='outlined'
                   name='mileage'
-                  id='formatted-numberformat-input'
+                  id='mileageInput'
                   error={'mileage' in errors}
                   helperText={'mileage' in errors ? errors.mileage.message : ''}
                   InputProps={{
@@ -418,6 +420,7 @@ const AppendAdPage = () => {
                 <h3>Комментарий</h3>
                 <TextField
                   name='comment'
+                  id='descriptionArea'
                   variant='outlined'
                   className={classes.textFieldBlock}
                   placeholder='Добавьте описание'
@@ -439,7 +442,7 @@ const AppendAdPage = () => {
                   label='Телефон'
                   variant='outlined'
                   name='phone'
-                  id='formatted-numberformat-input'
+                  id='phoneNumberInput'
                   error={'phone' in errors}
                   helperText={'phone' in errors ? errors.phone.message : ''}
                   InputProps={{
@@ -451,7 +454,7 @@ const AppendAdPage = () => {
                 <h3>Колличество владельцев</h3>
                 <RadioGroup aria-label='countOwners' name='countOwners' onChange={handleCountOwnersChange}>
                   {ownersRadioValues.map((item: { label: string; value: string }) => (
-                    <FormControlLabel value={item.value} control={<Radio required color='primary' />} label={item.label} />
+                    <FormControlLabel value={item.value} control={<Radio required color='primary' id={`countOwnersRadio${item.value}`} />}  label={item.label} />
                   ))}
                 </RadioGroup>
               </p>
@@ -466,7 +469,7 @@ const AppendAdPage = () => {
                   onChange={handlePriceChange}
                   variant='outlined'
                   name='price'
-                  id='formatted-numberformat-input'
+                  id='priceInput'
                   error={'price' in errors}
                   helperText={'price' in errors ? errors.price.message : ''}
                   InputProps={{
@@ -475,7 +478,7 @@ const AppendAdPage = () => {
                 />
               </p>
               <p>
-                <Button variant='contained' color='primary' type='submit' startIcon={<PublishIcon />}>
+                <Button variant='contained' color='primary' type='submit' id='addButton' startIcon={<PublishIcon />}>
                   Подать объявление
                 </Button>
               </p>

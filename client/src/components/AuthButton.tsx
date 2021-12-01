@@ -8,7 +8,7 @@ const AuthButton = () => {
   const classes = useNavStyles();
   return (
     <>
-      <Button className={classes.menuButton} component={RouterLink} to={loginLink}>
+      <Button className={classes.menuButton} id='loginButton' component={RouterLink} to={loginLink}>
         Вход
       </Button>
       <Button className={classes.menuButton} component={RouterLink} to={signupLink}>

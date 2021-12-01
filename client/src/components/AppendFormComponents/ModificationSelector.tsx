@@ -14,7 +14,7 @@ const ModificationSelector: React.FC<{
           <>
             <FormControlLabel
               value={modification.id.toString()}
-              control={<Radio required color='primary' />}
+              control={<Radio required color='primary' id={`modificationRadio${modification.id.toString()}`} />}
               label={`${modification.hp} л.с | ${modification.engineCapacity} л.`}
             />
           </>

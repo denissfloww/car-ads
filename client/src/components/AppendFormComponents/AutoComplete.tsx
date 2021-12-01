@@ -7,11 +7,13 @@ const AppendInputAutoComplete: React.FC<{
   optionLabel: string;
   value: string;
   handleChange: (e: any, value: any) => void;
-}> = ({ options, optionLabel, value, handleChange }) => {
+  id: string;
+}> = ({ options, optionLabel, value, handleChange, id }) => {
   return (
     <>
       <Autocomplete
         options={options}
+        id={id}
         getOptionLabel={option => option.name || option.toString()}
         getOptionSelected={(option, value) => option === value}
         value={value}
