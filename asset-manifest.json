@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/car-ads/static/css/main.27335d18.chunk.css",
-    "main.js": "/car-ads/static/js/main.88ae6425.chunk.js",
-    "main.js.map": "/car-ads/static/js/main.88ae6425.chunk.js.map",
+    "main.js": "/car-ads/static/js/main.c62d677e.chunk.js",
+    "main.js.map": "/car-ads/static/js/main.c62d677e.chunk.js.map",
     "runtime-main.js": "/car-ads/static/js/runtime-main.a84c8b49.js",
     "runtime-main.js.map": "/car-ads/static/js/runtime-main.a84c8b49.js.map",
     "static/css/2.9a79c2a8.chunk.css": "/car-ads/static/css/2.9a79c2a8.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.9a79c2a8.chunk.css",
     "static/js/2.1ff2eae2.chunk.js",
     "static/css/main.27335d18.chunk.css",
-    "static/js/main.88ae6425.chunk.js"
+    "static/js/main.c62d677e.chunk.js"
   ]
 }
