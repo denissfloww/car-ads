@@ -12,18 +12,14 @@ import {
   changeBody,
   changeBrand,
   changeColor,
-  changeComment,
   changeCountOwners,
   changeDrive,
   changeEngine,
   changeGearBox,
   changeGeneration,
-  changeMileage,
   changeModel,
   changeModification,
   changePhone,
-  changePrice,
-  changeVinNumber,
   changeYear,
   fetchBrands,
   selectAppendState,
@@ -54,10 +50,10 @@ const validationSchema = yup.object({
   mileage: yup.string().required('Заполните это поле!'),
   vin: yup.string().required('Заполните это поле!'),
   price: yup.string().required('Заполните это поле!'),
-  phone: yup
-    .string()
-    .required('Заполните это поле!')
-    .matches(/^7\([1-9]+\)\s\d+-\d{4}$/, 'Введите корректный формат телефона'),
+  // phone: yup
+  //   .string(),
+  //   // .required('Заполните это поле!')
+  //   // .matches(/^7\([1-9]+\)\s\d+-\d{4}$/, 'Введите корректный формат телефона'),
   brand: yup.string().required('Вы не выбрали марку!'),
 });
 
@@ -99,7 +95,7 @@ const AppendAdPage = () => {
   const [images, setImages] = useState([]);
   const [mileage, setMileage] = useState(43201);
   const [comment, setComment] = useState('Комментарий')
-  const [phone, setPhone] = useState('')
+  const [phone, setPhone] = useState('9199234517')
   const [price, setPrice] = useState('200000')
   const [vinNumber, setVin] = useState('test')
 
@@ -431,25 +427,25 @@ const AppendAdPage = () => {
                   rowsMax={Infinity}
                 />
               </p>
-              <p>
-                <h3>Контактный телефон</h3>
-                <TextField
-                  required
-                  fullWidth
-                  inputRef={append}
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  label='Телефон'
-                  variant='outlined'
-                  name='phone'
-                  id='phoneNumberInput'
-                  error={'phone' in errors}
-                  helperText={'phone' in errors ? errors.phone.message : ''}
-                  InputProps={{
-                    inputComponent: PhoneMask as any,
-                  }}
-                />
-              </p>
+              {/*<p>*/}
+              {/*  <h3>Контактный телефон</h3>*/}
+              {/*  <TextField*/}
+              {/*    required*/}
+              {/*    fullWidth*/}
+              {/*    inputRef={append}*/}
+              {/*    value={phone}*/}
+              {/*    onChange={handlePhoneChange}*/}
+              {/*    label='Телефон'*/}
+              {/*    variant='outlined'*/}
+              {/*    name='phone'*/}
+              {/*    id='phoneNumberInput'*/}
+              {/*    error={'phone' in errors}*/}
+              {/*    helperText={'phone' in errors ? errors.phone.message : ''}*/}
+              {/*    InputProps={{*/}
+              {/*      inputComponent: PhoneMask as any,*/}
+              {/*    }}*/}
+              {/*  />*/}
+              {/*</p>*/}
               <p>
                 <h3>Колличество владельцев</h3>
                 <RadioGroup aria-label='countOwners' name='countOwners' onChange={handleCountOwnersChange}>
